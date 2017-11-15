@@ -1,0 +1,3 @@
+[submodule "evil-collection"]
+	path = evil-collection
+	url = https://github.com/jojojames/evil-collection
