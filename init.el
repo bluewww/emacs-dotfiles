@@ -40,11 +40,12 @@
 ;(add-to-list
 ;  'load-path
 ;  (expand-file-name "evil-collection/" user-emacs-directory))
-(add-to-list
-  'load-path
-  (expand-file-name "evil-collection/" "~/.emacs.dev/"))
 
-(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
+;(add-to-list
+;  'load-path
+;  (expand-file-name "evil-collection/" "~/.emacs.dev/"))
+
+;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 (setq evil-want-C-u-scroll t)
 (use-package which-key :ensure t
   :init
@@ -52,7 +53,7 @@
 (use-package ivy :ensure t)
 (use-package counsel :ensure t)
 (use-package swiper :ensure t)
-;(use-package magit :ensure t)
+(use-package magit :ensure t)
 (use-package evil :ensure t
   :init
   (evil-mode))
@@ -60,17 +61,18 @@
   :commands (avy-goto-word-1))
 (use-package general :ensure t)
 
+(defun find-dotfile ()
+  (interactive)
+  (find-file-existing "~/.emacs.dev/init.el"))
+
 (general-define-key
   ;; replace default keybindings
   "C-'" 'avy-goto-word-1
   "M-x" 'counsel-M-x)
 
-(defun find-dotfile ()
-  (interactive)
-  (find-file-existing "~/.emacs.dev/init.el"))
-
 ;; ivy navigation
 (general-define-key
+ :keymaps 'ivy-minibuffer-map
   "C-j" 'ivy-next-line ; bugged
   "C-k" 'ivy-previous-line
   "C-h" (kbd "DEL") ; hack
@@ -80,7 +82,7 @@
 
 (general-define-key
  :states '(normal visual insert emacs)
- :prefix "SPC
+ :prefix "SPC"
  ;; TODO fix this
  :non-normal-prefix "M-SPC"
 
@@ -103,10 +105,10 @@
   "fr"	'counsel-recentf
   "pf"  'counsel-git
 
-
   ;; swiper
   "ss" 'swiper
   "ss" 'swiper-all
+
   ;; magit
   "gs" 'magit-status
 
