@@ -180,6 +180,16 @@
   :config
   (use-package evil-magit :ensure t))
 
+(use-package restart-emacs
+  :ensure t
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "qR" 'restart-emacs))
+
+; TODO remove (?)
 (use-package avy
   :ensure t
   :general
@@ -223,7 +233,7 @@
  "fD" 'delete-file
  "fc" 'copy-file
  "fR" 'rename-file
- ;; TODO: sudo edit
+ "fE" 'sudo-edit
 
  ;; window handling
  "wd" 'delete-window
@@ -246,7 +256,6 @@
 
  ;; exiting
  "qQ" 'kill-emacs
- "qR" 'restart-emacs ;TODO this is a package
  "qs" 'save-buffers-kill-emacs
 
  ;; more help
@@ -306,7 +315,6 @@
    "pr"  'preview-region))
 
 ;; Python
-(use-package python :ensure t)
 (use-package python
   :ensure t
   :mode ("\\.py\\'" . python-mode)
@@ -316,6 +324,20 @@
    :keymaps 'python-mode-map
    :prefix ","
    "a" 'describe-mode))
+
+;; C-C++
+(use-package cc-mode
+  :ensure t
+  :mode ("\\.h\\'" . cc-mode)
+  :general
+  (general-define-key
+   :states 'normal
+   :keymaps 'c-mode-map
+   :prefix ","
+   "a" 'describe-mode)
+  :config
+  (use-package disaster :ensure t)
+  (use-package cwarn :ensure t))
 
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing"
@@ -333,6 +355,16 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
 
+(defun sudo-edit (&optional arg)
+  "Edit currently visited file as root.
+With a prefix ARG prompt for a file to visit.
+Will also prompt for a file to visit if current
+buffer is not visiting a file."
+  (interactive "P")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:"
+			 (ido-read-file-name "Find file(as root): ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -342,17 +374,22 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(custom-enabled-themes (quote (ujelly)))
  '(custom-safe-themes
    (quote
-    ("53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default)))
+    ("53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
+     default)))
  '(delete-selection-mode nil)
  '(package-selected-packages
    (quote
-    (evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy
-		rainbow-delimiters winum evil-matchit evil-surround evil
-		which-key general use-package)))
+    (disaster restart-emacs evil-magit ujelly-theme auctex avy magit
+	      counsel-projectile counsel ivy rainbow-delimiters winum
+	      evil-matchit evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:inherit nil :stipple nil :background "#000000" :foreground
+			 "#ffffff" :inverse-video nil :box nil :strike-through
+			 nil :overline nil :underline nil :slant normal :weight
+			 normal :height 120 :width normal :foundry "Raph Levien,
+Kirill Tkachev (cyreal.org) " :family "Inconsolata")))))
