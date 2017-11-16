@@ -1,26 +1,33 @@
-; delete excess backup versions silently
-(setq delete-old-versions -1)
-; make backups file even when in version controlled dir
-(setq vc-make-backup-files t)
+;; sane defaults
+(setq
+ ; delete excess backup versions silently
+ delete-old-versions -1
+ ; make backups file even when in version controlled dir
+ vc-make-backup-files t
  ; which directory to put backups file
-(setq backup-directory-alist `(("." . "~/.emacs.dev/backups")))
-; don't ask for confirmation when opening symlinked file
-(setq vc-follow-symlinks t)
- ;transform backups file name
-(setq auto-save-file-name-transforms '((".*" "~/.emacs.dev/auto-save-list/" t)))
-; inhibit useless and old-school startup screen
-(setq inhibit-startup-screen t)
-; silent bell when you make a mistake
-(setq ring-bell-function 'ignore)
-; use utf-8 by default
-(setq coding-system-for-read 'utf-8 )
-(setq coding-system-for-write 'utf-8 )
-; sentence SHOULD end with only a point.
-(setq sentence-end-double-space nil)
-; toggle wrapping text at the 80th character
-(setq default-fill-column 80)
-; print a default message in the empty scratch buffer opened at startup
-(setq initial-scratch-message "Welcome in Emacs")
+ backup-directory-alist `(("." . "~/.emacs.dev/backups"))
+ ; don't ask for confirmation when opening symlinked file
+ vc-follow-symlinks t
+ ; transform backups file name
+ auto-save-file-name-transforms '((".*" "~/.emacs.dev/auto-save-list/" t))
+ inhibit-startup-screen t
+ ; silent bell when you make a mistake
+ ring-bell-function 'ignore
+ ; use utf-8 by default
+ coding-system-for-read 'utf-8
+ coding-system-for-write 'utf-8
+ ; sentence SHOULD end with only a point.
+ sentence-end-double-space nil
+ default-fill-column 80
+ help-window-select t
+ tab-width 4
+ initial-scratch-message "Welcome in Emacs")
+
+(when window-system
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (blink-cursor-mode -1))
 
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -44,8 +51,18 @@
 ;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;; nice built in modes
-(linum-mode)
-(show-paren-mode)
+(add-hook 'text-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'text-mode-hook 'show-paren-mode)
+(add-hook 'prog-mode-hook 'show-paren-mode)
+
+;; all packages
+(use-package general :ensure t)
+(general-define-key
+ :states '(normal visual insert emacs)
+ :prefix "SPC"
+ :non-normal-prefix "M-SPC"
+ "?" 'general-describe-keybindings)
 
 (use-package which-key :ensure t
  :init
@@ -54,7 +71,8 @@
  :init
  (setq evil-want-C-u-scroll t)
  (evil-mode))
-(use-package evil-surround :ensure t
+(use-package evil-surround
+  :ensure t
   :config
   (global-evil-surround-mode 1))
 (use-package evil-matchit :ensure t
@@ -68,130 +86,177 @@
 (use-package rainbow-delimiters :ensure t
   :init
   (rainbow-delimiters-mode))
-(use-package ivy :ensure t)
-(use-package counsel :ensure t)
-(use-package swiper :ensure t)
-(use-package magit :ensure t)
-(use-package avy :ensure t
-  :commands (avy-goto-word-1))
-(use-package general
+
+;; completion framework
+(use-package ivy
   :ensure t
   :config
-  ; replace default keybindings
-  (general-define-key
-   "C-'" 'avy-goto-word-1
-   "M-x" 'counsel-M-x)
-  ;; proper vim style escape
-
-  (general-define-key
-   :states '(normal visual)
-   "<escape>" 'keyboard-quit)
-  (general-define-key
-   :keymaps '(minibuffer-local-map
-	      minibuffer-local-ns-map
-	      minibuffer-local-completion-map
-	      minibuffer-local-must-match-map
-	      minibuffer-local-isearch-map)
-   "<escape>" 'minibuffer-keyboard-quit)
-
-  ;; ivy navigation
+  (ivy-mode 1)
+  (setq ivy-wrap t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-use-virtual-buffers t)
+  :general
   (general-define-key
    :keymaps 'ivy-minibuffer-map
-   "C-j" 'ivy-next-line ; bugged
+   "C-j" 'ivy-next-line
    "C-k" 'ivy-previous-line
    "C-h" (kbd "DEL") ; hack
    "C-l" 'ivy-alt-done
+   "C-d" 'ivy-scroll-up-command
+   "C-u" 'ivy-scroll-down-command
    "C-S-h" help-map
    "<escape>" 'minibuffer-keyboard-quit)
+  :general
+  (general-define-key
+  :states '(normal visual insert emacs)
+  :prefix "SPC"
+  :non-normal-prefix "M-SPC"
+  "bb" 'ivy-switch-buffer))
 
+(use-package counsel
+  :ensure t
+  :general
+  (general-define-key
+    :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "ff" 'counsel-find-file
+   "fr" 'counsel-recentf
+   "fp" 'counsel-git
+   "hb" 'counse-descbinds
+   ; TODO: explore more counsel functionality
+   ; spacemacs syle
+   "SPC" 'counsel-M-x)
+  :general
+  (general-define-key
+   "M-x" 'counsel-M-x))
+
+;; Searching
+(use-package swiper
+  :ensure t
+  :general
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
-   ;; TODO fix this
    :non-normal-prefix "M-SPC"
-
-   ;; buffer handling
-   "bb" 'ivy-switch-buffer
-   "bd" 'kill-this-buffer
-   "bm" 'kill-other-buffers
-   "bs" 'switch-to-scratch-buffer
-   "bn" 'next-buffer
-   "bp" 'previous-buffer
-   "bw" 'read-only-mode
-   "bN" 'new-empty-buffer
-   "bR" 'revert-buffer
-   "bE" 'erase-buffer
-
-   "/"   'counsel-git-grep
-
-   ;; file handling
-   "fs" 'save-buffer
-   "fed" 'find-dotfile
-   "ff" 'counsel-find-file
-   "fr" 'counsel-recentf
-   "pf" 'counsel-git
-   "fj" 'dired-jump
-   "fD" 'delete-file
-   "fc" 'copy-file
-   "fR" 'rename-file
-   ;; TODO: sudo edit
-
-   ;; window handling
-   "wd" 'delete-window
-   "wm" 'maximize-buffer
-   "wh" 'evil-window-left
-   "wj" 'evil-window-down
-   "wk" 'evil-window-up
-   "wl" 'evil-window-right
-   "ws" 'split-window-below
-   "wv" 'split-window-right
-   "ww" 'other-window
-   "1" 'winum-select-window-1
-   "2" 'winum-select-window-2
-   "3" 'winum-select-window-3
-   "4" 'winum-select-window-4
-   "5" 'winum-select-window-5
-
-   ;; swiper
    "ss" 'swiper
-   "sb" 'swiper-all
+   "sb" 'swiper-all))
 
-   ;; eshell
-   "'" 'eshell
+;; Project managment
+(use-package counsel-projectile :ensure t)
 
-   ;; magit
+(use-package projectile
+  :ensure t
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "pc" 'counsel-projectile-compile-project
+   "pf" 'counsel-projectile-find-file
+   "pb" 'counsel-projectile-switch-to-buffer
+   "pp" 'counsel-projectile-switch-project
+   "pg" 'projectile-find-tag
+   "pD" 'projectile-dired
+   "pd" 'counsel-projectile-find-dir))
+
+;; git intergration
+(use-package magit
+  :ensure t
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
    "gs" 'magit-status
    "gm" 'magit-dispatch-popup
    "gS" 'magit-stage-file
-   "gU" 'magit-unstage-file
+   "gU" 'magit-unstage-file)
+  :config
+  (use-package evil-magit :ensure t))
 
-   ;; projectile
-   "pc" 'projectile-compile-project
-   "pf" 'projectile-find-file-dwim
-   "pg" 'projectile-find-tag
-   "pD" 'projectile-dired
-   "pd" 'counsel-projectile-find-dir
+(use-package avy
+  :ensure t
+  :general
+  (general-define-key
+   "C-'" 'avy-goto-word-1))
 
-   ;; spacemacs syle
-   "SPC" 'counsel-M-x
+;; proper vim style escape
+(general-define-key
+ :states '(normal visual)
+ "<escape>" 'keyboard-quit)
+(general-define-key
+ :keymaps '(minibuffer-local-map
+      minibuffer-local-ns-map
+      minibuffer-local-completion-map
+      minibuffer-local-must-match-map
+      minibuffer-local-isearch-map)
+ "<escape>" 'minibuffer-keyboard-quit)
 
-   ;; exiting
-   "qQ" 'kill-emacs
-   "qR" 'restart-emacs
-   "qs" 'save-buffers-kill-emacs
+(general-define-key
+ :states '(normal visual insert emacs)
+ :prefix "SPC"
+ :non-normal-prefix "M-SPC"
 
-   ;; help
-   "hb" 'describe-bindings
-   "hc" 'describe-char
-   "hf" 'describe-function
-   "hv" 'describe-variable
-   "hk" 'describe-key
-   "hm" 'describe-mode
-   "hp" 'describe-package
-   "hi" 'info))
+ ;; buffer handling
+ "bd" 'kill-this-buffer
+ "bm" 'kill-other-buffers
+ "bs" 'switch-to-scratch-buffer
+ "bn" 'next-buffer
+ "bp" 'previous-buffer
+ "bw" 'read-only-mode
+ "bN" 'new-empty-buffer
+ "bR" 'revert-buffer
+ "bE" 'erase-buffer
+
+ "/"   'counsel-git-grep
+
+ ;; file handling
+ "fs" 'save-buffer
+ "fed" 'find-dotfile
+ "fj" 'dired-jump
+ "fD" 'delete-file
+ "fc" 'copy-file
+ "fR" 'rename-file
+ ;; TODO: sudo edit
+
+ ;; window handling
+ "wd" 'delete-window
+ "wm" 'maximize-buffer
+ "wh" 'evil-window-left
+ "wj" 'evil-window-down
+ "wk" 'evil-window-up
+ "wl" 'evil-window-right
+ "ws" 'split-window-below
+ "wv" 'split-window-right
+ "ww" 'other-window
+ "1" 'winum-select-window-1
+ "2" 'winum-select-window-2
+ "3" 'winum-select-window-3
+ "4" 'winum-select-window-4
+ "5" 'winum-select-window-5
+
+ ;; eshell
+ "'" 'eshell
+
+ ;; exiting
+ "qQ" 'kill-emacs
+ "qR" 'restart-emacs ;TODO this is package
+ "qs" 'save-buffers-kill-emacs
+
+ ;; more help
+ "hc" 'describe-char
+ "hk" 'describe-key
+ "hm" 'describe-mode
+ "hp" 'describe-package
+ "hf" 'describe-function ; those
+ "hv" 'describe-variable ; are remapped to counsel
+ "hi" 'info)
 
 ;; Layers
-(use-package evil-ediff :ensure t)
+;; lazy evilification of built-in stuff
+(with-eval-after-load "ediff"
+  (use-package evil-ediff :ensure t))
 
 ;(define-key evil-normal-state-map [escape] 'keyboard-quit)
 ;(define-key evil-visual-state-map [escape] 'keyboard-quit)
