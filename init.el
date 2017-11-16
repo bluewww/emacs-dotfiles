@@ -5,23 +5,25 @@
  ; make backups file even when in version controlled dir
  vc-make-backup-files t
  ; which directory to put backups file
- backup-directory-alist `(("." . "~/.emacs.dev/backups"))
+ backup-directory-alist `(("." . "~/.emacs.d/backups"))
  ; don't ask for confirmation when opening symlinked file
  vc-follow-symlinks t
  ; transform backups file name
- auto-save-file-name-transforms '((".*" "~/.emacs.dev/auto-save-list/" t))
+ auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))
  inhibit-startup-screen t
  ; silent bell when you make a mistake
  ring-bell-function 'ignore
- ; use utf-8 by default
- coding-system-for-read 'utf-8
- coding-system-for-write 'utf-8
  ; sentence SHOULD end with only a point.
  sentence-end-double-space nil
+ ; fix bug with maximization
+ frame-resize-pixelwise t
  default-fill-column 80
  help-window-select t
  tab-width 4
  initial-scratch-message "Welcome in Emacs")
+
+;; UTF-8 as default encoding
+(set-language-environment "UTF-8")
 
 (when window-system
   (tool-bar-mode -1)
@@ -36,6 +38,7 @@
 			 ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
+(setq package-check-signature nil)
 (unless (package-installed-p 'use-package)
  (package-refresh-contents)
  (package-install 'use-package))
@@ -71,6 +74,8 @@
  :init
  (setq evil-want-C-u-scroll t)
  (evil-mode))
+
+
 (use-package evil-surround
   :ensure t
   :config
@@ -108,10 +113,10 @@
    "<escape>" 'minibuffer-keyboard-quit)
   :general
   (general-define-key
-  :states '(normal visual insert emacs)
-  :prefix "SPC"
-  :non-normal-prefix "M-SPC"
-  "bb" 'ivy-switch-buffer))
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "bb" 'ivy-switch-buffer))
 
 (use-package counsel
   :ensure t
@@ -241,7 +246,7 @@
 
  ;; exiting
  "qQ" 'kill-emacs
- "qR" 'restart-emacs ;TODO this is package
+ "qR" 'restart-emacs ;TODO this is a package
  "qs" 'save-buffers-kill-emacs
 
  ;; more help
@@ -253,23 +258,51 @@
  "hv" 'describe-variable ; are remapped to counsel
  "hi" 'info)
 
-;; Layers
 ;; lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
   (use-package evil-ediff :ensure t))
 
-;(define-key evil-normal-state-map [escape] 'keyboard-quit)
-;(define-key evil-visual-state-map [escape] 'keyboard-quit)
-;(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+;;; Custom Layers
+;; LaTeX
+;(use-package auctex :ensure t :defer t)
+;(use-package tex-site :ensure t)
+;(require 'tex-site)
+(use-package auctex
+  :ensure t
+  :mode ("\\.tex\\'" . TeX-latex-mode)
+  :general
+  (general-define-key
+   :states 'normal
+   :keymaps 'LaTeX-mode-map
+   :prefix ","
+   "\\"  'TeX-insert-macro
+   "-"   'TeX-recenter-output-buffer
+   "%"   'TeX-comment-or-uncomment-paragraph
+   ";"   'TeX-comment-or-uncomment-region
+   ;; run compile open
+   "a"   'TeX-command-run-all
+   "b"   'latex/build
+   "k"   'TeX-kill-job
+   "l"   'TeX-recenter-output-buffer
+   "m"   'TeX-insert-macro
+   "v"   'TeX-view))
+
+;; Python
+(use-package python :ensure t)
+(use-package python
+  :ensure t
+  :mode ("\\.py\\'" . python-mode)
+  :general
+  (general-define-key
+   :states 'normal
+   :keymaps 'python-mode-map
+   :prefix ","
+   "a" 'describe-mode))
 
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing"
   (interactive)
-  (find-file-existing "~/.emacs.dev/init.el"))
+  (find-file-existing "~/.emacs.d/init.el"))
 
 ;;; esc quits
 (defun minibuffer-keyboard-quit ()
@@ -281,3 +314,24 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       (setq deactivate-mark  t)
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (ujelly)))
+ '(custom-safe-themes
+   (quote
+    ("53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default)))
+ '(delete-selection-mode nil)
+ '(package-selected-packages
+   (quote
+    (evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
