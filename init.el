@@ -285,7 +285,25 @@
    "k"   'TeX-kill-job
    "l"   'TeX-recenter-output-buffer
    "m"   'TeX-insert-macro
-   "v"   'TeX-view))
+   "v"   'TeX-view
+   "hd"  'TeX-doc
+   "*"   'LaTeX-mark-section      ;; C-c *
+   "."   'LaTeX-mark-environment  ;; C-c .
+   "c"   'LaTeX-close-environment ;; C-c ]
+   "e"   'LaTeX-environment       ;; C-c C-e
+   "ii"  'LaTeX-insert-item       ;; C-c C-j
+   "s"   'LaTeX-section           ;; C-c C-s
+   "fe"  'LaTeX-fill-environment  ;; C-c C-q C-e
+   "fp"  'LaTeX-fill-paragraph    ;; C-c C-q C-p
+   "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
+   "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
+   "pb"  'preview-buffer
+   "pc"  'preview-clearout
+   "pd"  'preview-document
+   "pe"  'preview-environment
+   "pf"  'preview-cache-preamble
+   "pp"  'preview-at-point
+   "pr"  'preview-region))
 
 ;; Python
 (use-package python :ensure t)
@@ -328,7 +346,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(delete-selection-mode nil)
  '(package-selected-packages
    (quote
-    (evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package))))
+    (evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy
+		rainbow-delimiters winum evil-matchit evil-surround evil
+		which-key general use-package)))
+ '(truncate-lines t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
