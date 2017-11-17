@@ -27,11 +27,13 @@
 
 (when window-system
   (tool-bar-mode -1)
+  (tooltip-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
   (blink-cursor-mode -1))
 
 (require 'package)
+; want to use use-package instead
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
 			 ("gnu"       . "http://elpa.gnu.org/packages/")
@@ -43,6 +45,9 @@
  (package-refresh-contents)
  (package-install 'use-package))
 (require 'use-package)
+
+; loading time
+(setq use-package-verbose t)
 ;(add-to-list
 ;  'load-path
 ;  (expand-file-name "evil-collection/" user-emacs-directory))
@@ -82,13 +87,14 @@
   (global-evil-surround-mode 1))
 (use-package evil-matchit :ensure t
   :config
-  (evil-matchit-mode))
+  (global-evil-matchit-mode 1))
 ; TODO: bindings
 ;(use-package evil-search-highlight-persist :ensure t)
 (use-package winum :ensure t
  :init
  (winum-mode))
 (use-package rainbow-delimiters :ensure t
+  :defer t
   :init
   (rainbow-delimiters-mode))
 
@@ -290,7 +296,7 @@
    ";"   'TeX-comment-or-uncomment-region
    ;; run compile open
    "a"   'TeX-command-run-all
-   "b"   'latex/build
+   "b"   'latex-build
    "k"   'TeX-kill-job
    "l"   'TeX-recenter-output-buffer
    "m"   'TeX-insert-macro
@@ -307,12 +313,19 @@
    "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
    "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
    "pb"  'preview-buffer
-   "pc"  'preview-clearout
    "pd"  'preview-document
    "pe"  'preview-environment
    "pf"  'preview-cache-preamble
    "pp"  'preview-at-point
-   "pr"  'preview-region))
+   "ps"  'preview-section
+   "pr"  'preview-region
+   "rb"  'preview-clearout-buffer
+   "rr"  'preview-clearout
+   "rd"  'preview-clearout-document
+   "rs"  'preview-clearout-section
+   "rp"  'preview-clearout-at-point)
+  :config
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode))
 
 ;; Python
 (use-package python
@@ -326,18 +339,22 @@
    "a" 'describe-mode))
 
 ;; C-C++
+;; TODO: flycheck, company?
 (use-package cc-mode
   :ensure t
-  :mode ("\\.h\\'" . cc-mode)
+  :mode ("\\.c\\'" . c-mode)
   :general
   (general-define-key
    :states 'normal
    :keymaps 'c-mode-map
    :prefix ","
-   "a" 'describe-mode)
+   "ga" 'projectile-find-other-file
+   "gA" 'projectile-find-other-file-other-window
+   "D"  'disaster)
   :config
   (use-package disaster :ensure t)
-  (use-package cwarn :ensure t))
+  (use-package cwarn :ensure t)
+  (add-hook 'c-mode-common-hook 'cwarn-mode))
 
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing"
@@ -366,17 +383,32 @@ buffer is not visiting a file."
 			 (ido-read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
+(defun kill-other-buffers ()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-view-program-selection
+   (quote
+    (((output-dvi has-no-display-manager)
+      "dvi2tty")
+     ((output-dvi style-pstricks)
+      "dvips and gv")
+     (output-dvi "Okular")
+     (output-pdf "Okular")
+     (output-html "xdg-open"))))
  '(custom-enabled-themes (quote (ujelly)))
  '(custom-safe-themes
    (quote
     ("53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
      default)))
  '(delete-selection-mode nil)
+ '(doc-view-continuous t)
  '(package-selected-packages
    (quote
     (disaster restart-emacs evil-magit ujelly-theme auctex avy magit
@@ -391,5 +423,5 @@ buffer is not visiting a file."
  '(default ((t (:inherit nil :stipple nil :background "#000000" :foreground
 			 "#ffffff" :inverse-video nil :box nil :strike-through
 			 nil :overline nil :underline nil :slant normal :weight
-			 normal :height 120 :width normal :foundry "Raph Levien,
-Kirill Tkachev (cyreal.org) " :family "Inconsolata")))))
+			 normal :height 115 :width normal :foundry "unknown"
+			 :family "Inconsolata")))))
