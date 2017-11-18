@@ -354,7 +354,9 @@
   :config
   (use-package disaster :ensure t)
   (use-package cwarn :ensure t)
-  (add-hook 'c-mode-common-hook 'cwarn-mode))
+  (add-hook 'c-mode-common-hook 'cwarn-mode)
+  (setq c-default-style "linux" ;GNU style is really shit
+	c-basic-offset 4))
 
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing"
