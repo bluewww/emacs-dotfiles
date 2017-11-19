@@ -131,7 +131,7 @@
   :ensure t
   :general
   (general-define-key
-    :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ff" 'counsel-find-file
@@ -157,8 +157,6 @@
    "sb" 'swiper-all))
 
 ;; Project managment
-(use-package counsel-projectile :ensure t)
-
 (use-package projectile
   :ensure t
   :general
@@ -172,7 +170,13 @@
    "pp" 'counsel-projectile-switch-project
    "pg" 'projectile-find-tag
    "pD" 'projectile-dired
-   "pd" 'counsel-projectile-find-dir))
+   "pd" 'counsel-projectile-find-dir)
+  :config
+  (projectile-mode)
+  (use-package counsel-projectile :ensure t
+    :config
+    ; taking only what we need from (counsel-projectile-on)
+    (setq projectile-switch-project-action 'counsel-projectile)))
 
 ;; git intergration
 (use-package magit
@@ -271,6 +275,11 @@
  ;; eshell
  "'" 'eshell
 
+ ;; elisp interaction
+ "xe" 'eval-last-sexp
+ "xb" 'eval-buffer
+ "xr" 'eval-region
+
  ;; exiting
  "qQ" 'kill-emacs
  "qs" 'save-buffers-kill-emacs
@@ -283,6 +292,11 @@
  "hf" 'describe-function ; those
  "hv" 'describe-variable ; are remapped to counsel
  "hi" 'info)
+
+;; global configuration
+; we want a portable python environment
+(setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
+(add-to-list 'exec-path "/opt/miniconda3/bin")
 
 ;; lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
@@ -347,7 +361,29 @@
    :states 'normal
    :keymaps 'python-mode-map
    :prefix ","
-   "a" 'describe-mode))
+   "si" 'run-python
+   "sb" 'python-shell-send-buffer
+   "sf" 'python-shell-send-function
+   "sr" 'python-shell-send-region
+   "sf" 'python-shell-send-file
+   "gg" 'anaconda-mode-find-definitions
+   "ga" 'anaconda-mode-find-assignments
+   "gb" 'anaconda-mode-go-back
+   "hh" 'anaconda-mode-show-doc
+   "cs" 'python-check)
+  :config
+  (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
+  (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
+  (use-package anaconda-mode :ensure t
+    :config
+    (add-hook 'python-mode-hook 'anaconda-mode)
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+  (use-package conda :ensure t
+    :config
+    (conda-env-initialize-eshell)
+    (conda-env-autoactivate-mode t)
+    (require 'subr-x) ; workaround for missing dependency
+    (setq conda-anaconda-home "/opt/miniconda3")))
 
 ;; C-C++
 ;; TODO: flycheck, company?
@@ -364,8 +400,9 @@
    "D"  'disaster)
   :config
   (use-package disaster :ensure t)
-  (use-package cwarn :ensure t)
-  (add-hook 'c-mode-common-hook 'cwarn-mode)
+  (use-package cwarn :ensure t
+    :config
+    (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux" ;GNU style is really shit
 	c-basic-offset 4))
 
@@ -424,9 +461,9 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (disaster restart-emacs evil-magit ujelly-theme auctex avy magit
-	      counsel-projectile counsel ivy rainbow-delimiters winum
-	      evil-matchit evil-surround evil which-key general use-package)))
+    (conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex
+	   avy magit counsel-projectile counsel ivy rainbow-delimiters winum
+	   evil-matchit evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
