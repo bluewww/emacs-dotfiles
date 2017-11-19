@@ -93,6 +93,9 @@
 (use-package winum :ensure t
  :init
  (winum-mode))
+(use-package winner :ensure t
+  :init
+  (winner-mode))
 (use-package rainbow-delimiters :ensure t
   :defer t
   :init
@@ -243,7 +246,7 @@
 
  ;; window handling
  "wd" 'delete-window
- "wm" 'maximize-buffer
+ "wm" 'maximize-window
  "wh" 'evil-window-left
  "wj" 'evil-window-down
  "wk" 'evil-window-up
@@ -251,6 +254,14 @@
  "ws" 'split-window-below
  "wv" 'split-window-right
  "ww" 'other-window
+ "wu" 'winner-undo
+ "wU" 'winner-redo
+ "wR" 'evil-window-rotate-upwards
+ "wr" 'evil-window-rotate-downwards
+ "w+" 'evil-window-increase-height
+ "w-" 'evil-window-decrease-height
+ "w;" 'evil-window-increase-width
+ "w:" 'evil-window-decrease-width
  "1" 'winum-select-window-1
  "2" 'winum-select-window-2
  "3" 'winum-select-window-3
