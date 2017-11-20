@@ -1,0 +1,11 @@
+.cache/
+elpa/
+eshell/
+backups/
+auto-save-list/
+anaconda-mode/
+tramp
+session.*
+recentf
+projectile.cache
+projectile-bookmarks.eld
