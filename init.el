@@ -48,6 +48,7 @@
 
 ; loading time
 (setq use-package-verbose t)
+
 ;(add-to-list
 ;  'load-path
 ;  (expand-file-name "evil-collection/" user-emacs-directory))
@@ -58,11 +59,6 @@
 
 ;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
-;; nice built in modes
-(add-hook 'text-mode-hook 'linum-mode)
-(add-hook 'prog-mode-hook 'linum-mode)
-(add-hook 'text-mode-hook 'show-paren-mode)
-(add-hook 'prog-mode-hook 'show-paren-mode)
 
 ;; all packages
 (use-package general :ensure t)
@@ -79,7 +75,6 @@
  :init
  (setq evil-want-C-u-scroll t)
  (evil-mode))
-
 
 (use-package evil-surround
   :ensure t
@@ -297,6 +292,12 @@
 ; we want a portable python environment
 (setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
 (add-to-list 'exec-path "/opt/miniconda3/bin")
+
+; activate some nice built in modes
+(add-hook 'text-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'text-mode-hook 'show-paren-mode)
+(add-hook 'prog-mode-hook 'show-paren-mode)
 
 ;; lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
