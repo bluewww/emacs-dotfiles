@@ -132,8 +132,9 @@
    "ff" 'counsel-find-file
    "fr" 'counsel-recentf
    "fp" 'counsel-git
-   "hb" 'counse-descbinds
-   ; TODO: explore more counsel functionality
+   "hb" 'counsel-descbinds
+   "hf" 'counsel-describe-function
+   "hv" 'counsel-describe-variable
    ; spacemacs syle
    "SPC" 'counsel-M-x)
   :general
@@ -284,8 +285,8 @@
  "hk" 'describe-key
  "hm" 'describe-mode
  "hp" 'describe-package
- "hf" 'describe-function ; those
- "hv" 'describe-variable ; are remapped to counsel
+ ;"hf" 'describe-function ; using counsel versions to force loading the package
+ ;"hv" 'describe-variable
  "hi" 'info)
 
 ;; global configuration
