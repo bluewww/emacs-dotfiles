@@ -77,7 +77,7 @@
 ;; all packages
 (use-package general :ensure t)
 (general-define-key
- :states '(normal visual insert emacs)
+ :states '(normal motion visual insert emacs)
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
  "?" 'general-describe-keybindings)
@@ -131,7 +131,7 @@
    "<escape>" 'minibuffer-keyboard-quit)
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal motion visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "bb" 'ivy-switch-buffer))
@@ -140,7 +140,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal motion visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ff" 'counsel-find-file
@@ -160,7 +160,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal motion visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'swiper
@@ -171,7 +171,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal motion visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "pc" 'counsel-projectile-compile-project
@@ -194,7 +194,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal motion visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "gs" 'magit-status
@@ -208,7 +208,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal motion visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "qR" 'restart-emacs))
@@ -233,7 +233,7 @@
  "<escape>" 'minibuffer-keyboard-quit)
 
 (general-define-key
- :states '(normal visual insert emacs)
+ :states '(normal motion visual insert emacs)
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
 
