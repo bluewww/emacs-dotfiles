@@ -169,6 +169,7 @@
    "pd" 'counsel-projectile-find-dir)
   :config
   (projectile-mode)
+  (setq projectile-completion-system 'ivy)
   (use-package counsel-projectile :ensure t
     :config
     ; taking only what we need from (counsel-projectile-on)
@@ -376,6 +377,7 @@
   :config
   (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
   (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
+  (setq python-indent-guess-indent-offset nil)
   (use-package anaconda-mode :ensure t
     :config
     (add-hook 'python-mode-hook 'anaconda-mode)
