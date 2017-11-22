@@ -63,16 +63,9 @@
 ; loading time
 (setq use-package-verbose t)
 
-;(add-to-list
-;  'load-path
-;  (expand-file-name "evil-collection/" user-emacs-directory))
-
-;(add-to-list
-;  'load-path
-;  (expand-file-name "evil-collection/" "~/.emacs.dev/"))
-
-;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
-
+(add-to-list
+  'load-path
+  (expand-file-name "evil-collection/" user-emacs-directory))
 
 ;; all packages
 (use-package general :ensure t)
@@ -307,6 +300,12 @@
 ;; lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
   (use-package evil-ediff :ensure t))
+
+(with-eval-after-load 'image-mode
+  (require 'evil-image)
+  (evil-image-setup))
+
+;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;;; Custom Layers
 ;; LaTeX
