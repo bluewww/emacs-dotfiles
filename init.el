@@ -1,4 +1,5 @@
-;; sane defaults
+;; Global configuration
+; sane defaults
 (setq
  ; delete excess backup versions silently
  delete-old-versions -1
@@ -25,12 +26,23 @@
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
-(when window-system
-  (tool-bar-mode -1)
-  (tooltip-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (blink-cursor-mode -1))
+; we want a portable python environment
+(setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
+(add-to-list 'exec-path "/opt/miniconda3/bin")
+
+; activate some nice built in modes
+(add-hook 'text-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'text-mode-hook 'show-paren-mode)
+(add-hook 'prog-mode-hook 'show-paren-mode)
+
+;; doing this in custom
+;;(when window-system
+;;  (tool-bar-mode -1)
+;;  (tooltip-mode -1)
+;;  (menu-bar-mode -1)
+;;  (scroll-bar-mode -1)
+;;  (blink-cursor-mode -1))
 
 (require 'package)
 ; want to use use-package instead
@@ -290,17 +302,6 @@
  ;"hv" 'describe-variable
  "hi" 'info)
 
-;; global configuration
-; we want a portable python environment
-(setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
-(add-to-list 'exec-path "/opt/miniconda3/bin")
-
-; activate some nice built in modes
-(add-hook 'text-mode-hook 'linum-mode)
-(add-hook 'prog-mode-hook 'linum-mode)
-(add-hook 'text-mode-hook 'show-paren-mode)
-(add-hook 'prog-mode-hook 'show-paren-mode)
-
 ;; lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
   (use-package evil-ediff :ensure t))
@@ -385,6 +386,7 @@
   (use-package conda :ensure t
     :config
     (conda-env-initialize-eshell)
+    ;;TODO: is activated in any major mode, fix this with hooks?
     (conda-env-autoactivate-mode t)
     (require 'subr-x) ; workaround for missing dependency
     (setq conda-anaconda-home "/opt/miniconda3")))
@@ -456,6 +458,7 @@ buffer is not visiting a file."
      (output-dvi "Okular")
      (output-pdf "Okular")
      (output-html "xdg-open"))))
+ '(blink-cursor-mode nil)
  '(custom-enabled-themes (quote (ujelly)))
  '(custom-safe-themes
    (quote
@@ -463,19 +466,21 @@ buffer is not visiting a file."
      default)))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
+ '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
     (conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex
 	   avy magit counsel-projectile counsel ivy rainbow-delimiters winum
 	   evil-matchit evil-surround evil which-key general use-package)))
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
  '(truncate-lines t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#000000" :foreground
-			 "#ffffff" :inverse-video nil :box nil :strike-through
-			 nil :overline nil :underline nil :slant normal :weight
-			 normal :height 115 :width normal :foundry "unknown"
-			 :family "Inconsolata")))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil
+			 :strike-through nil :overline nil :underline nil :slant
+			 normal :weight normal :height 115 :width normal
+			 :foundry "unknown" :family "Inconsolata")))))
