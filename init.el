@@ -1,6 +1,8 @@
 ;; Global configuration
 ; sane defaults
 (setq
+ ; 50 MB, default is 800kb
+  gc-cons-threshold 50000000
  ; delete excess backup versions silently
  delete-old-versions -1
  ; make backups file even when in version controlled dir
