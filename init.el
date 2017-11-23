@@ -38,6 +38,8 @@
 (add-hook 'text-mode-hook 'show-paren-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
 
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
 ;; doing this in custom
 ;;(when window-system
 ;;  (tool-bar-mode -1)
@@ -357,9 +359,7 @@
    "rr"  'preview-clearout
    "rd"  'preview-clearout-document
    "rs"  'preview-clearout-section
-   "rp"  'preview-clearout-at-point)
-  :config
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode))
+   "rp"  'preview-clearout-at-point))
 
 ;; Python
 (use-package python
