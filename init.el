@@ -305,6 +305,10 @@
   (require 'evil-image)
   (evil-image-setup))
 
+(with-eval-after-load 'doc-view
+  (require 'evil-doc-view)
+  (evil-doc-view-setup))
+
 ;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;;; Custom Layers
