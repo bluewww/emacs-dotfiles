@@ -38,7 +38,32 @@
 (add-hook 'text-mode-hook 'show-paren-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
 
+; convenient auto revert
+; TODO:
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+; change the modeline descriptions to make them shorter
+(setq projectile-mode-line '(:eval (format " π[%s]" (projectile-project-name))))
+(defvar mode-line-cleaner-alist
+  `((auto-complete-mode . " α")
+    (undo-tree-mode . "")
+    (which-key-mode . "")
+    (ivy-mode . "")
+    (anaconda-mode . " conda")
+    ;projectile has its own setting
+    ;(projectile-mode . projectile-mode-line)
+    (eldoc-mode . " ε")
+    ;; Major modes
+    (lisp-interaction-mode . "λ")
+    (python-mode . "py")
+    (emacs-lisp-mode . "elisp"))
+  "Alist for `clean-mode-line'.
+ When you add a new element to the alist, keep in mind that you
+ must pass the correct minor/major mode symbol and a string you
+ want to use in the modeline *in lieu of* the original.")
+
+; always apply the changes
+(add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
 ;; doing this in custom
 ;;(when window-system
@@ -448,6 +473,18 @@ buffer is not visiting a file."
   "Kill all other buffers."
   (interactive)
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
+(defun clean-mode-line ()
+  (interactive)
+  (cl-loop for cleaner in mode-line-cleaner-alist
+	do (let* ((mode (car cleaner))
+		 (mode-str (cdr cleaner))
+		 (old-mode-str (cdr (assq mode minor-mode-alist))))
+	     (when old-mode-str
+		 (setcar old-mode-str mode-str))
+	       ;; major mode
+	     (when (eq mode major-mode)
+	       (setq mode-name mode-str)))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
