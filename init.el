@@ -341,6 +341,10 @@
   (require 'evil-dired)
   (evil-dired-setup))
 
+(with-eval-after-load 'info
+  (require 'evil-info)
+  (evil-info-setup))
+
 ;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;;; Custom Layers
