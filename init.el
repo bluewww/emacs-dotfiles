@@ -45,11 +45,12 @@
 ; change the modeline descriptions to make them shorter
 (setq projectile-mode-line '(:eval (format " π[%s]" (projectile-project-name))))
 (defvar mode-line-cleaner-alist
-  `((auto-complete-mode . " α")
+  `((auto-revert-mode . " α")
     (undo-tree-mode . "")
     (which-key-mode . "")
     (ivy-mode . "")
-    (anaconda-mode . " conda")
+    ; TODO: probably don't need to show this
+    (anaconda-mode . " γ")
     ;projectile has its own setting
     ;(projectile-mode . projectile-mode-line)
     (eldoc-mode . " ε")
@@ -336,6 +337,10 @@
   (require 'evil-doc-view)
   (evil-doc-view-setup))
 
+(with-eval-after-load 'dired
+  (require 'evil-dired)
+  (evil-dired-setup))
+
 ;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;;; Custom Layers
@@ -511,9 +516,10 @@ buffer is not visiting a file."
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex
-	   avy magit counsel-projectile counsel ivy rainbow-delimiters winum
-	   evil-matchit evil-surround evil which-key general use-package)))
+    (evil-ediff conda anaconda-mode disaster restart-emacs evil-magit
+		ujelly-theme auctex avy magit counsel-projectile counsel ivy
+		rainbow-delimiters winum evil-matchit evil-surround evil
+		which-key general use-package)))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(truncate-lines t))
@@ -524,5 +530,5 @@ buffer is not visiting a file."
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil
 			 :strike-through nil :overline nil :underline nil :slant
-			 normal :weight normal :height 115 :width normal
-			 :foundry "unknown" :family "Inconsolata")))))
+			 normal :weight normal :height 95 :width normal
+			 :foundry "unknown" :family "Inconsolata LGC")))))
