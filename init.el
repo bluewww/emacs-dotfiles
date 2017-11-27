@@ -258,6 +258,8 @@
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
 
+ "u" 'universal-argument
+
  ;; buffer handling
  "bd" 'kill-this-buffer
  "bm" 'kill-other-buffers
