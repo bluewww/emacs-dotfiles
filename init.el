@@ -1,3 +1,7 @@
+;; TODOS:
+;; conda-env-autoactivate-mode is turned on for all buffers even though should
+;; only be affecting python-mode
+;; include smartparens
 ;; Global configuration
 ; sane defaults
 (setq
