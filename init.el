@@ -355,10 +355,14 @@
 
 ;;; Custom Layers
 ;; LaTeX
-;(use-package auctex :ensure t :defer t)
-;(use-package tex-site :ensure t)
-;(require 'tex-site)
-(use-package auctex
+;;(use-package auctex :ensure t :defer t)
+;;(use-package tex-site :ensure t)
+;;(require 'tex-site)
+;;(use-package auctex ; Don't understand how auctext work,
+;;it just ignores the :config section... but now acutex won't
+;;be installed automatically
+
+(use-package tex
   :ensure t
   :mode ("\\.tex\\'" . TeX-latex-mode)
   :general
@@ -372,7 +376,7 @@
    ";"   'TeX-comment-or-uncomment-region
    ;; run compile open
    "a"   'TeX-command-run-all
-   "b"   'latex-build
+   "b"   'TeX-command-master
    "k"   'TeX-kill-job
    "l"   'TeX-recenter-output-buffer
    "m"   'TeX-insert-macro
@@ -399,7 +403,12 @@
    "rr"  'preview-clearout
    "rd"  'preview-clearout-document
    "rs"  'preview-clearout-section
-   "rp"  'preview-clearout-at-point))
+   "rp"  'preview-clearout-at-point
+  :config
+  (use-package auctex-latexmk
+    :ensure t
+    :config
+    (auctex-latexmk-setup)))
 
 ;; Python
 (use-package python
@@ -526,10 +535,10 @@ buffer is not visiting a file."
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (evil-ediff conda anaconda-mode disaster restart-emacs evil-magit
-		ujelly-theme auctex avy magit counsel-projectile counsel ivy
-		rainbow-delimiters winum evil-matchit evil-surround evil
-		which-key general use-package)))
+    (auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs
+		    evil-magit ujelly-theme auctex avy magit counsel-projectile
+		    counsel ivy rainbow-delimiters winum evil-matchit
+		    evil-surround evil which-key general use-package)))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(truncate-lines t))
