@@ -3,26 +3,26 @@
 ;; only be affecting python-mode
 ;; include smartparens
 ;; Global configuration
-; sane defaults
+;; sane defaults
 (setq
- ; 50 MB, default is 800kb
+ ;; 50 MB, default is 800kb
   gc-cons-threshold 50000000
- ; delete excess backup versions silently
+ ;; delete excess backup versions silently
  delete-old-versions -1
- ; make backups file even when in version controlled dir
+ ;; make backups file even when in version controlled dir
  vc-make-backup-files t
- ; which directory to put backups file
+ ;; which directory to put backups file
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
- ; don't ask for confirmation when opening symlinked file
+ ;; don't ask for confirmation when opening symlinked file
  vc-follow-symlinks t
- ; transform backups file name
+ ;; transform backups file name
  auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))
  inhibit-startup-screen t
- ; silent bell when you make a mistake
+ ;; silent bell when you make a mistake
  ring-bell-function 'ignore
- ; sentence SHOULD end with only a point.
+ ;; sentence SHOULD end with only a point.
  sentence-end-double-space nil
- ; fix bug with maximization
+ ;; fix bug with maximization
  frame-resize-pixelwise t
  default-fill-column 80
  help-window-select t
@@ -42,11 +42,11 @@
 (add-hook 'text-mode-hook 'show-paren-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
 
-; convenient auto revert
-; TODO:
+;; convenient auto revert
+;; TODO:
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-; change the modeline descriptions to make them shorter
+;; change the modeline descriptions to make them shorter
 (setq projectile-mode-line '(:eval (format " π[%s]" (projectile-project-name))))
 (defvar mode-line-cleaner-alist
   `((auto-revert-mode . " α")
@@ -69,12 +69,12 @@
 
 
 ;; doing this in custom
-;;(when window-system
-;;  (tool-bar-mode -1)
-;;  (tooltip-mode -1)
-;;  (menu-bar-mode -1)
-;;  (scroll-bar-mode -1)
-;;  (blink-cursor-mode -1))
+;; (when window-system
+;;   (tool-bar-mode -1)
+;;   (tooltip-mode -1)
+;;   ( menu-bar-mode -1)
+;;   (scroll-bar-mode -1)
+;;   (blink-cursor-mode -1))
 
 (require 'package)
 ; want to use use-package instead
@@ -90,14 +90,14 @@
  (package-install 'use-package))
 (require 'use-package)
 
-; loading time
+;; loading time
 (setq use-package-verbose t)
 
 (add-to-list
   'load-path
   (expand-file-name "evil-collection/" user-emacs-directory))
 
-;; all packages
+;;;; All packages
 (use-package general :ensure t)
 (general-define-key
  :states '(normal motion visual insert emacs)
@@ -209,7 +209,7 @@
   (setq projectile-completion-system 'ivy)
   (use-package counsel-projectile :ensure t
     :config
-    ; taking only what we need from (counsel-projectile-on)
+    ;; taking only what we need from (counsel-projectile-on)
     (setq projectile-switch-project-action 'counsel-projectile)))
 
 ;; git intergration
@@ -236,7 +236,7 @@
    :non-normal-prefix "M-SPC"
    "qR" 'restart-emacs))
 
-; TODO remove (?)
+;; TODO remove (?)
 (use-package avy
   :ensure t
   :general
@@ -344,11 +344,11 @@
  "hk" 'describe-key
  "hm" 'describe-mode
  "hp" 'describe-package
- ;"hf" 'describe-function ; using counsel versions to force loading the package
- ;"hv" 'describe-variable
+ ;; "hf" 'describe-function ; using counsel versions to force loading the package
+ ;; "hv" 'describe-variable
  "hi" 'info)
 
-;; lazy evilification of built-in stuff
+;;; lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
   (use-package evil-ediff :ensure t))
 
@@ -368,16 +368,16 @@
   (require 'evil-info)
   (evil-info-setup))
 
-;(with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
+;; (with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
-;;; Custom Layers
-;; LaTeX
-;;(use-package auctex :ensure t :defer t)
-;;(use-package tex-site :ensure t)
-;;(require 'tex-site)
-;;(use-package auctex ; Don't understand how auctext work,
-;;it just ignores the :config section... but now acutex won't
-;;be installed automatically
+;;;; Custom Layers
+;;; LaTeX
+;; (use-package auctex :ensure t :defer t)
+;; (use-package tex-site :ensure t)
+;; (require 'tex-site)
+;; (use-package auctex ; Don't understand how auctext work,
+;; it just ignores the :config section... but now acutex won't
+;; be installed automatically
 
 (use-package auctex
   :ensure t
@@ -427,7 +427,7 @@
     :config
     (auctex-latexmk-setup)))
 
-;; Python
+;;; Python
 (use-package python
   :ensure t
   :mode ("\\.py\\'" . python-mode)
@@ -462,7 +462,7 @@
     (require 'subr-x) ; workaround for missing dependency
     (setq conda-anaconda-home "/opt/miniconda3")))
 
-;; C-C++
+;;; C-C++
 ;; TODO: flycheck, company?
 (use-package cc-mode
   :ensure t
@@ -488,7 +488,7 @@
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
-;;; esc quits
+;; esc quits
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
 In Delete Selection mode, if the mark is active, just deactivate it;
@@ -526,8 +526,8 @@ buffer is not visiting a file."
 	       ;; major mode
 	     (when (eq mode major-mode)
 	       (setq mode-name mode-str)))))
-; do it after definition
-; always apply the changes
+;; do it after definition
+;; always apply the changes
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
 
@@ -570,5 +570,5 @@ buffer is not visiting a file."
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil
 			 :strike-through nil :overline nil :underline nil :slant
-			 normal :weight normal :height 95 :width normal
-			 :foundry "unknown" :family "Inconsolata LGC")))))
+			 normal :weight normal :height 95 :width normal :foundry
+			 "unknown" :family "Inconsolata LGC")))))
