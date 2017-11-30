@@ -360,7 +360,7 @@
 ;;it just ignores the :config section... but now acutex won't
 ;;be installed automatically
 
-(use-package tex
+(use-package auctex
   :ensure t
   :mode ("\\.tex\\'" . TeX-latex-mode)
   :general
@@ -401,8 +401,8 @@
    "rr"  'preview-clearout
    "rd"  'preview-clearout-document
    "rs"  'preview-clearout-section
-   "rp"  'preview-clearout-at-point)
-  :config
+   "rp"  'preview-clearout-at-point))
+(with-eval-after-load "TeX"
   (use-package auctex-latexmk
     :ensure t
     :config
