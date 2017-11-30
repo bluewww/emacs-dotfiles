@@ -243,6 +243,25 @@
   (general-define-key
    "C-'" 'avy-goto-word-1))
 
+;; paredit-like parenthesis editing
+(use-package lispy
+  :ensure t
+  :defer t
+  :init
+  ;; enable for elisp
+  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+  :config
+  (use-package lispyville
+    :ensure t
+    :config
+    (lispyville-set-key-theme
+     '(operators
+       slurp/barf-lispy
+       (additional normal visual)
+       (additional-movement normal visual motion)))
+    ;; always enable too
+    (add-hook 'lispy-mode-hook #'lispyville-mode)))
+
 ;; proper vim style escape
 (general-define-key
  :states '(normal visual)
@@ -537,10 +556,10 @@ buffer is not visiting a file."
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs
-		    evil-magit ujelly-theme auctex avy magit counsel-projectile
-		    counsel ivy rainbow-delimiters winum evil-matchit
-		    evil-surround evil which-key general use-package)))
+    (lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster
+		restart-emacs evil-magit ujelly-theme auctex avy magit
+		counsel-projectile counsel ivy rainbow-delimiters winum
+		evil-matchit evil-surround evil which-key general use-package)))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(truncate-lines t))
