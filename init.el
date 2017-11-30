@@ -67,8 +67,6 @@
  must pass the correct minor/major mode symbol and a string you
  want to use in the modeline *in lieu of* the original.")
 
-; always apply the changes
-(add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
 ;; doing this in custom
 ;;(when window-system
@@ -403,7 +401,7 @@
    "rr"  'preview-clearout
    "rd"  'preview-clearout-document
    "rs"  'preview-clearout-section
-   "rp"  'preview-clearout-at-point
+   "rp"  'preview-clearout-at-point)
   :config
   (use-package auctex-latexmk
     :ensure t
@@ -509,6 +507,10 @@ buffer is not visiting a file."
 	       ;; major mode
 	     (when (eq mode major-mode)
 	       (setq mode-name mode-str)))))
+; do it after definition
+; always apply the changes
+(add-hook 'after-change-major-mode-hook 'clean-mode-line)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
