@@ -368,6 +368,13 @@
   (require 'evil-info)
   (evil-info-setup))
 
+;; https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
+(with-eval-after-load 'eshell)
+(add-hook 'eshell-mode-hook
+	  (lambda ()
+	    (define-key eshell-mode-map (kbd "<tab>")
+	      'completion-at-point)))
+
 ;; (with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;;;; Custom Layers
