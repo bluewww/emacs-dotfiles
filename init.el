@@ -53,6 +53,7 @@
     (undo-tree-mode . "")
     (which-key-mode . "")
     (ivy-mode . "")
+    (lispyville-mode . " lispyv")
     ; TODO: probably don't need to show this
     (anaconda-mode . " γ")
     ;projectile has its own setting
@@ -251,25 +252,6 @@
   :general
   (general-define-key
    "C-'" 'avy-goto-word-1))
-
-;; paredit-like parenthesis editing
-(use-package lispy
-  :ensure t
-  :defer t
-  :init
-  ;; enable for elisp
-  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-  :config
-  (use-package lispyville
-    :ensure t
-    :config
-    (lispyville-set-key-theme
-     '(operators
-       slurp/barf-lispy
-       (additional normal visual)
-       (additional-movement normal visual motion)))
-    ;; always enable too
-    (add-hook 'lispy-mode-hook #'lispyville-mode)))
 
 ;; proper vim style escape
 (general-define-key
@@ -498,6 +480,37 @@
     (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux" ;GNU style is really shit
 	c-basic-offset 4))
+;;; Emacs Lisp
+;; paredit-like parenthesis editing
+(use-package lispy
+  :ensure t
+  :defer t
+  ;; :init
+  ;; enable for elisp
+  ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+  )
+(use-package lispyville
+  :ensure t
+  :defer t
+  :init
+  ;; always enable too
+  (add-hook 'emacs-lisp-mode-hook (lambda () (lispyville-mode 1)))
+  (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1)))
+  :config
+  (lispyville-set-key-theme
+   '(operators
+     slurp/barf-lispy
+     (additional normal visual)
+     (additional-movement normal visual motion)))
+  ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
+  )
+
+;;; Racket
+;(use-package racket-mode
+;  :ensure t
+;  :mode ("\\.rkt\\'" . racket-mode)
+;  (general-define-key
+;   ))
 
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing"
