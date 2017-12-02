@@ -67,6 +67,15 @@
  must pass the correct minor/major mode symbol and a string you
  want to use in the modeline *in lieu of* the original.")
 
+(if (display-graphic-p)
+    (progn
+      (setq initial-frame-alist
+	    '((width . 100) (height . 50)))
+      (tool-bar-mode -1)
+      (tooltip-mode -1)
+      (menu-bar-mode -1)
+      (scroll-bar-mode -1)
+      (blink-cursor-mode -1)))
 
 ;; doing this in custom
 ;; (when window-system
@@ -537,7 +546,6 @@ buffer is not visiting a file."
 ;; always apply the changes
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -552,7 +560,6 @@ buffer is not visiting a file."
      (output-dvi "Okular")
      (output-pdf "Okular")
      (output-html "xdg-open"))))
- '(blink-cursor-mode nil)
  '(custom-enabled-themes (quote (ujelly)))
  '(custom-safe-themes
    (quote
@@ -560,16 +567,14 @@ buffer is not visiting a file."
      default)))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
- '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
     (lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster
 		restart-emacs evil-magit ujelly-theme auctex avy magit
 		counsel-projectile counsel ivy rainbow-delimiters winum
 		evil-matchit evil-surround evil which-key general use-package)))
- '(scroll-bar-mode nil)
- '(tool-bar-mode nil)
  '(truncate-lines t))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

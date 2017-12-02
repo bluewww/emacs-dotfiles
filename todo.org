@@ -1,0 +1,3 @@
+** Bugs
+*** python inferior mode
+    C-d deletes instead of scrolling down
