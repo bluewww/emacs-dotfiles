@@ -22,6 +22,8 @@
  ring-bell-function 'ignore
  ;; sentence SHOULD end with only a point.
  sentence-end-double-space nil
+ ;; source path
+ source-directory "/usr/src/debug/emacs-25.3"
  ;; fix bug with maximization
  frame-resize-pixelwise t
  default-fill-column 80
@@ -317,6 +319,14 @@
  "3" 'winum-select-window-3
  "4" 'winum-select-window-4
  "5" 'winum-select-window-5
+
+ ;; TODO
+ ;; t for toggle
+ ;; r for register/killrings
+ ;; c for compile
+ ;;
+ "sg" 'xref-find-definitions
+ "sr" 'xref-find-references
 
  ;; eshell
  "'" 'eshell
