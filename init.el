@@ -369,6 +369,10 @@
   (require 'evil-info)
   (evil-info-setup))
 
+(with-eval-after-load 'comint
+  (require 'evil-comint)
+  (evil-comint-setup))
+
 ;; https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
 (with-eval-after-load 'eshell)
 (add-hook 'eshell-mode-hook
