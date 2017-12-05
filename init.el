@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; TODOS:
 ;; conda-env-autoactivate-mode is turned on for all buffers even though should
 ;; only be affecting python-mode
