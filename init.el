@@ -27,7 +27,7 @@
  source-directory "/usr/src/debug/emacs-25.3"
  ;; fix bug with maximization
  frame-resize-pixelwise t
- default-fill-column 80
+ fill-column 80
  help-window-select t
  tab-width 4
  initial-scratch-message "Welcome in Emacs")
@@ -35,15 +35,19 @@
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
-; we want a portable python environment
+;; we want a portable python environment
 (setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
 (add-to-list 'exec-path "/opt/miniconda3/bin")
 
-; activate some nice built in modes
+;; activate some nice built in modes
 (add-hook 'text-mode-hook 'linum-mode)
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'text-mode-hook 'show-paren-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
+
+;; narrowing is nice
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 ;; convenient auto revert
 ;; TODO:
@@ -119,11 +123,12 @@
  "?" 'general-describe-keybindings)
 
 (use-package which-key :ensure t
- :init
+ :config
  (which-key-mode))
 (use-package evil :ensure t
  :init
  (setq evil-want-C-u-scroll t)
+ :config
  (evil-mode))
 
 (use-package evil-surround
@@ -136,14 +141,14 @@
 ; TODO: bindings
 ;(use-package evil-search-highlight-persist :ensure t)
 (use-package winum :ensure t
- :init
+ :config
  (winum-mode))
 (use-package winner :ensure t
-  :init
+  :config
   (winner-mode))
 (use-package rainbow-delimiters :ensure t
   :defer t
-  :init
+  :config
   (rainbow-delimiters-mode))
 
 ;; completion framework
@@ -185,7 +190,6 @@
    "hb" 'counsel-descbinds
    "hf" 'counsel-describe-function
    "hv" 'counsel-describe-variable
-   ; spacemacs syle
    "SPC" 'counsel-M-x)
   :general
   (general-define-key
@@ -588,7 +592,7 @@ buffer is not visiting a file."
      (output-dvi "Okular")
      (output-pdf "Okular")
      (output-html "xdg-open"))))
- '(custom-enabled-themes (quote (ujelly)))
+ '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes
    (quote
     ("53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
