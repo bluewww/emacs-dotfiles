@@ -27,7 +27,7 @@
  source-directory "/usr/src/debug/emacs-25.3"
  ;; fix bug with maximization
  frame-resize-pixelwise t
- fill-column 80
+ default-fill-column 80
  help-window-select t
  tab-width 4
  initial-scratch-message "Welcome in Emacs")
@@ -53,6 +53,7 @@
 ;; TODO:
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
+
 ;; change the modeline descriptions to make them shorter
 (setq projectile-mode-line '(:eval (format " π[%s]" (projectile-project-name))))
 (defvar mode-line-cleaner-alist
@@ -75,6 +76,7 @@
  must pass the correct minor/major mode symbol and a string you
  want to use in the modeline *in lieu of* the original.")
 
+;; disable window stuff
 (if (display-graphic-p)
     (progn
       (setq initial-frame-alist
@@ -84,14 +86,6 @@
       (menu-bar-mode -1)
       (scroll-bar-mode -1)
       (blink-cursor-mode -1)))
-
-;; doing this in custom
-;; (when window-system
-;;   (tool-bar-mode -1)
-;;   (tooltip-mode -1)
-;;   ( menu-bar-mode -1)
-;;   (scroll-bar-mode -1)
-;;   (blink-cursor-mode -1))
 
 (require 'package)
 ; want to use use-package instead
@@ -378,7 +372,17 @@
   (require 'evil-comint)
   (evil-comint-setup))
 
+;;; general settings for built-in stuff
+;; tramp
+(with-eval-after-load 'tramp
+  ;(setq projectile-mode-line " Projectile")
+  (setq tramp-default-method "ssh")
+  ;(setq tramp-verbose 6) ; debugging mode
+  (setq tramp-shell-prompt-pattern ; fix parsing bug of fancy remote  prompts
+	"\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+
 ;; https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
+;; eshell
 (with-eval-after-load 'eshell)
 (add-hook 'eshell-mode-hook
 	  (lambda ()
@@ -593,18 +597,19 @@ buffer is not visiting a file."
      (output-pdf "Okular")
      (output-html "xdg-open"))))
  '(custom-enabled-themes (quote (wombat)))
- '(custom-safe-themes
-   (quote
-    ("53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
-     default)))
+ '(custom-safe-themes (quote
+		       ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59"
+			"53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
+			default)))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster
-		restart-emacs evil-magit ujelly-theme auctex avy magit
-		counsel-projectile counsel ivy rainbow-delimiters winum
-		evil-matchit evil-surround evil which-key general use-package)))
+    (sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda
+		     anaconda-mode disaster restart-emacs evil-magit
+		     ujelly-theme auctex avy magit counsel-projectile counsel
+		     ivy rainbow-delimiters winum evil-matchit evil-surround
+		     evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
