@@ -169,7 +169,8 @@
    :states '(normal motion visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
-   "bb" 'ivy-switch-buffer))
+   "bb" 'ivy-switch-buffer
+   "bo" 'ivy-switch-buffer-other-window))
 
 (use-package counsel
   :ensure t
@@ -236,7 +237,8 @@
    "gS" 'magit-stage-file
    "gU" 'magit-unstage-file)
   :config
-  (use-package evil-magit :ensure t))
+  (use-package evil-magit :ensure t)
+  (setq magit-completing-read-function 'ivy-completing-read))
 
 (use-package restart-emacs
   :ensure t
@@ -392,6 +394,16 @@
 ;; (with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;;;; Custom Layers
+
+;;; pdf
+(use-package pdf-tools
+  :ensure t
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (pdf-tools-install)
+  (require 'evil-pdf)
+  (evil-pdf-setup))
+
 ;;; LaTeX
 ;; (use-package auctex :ensure t :defer t)
 ;; (use-package tex-site :ensure t)
@@ -594,22 +606,23 @@ buffer is not visiting a file."
      ((output-dvi style-pstricks)
       "dvips and gv")
      (output-dvi "Okular")
-     (output-pdf "Okular")
+     (output-pdf "PDF Tools")
      (output-html "xdg-open"))))
  '(custom-enabled-themes (quote (wombat)))
- '(custom-safe-themes (quote
-		       ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59"
-			"53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
-			default)))
+ '(custom-safe-themes
+   (quote
+    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59"
+     "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
+     default)))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda
-		     anaconda-mode disaster restart-emacs evil-magit
-		     ujelly-theme auctex avy magit counsel-projectile counsel
-		     ivy rainbow-delimiters winum evil-matchit evil-surround
-		     evil which-key general use-package)))
+    (pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda
+	       anaconda-mode disaster restart-emacs evil-magit ujelly-theme
+	       auctex avy magit counsel-projectile counsel ivy
+	       rainbow-delimiters winum evil-matchit evil-surround evil
+	       which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
