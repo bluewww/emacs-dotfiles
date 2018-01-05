@@ -7,7 +7,7 @@
 ;; sane defaults
 (setq
  ;; 50 MB, default is 800kb
-  gc-cons-threshold 50000000
+ gc-cons-threshold 50000000
  ;; delete excess backup versions silently
  delete-old-versions -1
  ;; make backups file even when in version controlled dir
@@ -80,7 +80,7 @@
 (if (display-graphic-p)
     (progn
       (setq initial-frame-alist
-	    '((width . 100) (height . 50)))
+            '((width . 100) (height . 50)))
       (tool-bar-mode -1)
       (tooltip-mode -1)
       (menu-bar-mode -1)
@@ -91,22 +91,22 @@
 ; want to use use-package instead
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-			 ("gnu"       . "http://elpa.gnu.org/packages/")
-			 ("melpa"     . "https://melpa.org/packages/")))
+                         ("gnu"       . "http://elpa.gnu.org/packages/")
+                         ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
 (setq package-check-signature nil)
 (unless (package-installed-p 'use-package)
- (package-refresh-contents)
- (package-install 'use-package))
+  (package-refresh-contents)
+  (package-install 'use-package))
 (require 'use-package)
 
 ;; loading time
 (setq use-package-verbose t)
 
 (add-to-list
-  'load-path
-  (expand-file-name "evil-collection/" user-emacs-directory))
+ 'load-path
+ (expand-file-name "evil-collection/" user-emacs-directory))
 
 ;;;; All packages
 (use-package general :ensure t)
@@ -117,13 +117,13 @@
  "?" 'general-describe-keybindings)
 
 (use-package which-key :ensure t
- :config
- (which-key-mode))
+  :config
+  (which-key-mode))
 (use-package evil :ensure t
- :init
- (setq evil-want-C-u-scroll t)
- :config
- (evil-mode))
+  :init
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-mode))
 
 (use-package evil-surround
   :ensure t
@@ -135,8 +135,8 @@
 ; TODO: bindings
 ;(use-package evil-search-highlight-persist :ensure t)
 (use-package winum :ensure t
- :config
- (winum-mode))
+  :config
+  (winum-mode))
 (use-package winner :ensure t
   :config
   (winner-mode))
@@ -158,7 +158,7 @@
    :keymaps 'ivy-minibuffer-map
    "C-j" 'ivy-next-line
    "C-k" 'ivy-previous-line
-   "C-h" (kbd "DEL") ; hack
+   "C-h" (kbd "DEL")                    ; hack
    "C-l" 'ivy-alt-done
    "C-d" 'ivy-scroll-up-command
    "C-u" 'ivy-scroll-down-command
@@ -262,10 +262,10 @@
  "<escape>" 'keyboard-quit)
 (general-define-key
  :keymaps '(minibuffer-local-map
-      minibuffer-local-ns-map
-      minibuffer-local-completion-map
-      minibuffer-local-must-match-map
-      minibuffer-local-isearch-map)
+            minibuffer-local-ns-map
+            minibuffer-local-completion-map
+            minibuffer-local-must-match-map
+            minibuffer-local-isearch-map)
  "<escape>" 'minibuffer-keyboard-quit)
 
 (general-define-key
@@ -346,7 +346,7 @@
  "hk" 'describe-key
  "hm" 'describe-mode
  "hp" 'describe-package
- ;; "hf" 'describe-function ; using counsel versions to force loading the package
+ ;; "hf" 'describe-function  using counsel versions to force loading the package
  ;; "hv" 'describe-variable
  "hi" 'info)
 
@@ -381,15 +381,16 @@
   (setq tramp-default-method "ssh")
   ;(setq tramp-verbose 6) ; debugging mode
   (setq tramp-shell-prompt-pattern ; fix parsing bug of fancy remote  prompts
-	"\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
-;; https://emacs.stackexchange.com/questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
+;; https://emacs.stackexchange.com/
+;; questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
 ;; eshell
 (with-eval-after-load 'eshell)
 (add-hook 'eshell-mode-hook
-	  (lambda ()
-	    (define-key eshell-mode-map (kbd "<tab>")
-	      'completion-at-point)))
+          (lambda ()
+            (define-key eshell-mode-map (kbd "<tab>")
+              'completion-at-point)))
 
 ;; (with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
@@ -490,9 +491,9 @@
   (use-package conda :ensure t
     :config
     (conda-env-initialize-eshell)
-    ;;TODO: is activated in any major mode, fix this with hooks?
+    ; TODO: is activated in any major mode, fix this with hooks?
     (conda-env-autoactivate-mode t)
-    (require 'subr-x) ; workaround for missing dependency
+    (require 'subr-x)                   ; workaround for missing dependency
     (setq conda-anaconda-home "/opt/miniconda3")))
 
 ;;; C-C++
@@ -515,8 +516,8 @@
   (use-package cwarn :ensure t
     :config
     (add-hook 'c-mode-common-hook 'cwarn-mode))
-  (setq c-default-style "linux" ;GNU style is really shit
-	c-basic-offset 4)
+  (setq c-default-style "linux"                 ;GNU style is really shit
+        c-basic-offset 4)
   (use-package clang-format :ensure t))
 ;;; Emacs Lisp
 ;; paredit-like parenthesis editing
@@ -574,7 +575,7 @@ buffer is not visiting a file."
   (interactive "P")
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:"
-			 (ido-read-file-name "Find file(as root): ")))
+                         (ido-read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun kill-other-buffers ()
@@ -585,14 +586,14 @@ buffer is not visiting a file."
 (defun clean-mode-line ()
   (interactive)
   (cl-loop for cleaner in mode-line-cleaner-alist
-	do (let* ((mode (car cleaner))
-		 (mode-str (cdr cleaner))
-		 (old-mode-str (cdr (assq mode minor-mode-alist))))
-	     (when old-mode-str
-		 (setcar old-mode-str mode-str))
-	       ;; major mode
-	     (when (eq mode major-mode)
-	       (setq mode-name mode-str)))))
+           do (let* ((mode (car cleaner))
+                     (mode-str (cdr cleaner))
+                     (old-mode-str (cdr (assq mode minor-mode-alist))))
+                (when old-mode-str
+                  (setcar old-mode-str mode-str))
+                ;; major mode
+                (when (eq mode major-mode)
+                  (setq mode-name mode-str)))))
 ;; do it after definition
 ;; always apply the changes
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
@@ -622,10 +623,10 @@ buffer is not visiting a file."
  '(package-selected-packages
    (quote
     (clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk
-		  evil-ediff conda anaconda-mode disaster restart-emacs
-		  evil-magit ujelly-theme auctex avy magit counsel-projectile
-		  counsel ivy rainbow-delimiters winum evil-matchit
-		  evil-surround evil which-key general use-package)))
+                  evil-ediff conda anaconda-mode disaster restart-emacs
+                  evil-magit ujelly-theme auctex avy magit counsel-projectile
+                  counsel ivy rainbow-delimiters winum evil-matchit
+                  evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
@@ -634,6 +635,6 @@ buffer is not visiting a file."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil
-			 :strike-through nil :overline nil :underline nil :slant
-			 normal :weight normal :height 95 :width normal :foundry
-			 "unknown" :family "Inconsolata LGC")))))
+                         :strike-through nil :overline nil :underline nil :slant
+                         normal :weight normal :height 95 :width normal :foundry
+                         "unknown" :family "Inconsolata LGC")))))
