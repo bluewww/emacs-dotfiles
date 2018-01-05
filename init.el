@@ -503,18 +503,21 @@
   :general
   (general-define-key
    :states 'normal
-   :keymaps 'c-mode-map
+   :keymaps '(c-mode-map c++-mode-map)
    :prefix ","
    "ga" 'projectile-find-other-file
    "gA" 'projectile-find-other-file-other-window
-   "D"  'disaster)
+   "D"  'disaster
+   "fb" 'clang-format-buffer
+   "fr" 'clang-format-region)
   :config
   (use-package disaster :ensure t)
   (use-package cwarn :ensure t
     :config
     (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux" ;GNU style is really shit
-	c-basic-offset 4))
+	c-basic-offset 4)
+  (use-package clang-format :ensure t))
 ;;; Emacs Lisp
 ;; paredit-like parenthesis editing
 (use-package lispy
@@ -618,11 +621,11 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda
-	       anaconda-mode disaster restart-emacs evil-magit ujelly-theme
-	       auctex avy magit counsel-projectile counsel ivy
-	       rainbow-delimiters winum evil-matchit evil-surround evil
-	       which-key general use-package)))
+    (clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk
+		  evil-ediff conda anaconda-mode disaster restart-emacs
+		  evil-magit ujelly-theme auctex avy magit counsel-projectile
+		  counsel ivy rainbow-delimiters winum evil-matchit
+		  evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
