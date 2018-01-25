@@ -49,11 +49,6 @@
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
-;; convenient auto revert
-;; TODO:
-(add-hook 'doc-view-mode-hook 'auto-revert-mode)
-
-
 ;; change the modeline descriptions to make them shorter
 (setq projectile-mode-line '(:eval (format " π[%s]" (projectile-project-name))))
 (defvar mode-line-cleaner-alist
@@ -111,10 +106,12 @@
 ;;;; All packages
 (use-package general :ensure t)
 (general-define-key
- :states '(normal motion visual insert emacs)
+ :states '(normal insert emacs visual)
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
  "?" 'general-describe-keybindings)
+
+;(define-key evil-motion-state-map (kbd "SPC ?") 'general-describe-keybindings)
 
 (use-package which-key :ensure t
   :config
@@ -166,7 +163,7 @@
    "<escape>" 'minibuffer-keyboard-quit)
   :general
   (general-define-key
-   :states '(normal motion visual insert emacs)
+   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "bb" 'ivy-switch-buffer
@@ -176,7 +173,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal motion visual insert emacs)
+   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ff" 'counsel-find-file
@@ -195,7 +192,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal motion visual insert emacs)
+   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'swiper
@@ -206,7 +203,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal motion visual insert emacs)
+   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "pc" 'counsel-projectile-compile-project
@@ -229,7 +226,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal motion visual insert emacs)
+   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "gs" 'magit-status
@@ -244,7 +241,7 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal motion visual insert emacs)
+   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "qR" 'restart-emacs))
@@ -269,7 +266,7 @@
  "<escape>" 'minibuffer-keyboard-quit)
 
 (general-define-key
- :states '(normal motion visual insert emacs)
+ :states '(normal visual insert emacs)
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
 
@@ -350,7 +347,7 @@
  ;; "hv" 'describe-variable
  "hi" 'info)
 
-;;; lazy evilification of built-in stuff
+;;; general settings and lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
   (use-package evil-ediff :ensure t))
 
@@ -361,6 +358,7 @@
 (with-eval-after-load 'doc-view
   (require 'evil-doc-view)
   (evil-doc-view-setup))
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
 (with-eval-after-load 'dired
   (require 'evil-dired)
@@ -374,8 +372,6 @@
   (require 'evil-comint)
   (evil-comint-setup))
 
-;;; general settings for built-in stuff
-;; tramp
 (with-eval-after-load 'tramp
   ;(setq projectile-mode-line " Projectile")
   (setq tramp-default-method "ssh")
@@ -400,6 +396,8 @@
 (use-package pdf-tools
   :ensure t
   :mode ("\\.pdf\\'" . pdf-view-mode)
+  :init
+  (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
   :config
   (pdf-tools-install)
   (require 'evil-pdf)
@@ -443,6 +441,7 @@
    "fp"  'LaTeX-fill-paragraph    ;; C-c C-q C-p
    "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
    "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
+   "fb"  'LaTeX-fill-buffer
    "pb"  'preview-buffer
    "pd"  'preview-document
    "pe"  'preview-environment
@@ -615,18 +614,12 @@ buffer is not visiting a file."
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes
    (quote
-    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59"
-     "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
-     default)))
+    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59" "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default)))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk
-                  evil-ediff conda anaconda-mode disaster restart-emacs
-                  evil-magit ujelly-theme auctex avy magit counsel-projectile
-                  counsel ivy rainbow-delimiters winum evil-matchit
-                  evil-surround evil which-key general use-package)))
+    (ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
@@ -634,7 +627,4 @@ buffer is not visiting a file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil
-                         :strike-through nil :overline nil :underline nil :slant
-                         normal :weight normal :height 95 :width normal :foundry
-                         "unknown" :family "Inconsolata LGC")))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 95 :width normal :foundry "unknown" :family "Inconsolata LGC")))))
