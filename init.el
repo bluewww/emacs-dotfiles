@@ -104,23 +104,19 @@
  (expand-file-name "evil-collection/" user-emacs-directory))
 
 ;;;; All packages
+
+(use-package evil :ensure t
+  :init
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-mode))
+
 (use-package general :ensure t)
 (general-define-key
  :states '(normal insert emacs visual)
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
  "?" 'general-describe-keybindings)
-
-;(define-key evil-motion-state-map (kbd "SPC ?") 'general-describe-keybindings)
-
-(use-package which-key :ensure t
-  :config
-  (which-key-mode))
-(use-package evil :ensure t
-  :init
-  (setq evil-want-C-u-scroll t)
-  :config
-  (evil-mode))
 
 (use-package evil-surround
   :ensure t
@@ -131,6 +127,11 @@
   (global-evil-matchit-mode 1))
 ; TODO: bindings
 ;(use-package evil-search-highlight-persist :ensure t)
+
+(use-package which-key :ensure t
+  :config
+  (which-key-mode))
+
 (use-package winum :ensure t
   :config
   (winum-mode))
@@ -619,7 +620,7 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
+    (ox-rst org ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
