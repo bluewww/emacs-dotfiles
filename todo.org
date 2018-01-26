@@ -1,3 +1,11 @@
 ** Bugs
 *** python inferior mode
-    C-d deletes instead of scrolling down
+    =C-d= deletes instead of scrolling down.
+*** andaconda-mode
+    =conda-env-autoactivate-mode is= turned on for all buffers even though should
+    only be affecting =python-mode=.
+** Improvements
+*** whitespace-mode
+    Don't highlight tabs
+*** org-mode
+    Use =use-package= for the latest version. Add ox-rst and ox-gfm support.

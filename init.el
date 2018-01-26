@@ -1,8 +1,4 @@
 ;;; -*- lexical-binding: t; -*-
-;; TODOS: conda-env-autoactivate-mode is turned on for all buffers even though
-;; should only be affecting python-mode
-;; Make org mode work with use-package and support ox-rst, ox-gfm for exportin
-;; Configure whitespace-mode to don't highlight tabs
 ;;
 ;; Global configuration
 ;; sane defaults
@@ -535,15 +531,15 @@
   (setq c-default-style "linux"                 ;GNU style is really shit
         c-basic-offset 4)
   (use-package clang-format :ensure t))
+
 ;;; Emacs Lisp
 ;; paredit-like parenthesis editing
-(use-package lispy
-  :ensure t
-  :defer t
-  ;; :init
-  ;; enable for elisp
-  ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-  )
+(use-package lispy :ensure t
+  :defer t)
+;; :init
+;; enable for elisp
+;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+
 (use-package lispyville
   :ensure t
   :defer t
@@ -556,9 +552,8 @@
    '(operators
      slurp/barf-lispy
      (additional normal visual)
-     (additional-movement normal visual motion)))
-  ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
-  )
+     (additional-movement normal visual motion))))
+;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 
 ;;; Racket
 ;(use-package racket-mode
