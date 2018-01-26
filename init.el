@@ -1,8 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
-;; TODOS:
-;; conda-env-autoactivate-mode is turned on for all buffers even though should
-;; only be affecting python-mode
-;; include smartparens
+;; TODOS: conda-env-autoactivate-mode is turned on for all buffers even though
+;; should only be affecting python-mode
+;; Wait for motion map fix and reintroduce it
+;; Make org mode work with use-package and support ox-rst, ox-gfm for exportin
+;; Configure whitespace-mode to don't highlight tabs
+;;
 ;; Global configuration
 ;; sane defaults
 (setq
