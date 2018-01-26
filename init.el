@@ -235,6 +235,9 @@
 ;; git intergration
 (use-package magit
   :ensure t
+  :init
+  ;; disable built in version control if we use magit
+  (setq vc-handled-backends nil)
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
