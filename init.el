@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 ;; TODOS: conda-env-autoactivate-mode is turned on for all buffers even though
 ;; should only be affecting python-mode
-;; Wait for motion map fix and reintroduce it
 ;; Make org mode work with use-package and support ox-rst, ox-gfm for exportin
 ;; Configure whitespace-mode to don't highlight tabs
 ;;
@@ -106,20 +105,11 @@
  (expand-file-name "evil-collection/" user-emacs-directory))
 
 ;;;; All packages
-
 (use-package evil :ensure t
   :init
   (setq evil-want-C-u-scroll t)
   :config
   (evil-mode))
-
-(use-package general :ensure t)
-(general-define-key
- :states '(normal insert emacs visual)
- :prefix "SPC"
- :non-normal-prefix "M-SPC"
- "?" 'general-describe-keybindings)
-
 (use-package evil-surround
   :ensure t
   :config
@@ -127,8 +117,20 @@
 (use-package evil-matchit :ensure t
   :config
   (global-evil-matchit-mode 1))
-; TODO: bindings
-;(use-package evil-search-highlight-persist :ensure t)
+
+(use-package general :ensure t)
+;; just take the override map and increase its precedence to the maximum (for evil)
+(evil-make-intercept-map general-override-mode-map)
+;; the mapping has to be introduced as minor mode
+(general-override-mode)
+(general-define-key
+ :states '(normal insert emacs visual motion)
+ :keymaps 'override
+ :prefix "SPC"
+ :non-normal-prefix "M-SPC"
+ "?" 'general-describe-keybindings)
+
+;;(use-package evil-search-highlight-persist :ensure t)
 
 (use-package which-key :ensure t
   :config
@@ -137,15 +139,17 @@
 (use-package winum :ensure t
   :config
   (winum-mode))
+
 (use-package winner :ensure t
   :config
   (winner-mode))
+
 (use-package rainbow-delimiters :ensure t
   :defer t
   :config
   (rainbow-delimiters-mode))
 
-;; completion framework
+;; Completion framework
 (use-package ivy
   :ensure t
   :config
@@ -166,7 +170,8 @@
    "<escape>" 'minibuffer-keyboard-quit)
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "bb" 'ivy-switch-buffer
@@ -176,7 +181,8 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ff" 'counsel-find-file
@@ -195,7 +201,8 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'swiper
@@ -206,7 +213,8 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "pc" 'counsel-projectile-compile-project
@@ -229,7 +237,8 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "gs" 'magit-status
@@ -244,7 +253,8 @@
   :ensure t
   :general
   (general-define-key
-   :states '(normal visual insert emacs)
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "qR" 'restart-emacs))
@@ -269,7 +279,8 @@
  "<escape>" 'minibuffer-keyboard-quit)
 
 (general-define-key
- :states '(normal visual insert emacs)
+ :states '(normal visual insert emacs motion)
+ :keymaps 'override
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
 
