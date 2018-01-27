@@ -116,7 +116,8 @@
 
 (use-package general :ensure t)
 ;; just take the override map and increase its precedence to the maximum (for evil)
-(evil-make-intercept-map general-override-mode-map)
+;; is is already an intercept map
+;;(evil-make-intercept-map general-override-mode-map)
 ;; the mapping has to be introduced as minor mode
 (general-override-mode)
 (general-define-key
