@@ -339,6 +339,10 @@
  ;;
  "sg" 'xref-find-definitions
  "sr" 'xref-find-references
+ "sa" 'xref-find-apropos
+
+ ;; zooming
+ "zz" 'text-scale-adjust
 
  ;; eshell
  "'" 'eshell
@@ -360,6 +364,12 @@
  ;; "hf" 'describe-function  using counsel versions to force loading the package
  ;; "hv" 'describe-variable
  "hi" 'info)
+
+;; mousewheel zooming
+(general-define-key
+ :keymaps 'override
+ "<C-mouse-4>" 'text-scale-increase
+ "<C-mouse-5>" 'text-scale-decrease)
 
 ;;; general settings and lazy evilification of built-in stuff
 (with-eval-after-load "ediff"
