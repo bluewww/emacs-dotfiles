@@ -33,8 +33,8 @@
 (set-language-environment "UTF-8")
 
 ;; we want a portable python environment
-(setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
-(add-to-list 'exec-path "/opt/miniconda3/bin")
+;(setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
+;(add-to-list 'exec-path "/opt/miniconda3/bin")
 
 ;; activate some nice built in modes
 (add-hook 'text-mode-hook 'linum-mode)
@@ -504,20 +504,18 @@
    "hh" 'anaconda-mode-show-doc
    "cs" 'python-check)
   :config
-  (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
-  (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
-  (setq python-indent-guess-indent-offset nil)
+  ;(setq python-shell-interpreter "/opt/miniconda3/bin/python3")
+  ;(setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
+  ;(setq python-indent-guess-indent-offset nil)
   (use-package anaconda-mode :ensure t
     :config
     (add-hook 'python-mode-hook 'anaconda-mode)
     (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
-  (use-package conda :ensure t
+  (use-package auto-virtualenv :ensure t
     :config
-    (conda-env-initialize-eshell)
-    ; TODO: is activated in any major mode, fix this with hooks?
-    (conda-env-autoactivate-mode t)
-    (require 'subr-x)                   ; workaround for missing dependency
-    (setq conda-anaconda-home "/opt/miniconda3")))
+    (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+    (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
+    (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv)))
 
 ;;; C-C++
 ;; TODO: flycheck, company?
@@ -642,7 +640,7 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (ox-rst org ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
+    (auto-virtualenv ox-rst org ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
