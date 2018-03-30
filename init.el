@@ -33,7 +33,8 @@
 (set-language-environment "UTF-8")
 
 ;; we want a portable python environment
-;(setenv "PATH" (concat "/opt/miniconda3/bin:" (getenv "PATH")))
+(setenv "PATH" (concat "$HOME/.pyenv/bin:" (getenv "PATH")))
+;(getenv "PATH")
 ;(add-to-list 'exec-path "/opt/miniconda3/bin")
 
 ;; activate some nice built in modes
