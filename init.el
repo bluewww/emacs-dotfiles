@@ -9,10 +9,12 @@
  delete-old-versions -1
  ;; make backups file even when in version controlled dir
  vc-make-backup-files t
+ backup-by-copying t
  ;; which directory to put backups file
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
- ;; don't ask for confirmation when opening symlinked file
- vc-follow-symlinks t
+ keep-new-version 6
+ keep-old-version 2
+ version-control t
  ;; transform backups file name
  auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))
  inhibit-startup-screen t
