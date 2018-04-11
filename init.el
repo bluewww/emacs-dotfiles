@@ -49,6 +49,9 @@
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+;; colum numbers
+(column-number-mode)
+
 ;; change the modeline descriptions to make them shorter
 (setq projectile-mode-line '(:eval (format " π[%s]" (projectile-project-name))))
 (defvar mode-line-cleaner-alist
