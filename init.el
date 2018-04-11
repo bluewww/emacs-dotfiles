@@ -540,10 +540,15 @@
    "fb" 'clang-format-buffer
    "fr" 'clang-format-region)
   :config
-  (use-package disaster :ensure t)
-  (use-package cwarn :ensure t
-    :config
-    (add-hook 'c-mode-common-hook 'cwarn-mode))
+  (use-package lsp-mode :ensure t)
+  (use-package cquery :ensure t
+    :init
+    (setq cquery-executable "/usr/local/bin/cquery")
+    (lsp-cquery-enable))
+  ;(use-package disaster :ensure t)
+  ;(use-package cwarn :ensure t
+  ;  :config
+  ;  (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux"                 ;GNU style is really shit
         c-basic-offset 4)
   (use-package clang-format :ensure t))
@@ -645,7 +650,7 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (auto-virtualenv ox-rst org ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
+    (cquery lsp-mode auto-virtualenv ox-rst org ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
