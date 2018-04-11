@@ -133,6 +133,11 @@
  :non-normal-prefix "M-SPC"
  "?" 'general-describe-keybindings)
 
+;; evil-mode seems to use it, so we unmap it to make xref work
+(general-define-key
+ :states 'normal
+ "M-." nil)
+
 ;;(use-package evil-search-highlight-persist :ensure t)
 
 (use-package which-key :ensure t
@@ -342,10 +347,6 @@
  ;; t for toggle
  ;; r for register/killrings
  ;; c for compile
- ;;
- "sg" 'xref-find-definitions
- "sr" 'xref-find-references
- "sa" 'xref-find-apropos
 
  ;; zooming
  "zz" 'text-scale-adjust
