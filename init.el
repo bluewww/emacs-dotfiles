@@ -566,11 +566,9 @@
 ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 
 ;;; Racket
-;(use-package racket-mode
-;  :ensure t
-;  :mode ("\\.rkt\\'" . racket-mode)
-;  (general-define-key
-;   ))
+(use-package racket-mode
+  :ensure t
+  :mode ("\\.rkt\\'" . racket-mode))
 
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing"
