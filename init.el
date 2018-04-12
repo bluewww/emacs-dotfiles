@@ -86,7 +86,7 @@
       (blink-cursor-mode -1)))
 
 (require 'package)
-; want to use use-package instead
+;; want to use use-package instead
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
                          ("gnu"       . "http://elpa.gnu.org/packages/")
@@ -107,20 +107,8 @@
  (expand-file-name "evil-collection/" user-emacs-directory))
 
 ;;;; All packages
-(use-package evil :ensure t
-  :init
-  (setq evil-want-C-u-scroll t)
-  :config
-  (evil-mode))
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
-(use-package evil-matchit :ensure t
-  :config
-  (global-evil-matchit-mode 1))
-
 (use-package general :ensure t)
+
 ;; just take the override map and increase its precedence to the maximum (for evil)
 ;; is is already an intercept map
 ;;(evil-make-intercept-map general-override-mode-map)
@@ -133,10 +121,41 @@
  :non-normal-prefix "M-SPC"
  "?" 'general-describe-keybindings)
 
-;; evil-mode seems to use it, so we unmap it to make xref work
-(general-define-key
- :states 'normal
- "M-." nil)
+(use-package evil :ensure t
+  :init
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-mode)
+  :general
+  (general-define-key                   ; evil-mode seems to use it, so we unmap
+                                        ; it to make xref work
+   :states 'normal
+   "M-." nil)
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+    "wh" 'evil-window-left
+    "wj" 'evil-window-down
+    "wk" 'evil-window-up
+    "wl" 'evil-window-right
+    "wR" 'evil-window-rotate-upwards
+    "wr" 'evil-window-rotate-downwards
+    "w+" 'evil-window-increase-height
+    "w-" 'evil-window-decrease-height
+    "w;" 'evil-window-increase-width
+    "w:" 'evil-window-decrease-width))
+
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-matchit :ensure t
+  :config
+  (global-evil-matchit-mode 1))
 
 ;;(use-package evil-search-highlight-persist :ensure t)
 
@@ -146,7 +165,19 @@
 
 (use-package winum :ensure t
   :config
-  (winum-mode))
+  (winum-mode)
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+    "1" 'winum-select-window-1
+    "2" 'winum-select-window-2
+    "3" 'winum-select-window-3
+    "4" 'winum-select-window-4
+    "5" 'winum-select-window-5))
+
 
 (use-package winner :ensure t
   :config
@@ -176,7 +207,6 @@
    "C-u" 'ivy-scroll-down-command
    "C-S-h" help-map
    "<escape>" 'minibuffer-keyboard-quit)
-  :general
   (general-define-key
    :states '(normal visual insert emacs motion)
    :keymaps 'override
@@ -196,6 +226,7 @@
    "ff" 'counsel-find-file
    "fr" 'counsel-recentf
    "fp" 'counsel-git
+   "/"  'counsel-git-grep
    "hb" 'counsel-descbinds
    "hf" 'counsel-describe-function
    "hv" 'counsel-describe-variable
@@ -260,17 +291,7 @@
   (use-package evil-magit :ensure t)
   (setq magit-completing-read-function 'ivy-completing-read))
 
-(use-package restart-emacs
-  :ensure t
-  :general
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'override
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-   "qR" 'restart-emacs))
 
-;; TODO remove (?)
 (use-package avy
   :ensure t
   :general
@@ -308,8 +329,6 @@
  "bR" 'revert-buffer
  "bE" 'erase-buffer
 
- "/"   'counsel-git-grep
-
  ;; file handling
  "fs" 'save-buffer
  "fed" 'find-dotfile
@@ -322,26 +341,11 @@
  ;; window handling
  "wd" 'delete-window
  "wm" 'maximize-window
- "wh" 'evil-window-left
- "wj" 'evil-window-down
- "wk" 'evil-window-up
- "wl" 'evil-window-right
  "ws" 'split-window-below
  "wv" 'split-window-right
  "ww" 'other-window
  "wu" 'winner-undo
  "wU" 'winner-redo
- "wR" 'evil-window-rotate-upwards
- "wr" 'evil-window-rotate-downwards
- "w+" 'evil-window-increase-height
- "w-" 'evil-window-decrease-height
- "w;" 'evil-window-increase-width
- "w:" 'evil-window-decrease-width
- "1" 'winum-select-window-1
- "2" 'winum-select-window-2
- "3" 'winum-select-window-3
- "4" 'winum-select-window-4
- "5" 'winum-select-window-5
 
  ;; TODO
  ;; t for toggle
@@ -418,8 +422,6 @@
           (lambda ()
             (define-key eshell-mode-map (kbd "<tab>")
               'completion-at-point)))
-
-;; (with-eval-after-load 'ivy (require 'evil-ivy) (evil-ivy-setup))
 
 ;;;; Custom Layers
 
@@ -525,10 +527,10 @@
     (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv)))
 
 ;;; C-C++
-;; TODO: flycheck, company?
+;; usage:
 (use-package cc-mode
   :ensure t
-  :mode ("\\.c\\'" . c-mode)
+  :mode ("\\.c\\'" . c-mode)            ;TODO: add c++ mode
   :general
   (general-define-key
    :states 'normal
@@ -536,15 +538,19 @@
    :prefix ","
    "ga" 'projectile-find-other-file
    "gA" 'projectile-find-other-file-other-window
-   "D"  'disaster
+;   "D"  'disaster
    "fb" 'clang-format-buffer
    "fr" 'clang-format-region)
   :config
-  (use-package lsp-mode :ensure t)
-  (use-package cquery :ensure t
-    :init
-    (setq cquery-executable "/usr/local/bin/cquery")
-    (lsp-cquery-enable))
+  (use-package lsp-mode :ensure t
+    :config
+    (use-package cquery
+      :init
+      (setq cquery-executable "/usr/local/bin/cquery")
+      :commands
+      lsp-cquery-enable
+      :init
+      (add-hook 'c-mode-common-hook #'cquery//enable)))
   ;(use-package disaster :ensure t)
   ;(use-package cwarn :ensure t
   ;  :config
@@ -552,6 +558,11 @@
   (setq c-default-style "linux"                 ;GNU style is really shit
         c-basic-offset 4)
   (use-package clang-format :ensure t))
+
+(defun cquery//enable ()
+  (condition-case nil
+      (lsp-cquery-enable)
+    (user-error nil)))
 
 ;;; Emacs Lisp
 ;; paredit-like parenthesis editing
