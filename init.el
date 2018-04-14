@@ -350,7 +350,11 @@
  ;; TODO
  ;; t for toggle
  ;; r for register/killrings
- ;; c for compile
+
+ ;;compiling
+ "cc" 'compile
+ "ck" 'kill-compilation
+ "cr" 'recompile
 
  ;; zooming
  "zz" 'text-scale-adjust
@@ -383,29 +387,37 @@
  "<C-mouse-5>" 'text-scale-decrease)
 
 ;;; general settings and lazy evilification of built-in stuff
-(with-eval-after-load "ediff"
-  (use-package evil-ediff :ensure t))
+;(with-eval-after-load "ediff"
+;  (use-package evil-collection-ediff :ensure t))
 
 (with-eval-after-load 'image-mode
-  (require 'evil-image)
+  (require 'evil-collection-image)
   (evil-image-setup))
 
 (with-eval-after-load 'doc-view
-  (require 'evil-doc-view)
-  (evil-doc-view-setup))
+  (require 'evil-collection-doc-view)
+  (evil-collection-doc-view-setup))
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
 (with-eval-after-load 'dired
-  (require 'evil-dired)
-  (evil-dired-setup))
+  (require 'evil-collection-dired)
+  (evil-collection-dired-setup))
 
 (with-eval-after-load 'info
-  (require 'evil-info)
-  (evil-info-setup))
+  (require 'evil-collection-info)
+  (evil-collection-info-setup))
 
 (with-eval-after-load 'comint
-  (require 'evil-comint)
-  (evil-comint-setup))
+  (require 'evil-collection-comint)
+  (evil-collection-comint-setup))
+
+(with-eval-after-load 'compile
+  (require 'evil-collection-compile)
+  (evil-collection-compile-setup))
+
+(with-eval-after-load 'package
+  (require 'evil-collection-package-menu)
+  (evil-collection-package-menu-setup))
 
 (with-eval-after-load 'tramp
   ;(setq projectile-mode-line " Projectile")
