@@ -39,9 +39,11 @@
 ;(getenv "PATH")
 ;(add-to-list 'exec-path "/opt/miniconda3/bin")
 
-;; activate some nice built in modes
-(add-hook 'text-mode-hook 'linum-mode)
-(add-hook 'prog-mode-hook 'linum-mode)
+;; line numbers
+(if (version<= "26.1" emacs-version)
+    (global-display-line-numbers-mode) ; welcome to the 21th century
+  (global-linum-mode))
+
 (add-hook 'text-mode-hook 'show-paren-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
 
