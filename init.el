@@ -545,6 +545,8 @@
 (use-package cc-mode
   :ensure t
   :mode ("\\.c\\'" . c-mode)            ;TODO: add c++ mode
+  :init
+  (add-hook 'c-mode-common-hook 'electric-pair-local-mode)
   :general
   (general-define-key
    :states 'normal
