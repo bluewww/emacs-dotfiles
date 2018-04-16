@@ -368,6 +368,7 @@
  "xe" 'eval-last-sexp
  "xb" 'eval-buffer
  "xr" 'eval-region
+ "xj" 'eval-print-last-sexp
 
  ;; exiting
  "qQ" 'kill-emacs
