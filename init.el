@@ -29,6 +29,8 @@
  default-fill-column 80
  help-window-select t
  tab-width 4
+ ;; scroll just one line when hitting bottom of screen
+ scroll-conservatively 10000
  initial-scratch-message "Welcome in Emacs")
 
 ;; UTF-8 as default encoding
