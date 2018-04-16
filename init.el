@@ -298,7 +298,13 @@
   :ensure t
   :general
   (general-define-key
-   "C-'" 'avy-goto-word-1))
+   "C-'" 'avy-goto-word-1)
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "j" 'avy-goto-word-1))
 
 ;; proper vim style escape
 (general-define-key
