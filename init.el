@@ -569,13 +569,12 @@
   :config
   (use-package lsp-mode :ensure t
     :config
-    (use-package cquery
+    (use-package cquery :ensure t
       :init
       (setq cquery-executable "/usr/local/bin/cquery")
+      (add-hook 'c-mode-common-hook #'cquery//enable)
       :commands
-      lsp-cquery-enable
-      :init
-      (add-hook 'c-mode-common-hook #'cquery//enable)))
+      lsp-cquery-enable))
   ;(use-package disaster :ensure t)
   ;(use-package cwarn :ensure t
   ;  :config
@@ -686,7 +685,7 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (cquery lsp-mode auto-virtualenv ox-rst org ox-gfm clang-format pdf-tools sourcerer-theme lispyville lispy auctex-latexmk evil-ediff conda anaconda-mode disaster restart-emacs evil-magit ujelly-theme auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
+    (cquery lsp-mode auto-virtualenv ox-rst org ox-gfm clang-format pdf-tools lispyville lispy auctex-latexmk evil-ediff anaconda-mode disaster restart-emacs evil-magit auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
  '(truncate-lines t))
 
 (custom-set-faces
