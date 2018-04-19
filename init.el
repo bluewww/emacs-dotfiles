@@ -361,6 +361,8 @@
  ;; t for toggle
  ;; r for register/killrings
 
+ ;; dired
+ "d" 'dired
  ;;compiling
  "cc" 'compile
  "ck" 'kill-compilation
