@@ -365,6 +365,9 @@
  "ck" 'kill-compilation
  "cr" 'recompile
 
+ ;;repeat
+ "r" 'repeat
+
  ;; zooming
  "zz" 'text-scale-adjust
 
