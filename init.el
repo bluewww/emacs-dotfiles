@@ -99,6 +99,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+(setq use-package-always-ensure t)
 
 ;; loading time
 (setq use-package-verbose t)
@@ -149,12 +150,14 @@
     "w:" 'evil-window-decrease-width))
 
 
-(use-package evil-surround
-  :ensure t
+(use-package evil-surround :ensure t
+  :after evil
   :config
   (global-evil-surround-mode 1))
 
+
 (use-package evil-matchit :ensure t
+  :after evil
   :config
   (global-evil-matchit-mode 1))
 
@@ -266,11 +269,13 @@
    "pd" 'counsel-projectile-find-dir)
   :config
   (projectile-mode)
-  (setq projectile-completion-system 'ivy)
-  (use-package counsel-projectile :ensure t
-    :config
-    ;; taking only what we need from (counsel-projectile-on)
-    (setq projectile-switch-project-action 'counsel-projectile)))
+  (setq projectile-completion-system 'ivy))
+
+(use-package counsel-projectile :ensure t
+  :after projectile
+  :config
+  ;; taking only what we need from (counsel-projectile-on)
+  (setq projectile-switch-project-action 'counsel-projectile))
 
 ;; git intergration
 (use-package magit
@@ -289,9 +294,10 @@
    "gS" 'magit-stage-file
    "gU" 'magit-unstage-file)
   :config
-  (use-package evil-magit :ensure t)
   (setq magit-completing-read-function 'ivy-completing-read))
 
+(use-package evil-magit :ensure t
+  :after magit)
 
 (use-package avy
   :ensure t
@@ -541,18 +547,39 @@
   ;(setq python-shell-interpreter "/opt/miniconda3/bin/python3")
   ;(setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
   ;(setq python-indent-guess-indent-offset nil)
-  (use-package anaconda-mode :ensure t
-    :config
-    (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
-  (use-package auto-virtualenv :ensure t
-    :config
-    (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-    (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
-    (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv)))
+  )
+(use-package anaconda-mode :ensure t
+  :after python
+  :init
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+
+(use-package auto-virtualenv :ensure t
+  :after python
+  :init
+  (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+  (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
+  (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
 
 ;;; C-C++
 ;; usage:
+(use-package lsp-mode :ensure t
+  :hook c-mode)
+
+(use-package cquery :ensure t
+  :commands lsp-cquery-enable
+  :init
+  (setq cquery-executable "/usr/local/bin/cquery")
+  (add-hook 'c-mode-common-hook #'cquery//enable))
+
+(defun cquery//enable ()
+  (condition-case nil
+      (lsp-cquery-enable)
+    (user-error nil)))
+
+(use-package clang-format :ensure t
+  :after c-mode)
+
 (use-package cc-mode
   :ensure t
   :mode ("\\.c\\'" . c-mode)            ;TODO: add c++ mode
@@ -569,26 +596,12 @@
    "fb" 'clang-format-buffer
    "fr" 'clang-format-region)
   :config
-  (use-package lsp-mode :ensure t
-    :config
-    (use-package cquery :ensure t
-      :init
-      (setq cquery-executable "/usr/local/bin/cquery")
-      (add-hook 'c-mode-common-hook #'cquery//enable)
-      :commands
-      lsp-cquery-enable))
   ;(use-package disaster :ensure t)
   ;(use-package cwarn :ensure t
   ;  :config
   ;  (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux"                 ;GNU style is really shit
-        c-basic-offset 4)
-  (use-package clang-format :ensure t))
-
-(defun cquery//enable ()
-  (condition-case nil
-      (lsp-cquery-enable)
-    (user-error nil)))
+	c-basic-offset 4))
 
 ;;; Emacs Lisp
 ;; paredit-like parenthesis editing
@@ -614,8 +627,7 @@
 ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 
 ;;; Racket
-(use-package racket-mode
-  :ensure t
+(use-package racket-mode :ensure t
   :mode ("\\.rkt\\'" . racket-mode))
 
 (defun find-dotfile ()
