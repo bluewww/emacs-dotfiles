@@ -422,9 +422,9 @@
   (require 'evil-collection-dired)
   (evil-collection-dired-setup))
 
-(with-eval-after-load 'info
-  (require 'evil-collection-info)
-  (evil-collection-info-setup))
+ (with-eval-after-load 'info
+   (require 'evil-collection-info)
+   (evil-collection-info-setup))
 
 (with-eval-after-load 'comint
   (require 'evil-collection-comint)
@@ -532,17 +532,13 @@
   (general-define-key
    :states 'normal
    :keymaps 'python-mode-map
-   :prefix ","
-   "si" 'run-python
-   "sb" 'python-shell-send-buffer
-   "sf" 'python-shell-send-function
-   "sr" 'python-shell-send-region
-   "sf" 'python-shell-send-file
-   "gg" 'anaconda-mode-find-definitions
-   "ga" 'anaconda-mode-find-assignments
-   "gb" 'anaconda-mode-go-back
-   "hh" 'anaconda-mode-show-doc
-   "cs" 'python-check)
+   :prefix "SPC"
+   "mi" 'run-python
+   "mb" 'python-shell-send-buffer
+   "md" 'python-shell-send-function
+   "mr" 'python-shell-send-region
+   "mf" 'python-shell-send-file
+   "mc" 'python-check)
   :config
   ;(setq python-shell-interpreter "/opt/miniconda3/bin/python3")
   ;(setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
@@ -589,12 +585,12 @@
   (general-define-key
    :states 'normal
    :keymaps '(c-mode-map c++-mode-map)
-   :prefix ","
-   "ga" 'projectile-find-other-file
-   "gA" 'projectile-find-other-file-other-window
+   :prefix "SPC"
+   "ma" 'projectile-find-other-file
+   "mA" 'projectile-find-other-file-other-window
 ;   "D"  'disaster
-   "fb" 'clang-format-buffer
-   "fr" 'clang-format-region)
+   "mb" 'clang-format-buffer
+   "mr" 'clang-format-region)
   :config
   ;(use-package disaster :ensure t)
   ;(use-package cwarn :ensure t
