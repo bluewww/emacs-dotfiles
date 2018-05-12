@@ -109,8 +109,11 @@
  (expand-file-name "evil-collection/" user-emacs-directory))
 
 ;;;; All packages
-(use-package general :ensure t)
 
+;; temporary patch for dead keys, instead of env XMODIFIERS= emacs
+(use-package iso-transl :ensure nil)
+
+(use-package general :ensure t)
 ;; just take the override map and increase its precedence to the maximum (for evil)
 ;; is is already an intercept map
 ;;(evil-make-intercept-map general-override-mode-map)
