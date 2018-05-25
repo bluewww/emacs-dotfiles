@@ -113,7 +113,7 @@
 ;; temporary patch for dead keys, instead of env XMODIFIERS= emacs
 (use-package iso-transl :ensure nil)
 
-(use-package general :ensure t)
+(use-package general)
 ;; just take the override map and increase its precedence to the maximum (for evil)
 ;; is is already an intercept map
 ;;(evil-make-intercept-map general-override-mode-map)
@@ -153,24 +153,24 @@
     "w:" 'evil-window-decrease-width))
 
 
-(use-package evil-surround :ensure t
+(use-package evil-surround
   :after evil
   :config
   (global-evil-surround-mode 1))
 
 
-(use-package evil-matchit :ensure t
+(use-package evil-matchit
   :after evil
   :config
   (global-evil-matchit-mode 1))
 
-;;(use-package evil-search-highlight-persist :ensure t)
+;;(use-package evil-search-highlight-persist )
 
-(use-package which-key :ensure t
+(use-package which-key
   :config
   (which-key-mode))
 
-(use-package winum :ensure t
+(use-package winum
   :config
   (winum-mode)
   :general
@@ -186,18 +186,17 @@
     "5" 'winum-select-window-5))
 
 
-(use-package winner :ensure t
+(use-package winner
   :config
   (winner-mode))
 
-(use-package rainbow-delimiters :ensure t
+(use-package rainbow-delimiters
   :defer t
   :config
   (rainbow-delimiters-mode))
 
 ;; Completion framework
 (use-package ivy
-  :ensure t
   :config
   (ivy-mode 1)
   (setq ivy-wrap t)
@@ -223,7 +222,7 @@
    "bo" 'ivy-switch-buffer-other-window))
 
 (use-package counsel
-  :ensure t
+
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
@@ -244,7 +243,6 @@
 
 ;; Searching
 (use-package swiper
-  :ensure t
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
@@ -256,7 +254,6 @@
 
 ;; Project managment
 (use-package projectile
-  :ensure t
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
@@ -274,7 +271,7 @@
   (projectile-mode)
   (setq projectile-completion-system 'ivy))
 
-(use-package counsel-projectile :ensure t
+(use-package counsel-projectile
   :after projectile
   :config
   ;; taking only what we need from (counsel-projectile-on)
@@ -282,7 +279,6 @@
 
 ;; git intergration
 (use-package magit
-  :ensure t
   :init
   ;; disable built in version control if we use magit
   (setq vc-handled-backends nil)
@@ -299,11 +295,10 @@
   :config
   (setq magit-completing-read-function 'ivy-completing-read))
 
-(use-package evil-magit :ensure t
+(use-package evil-magit
   :after magit)
 
 (use-package avy
-  :ensure t
   :general
   (general-define-key
    "C-'" 'avy-goto-word-1)
@@ -410,11 +405,11 @@
 
 ;;; general settings and lazy evilification of built-in stuff
 ;(with-eval-after-load "ediff"
-;  (use-package evil-collection-ediff :ensure t))
+;  (use-package evil-collection-ediff ))
 
 (with-eval-after-load 'image-mode
   (require 'evil-collection-image)
-  (evil-image-setup))
+  (evil-collection-image-setup))
 
 (with-eval-after-load 'doc-view
   (require 'evil-collection-doc-view)
@@ -461,25 +456,23 @@
 
 ;;; pdf
 (use-package pdf-tools
-  :ensure t
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :init
   (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
   :config
   (pdf-tools-install)
-  (require 'evil-pdf)
-  (evil-pdf-setup))
+  (require 'evil-collection-pdf)
+  (evil-collection-pdf-setup))
 
 ;;; LaTeX
-;; (use-package auctex :ensure t :defer t)
-;; (use-package tex-site :ensure t)
+;; (use-package auctex  :defer t)
+;; (use-package tex-site )
 ;; (require 'tex-site)
 ;; (use-package auctex ; Don't understand how auctext work,
 ;; it just ignores the :config section... but now acutex won't
 ;; be installed automatically
 
 (use-package auctex
-  :ensure t
   :mode ("\\.tex\\'" . TeX-latex-mode)
   :general
   (general-define-key
@@ -523,13 +516,11 @@
    "rp"  'preview-clearout-at-point))
 (with-eval-after-load "TeX"
   (use-package auctex-latexmk
-    :ensure t
     :config
     (auctex-latexmk-setup)))
 
 ;;; Python
 (use-package python
-  :ensure t
   :mode ("\\.py\\'" . python-mode)
   :general
   (general-define-key
@@ -547,13 +538,13 @@
   ;(setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
   ;(setq python-indent-guess-indent-offset nil)
   )
-(use-package anaconda-mode :ensure t
+(use-package anaconda-mode
   :after python
   :init
   (add-hook 'python-mode-hook 'anaconda-mode)
   (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
 
-(use-package auto-virtualenv :ensure t
+(use-package auto-virtualenv
   :after python
   :init
   (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
@@ -562,10 +553,10 @@
 
 ;;; C-C++
 ;; usage:
-(use-package lsp-mode :ensure t
+(use-package lsp-mode
   :hook c-mode)
 
-(use-package cquery :ensure t
+(use-package cquery
   :commands lsp-cquery-enable
   :init
   (setq cquery-executable "/usr/local/bin/cquery")
@@ -576,11 +567,10 @@
       (lsp-cquery-enable)
     (user-error nil)))
 
-(use-package clang-format :ensure t
+(use-package clang-format
   :after c-mode)
 
 (use-package cc-mode
-  :ensure t
   :mode ("\\.c\\'" . c-mode)            ;TODO: add c++ mode
   :init
   (add-hook 'c-mode-common-hook 'electric-pair-local-mode)
@@ -595,23 +585,22 @@
    "mb" 'clang-format-buffer
    "mr" 'clang-format-region)
   :config
-  ;(use-package disaster :ensure t)
-  ;(use-package cwarn :ensure t
+  ;(use-package disaster )
+  ;(use-package cwarn
   ;  :config
   ;  (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux"                 ;GNU style is really shit
-	c-basic-offset 4))
+        c-basic-offset 4))
 
 ;;; Emacs Lisp
 ;; paredit-like parenthesis editing
-(use-package lispy :ensure t
+(use-package lispy
   :defer t)
 ;; :init
 ;; enable for elisp
 ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 
 (use-package lispyville
-  :ensure t
   :defer t
   :init
   ;; always enable too
@@ -626,7 +615,7 @@
 ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 
 ;;; Racket
-(use-package racket-mode :ensure t
+(use-package racket-mode
   :mode ("\\.rkt\\'" . racket-mode))
 
 (defun find-dotfile ()
