@@ -60,7 +60,7 @@
     (undo-tree-mode . "")
     (which-key-mode . "")
     (ivy-mode . "")
-    (lispyville-mode . " lispyv")
+    ;(lispyville-mode . " lispyv")
     ; TODO: probably don't need to show this
     (anaconda-mode . " γ")
     ;projectile has its own setting
@@ -593,26 +593,31 @@
         c-basic-offset 4))
 
 ;;; Emacs Lisp
-;; paredit-like parenthesis editing
-(use-package lispy
-  :defer t)
-;; :init
-;; enable for elisp
-;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-
-(use-package lispyville
-  :defer t
+(use-package elisp-mode :ensure nil
+  :mode ("\\.el\\'" . emacs-lisp-mode)
   :init
-  ;; always enable too
-  (add-hook 'emacs-lisp-mode-hook (lambda () (lispyville-mode 1)))
-  (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1)))
-  :config
-  (lispyville-set-key-theme
-   '(operators
-     slurp/barf-lispy
-     (additional normal visual)
-     (additional-movement normal visual motion))))
-;; (add-hook 'lispy-mode-hook #'lispyville-mode)
+  (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1))))
+
+;; paredit-like parenthesis editing
+;(use-package lispy
+;  :defer t)
+;;; :init
+;;; enable for elisp
+;;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+;
+;(use-package lispyville
+;  :defer t
+;  :init
+;  ;; always enable too
+;  (add-hook 'emacs-lisp-mode-hook (lambda () (lispyville-mode 1)))
+;  (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1)))
+;  :config
+;  (lispyville-set-key-theme
+;   '(operators
+;     slurp/barf-lispy
+;     (additional normal visual)
+;     (additional-movement normal visual motion))))
+;;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 
 ;;; Racket
 (use-package racket-mode
@@ -687,7 +692,7 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (cquery lsp-mode auto-virtualenv ox-rst org ox-gfm clang-format pdf-tools lispyville lispy auctex-latexmk evil-ediff anaconda-mode disaster restart-emacs evil-magit auctex avy magit counsel-projectile counsel ivy rainbow-delimiters winum evil-matchit evil-surround evil which-key general use-package)))
+    (winum which-key use-package rainbow-delimiters racket-mode pdf-tools general evil-surround evil-matchit evil-magit cquery counsel-projectile clang-format auto-virtualenv auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (custom-set-faces
