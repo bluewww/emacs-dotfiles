@@ -222,7 +222,6 @@
    "bo" 'ivy-switch-buffer-other-window))
 
 (use-package counsel
-
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
@@ -446,7 +445,9 @@
 ;; https://emacs.stackexchange.com/
 ;; questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
 ;; eshell
-(with-eval-after-load 'eshell)
+(with-eval-after-load 'eshell
+  (require 'evil-collection-eshell)
+  (evil-collection-eshell-setup))
 (add-hook 'eshell-mode-hook
           (lambda ()
             (define-key eshell-mode-map (kbd "<tab>")
