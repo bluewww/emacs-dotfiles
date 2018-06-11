@@ -159,10 +159,10 @@
   (global-evil-surround-mode 1))
 
 
-(use-package evil-matchit
-  :after evil
-  :config
-  (global-evil-matchit-mode 1))
+;; (use-package evil-matchit :ensure t
+;;   :after evil
+;;   :config
+;;   (global-evil-matchit-mode 1))
 
 ;;(use-package evil-search-highlight-persist )
 
