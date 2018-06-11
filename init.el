@@ -126,7 +126,7 @@
  :non-normal-prefix "M-SPC"
  "?" 'general-describe-keybindings)
 
-(use-package evil :ensure t
+(use-package evil
   :init
   (setq evil-want-C-u-scroll t)
   :config
