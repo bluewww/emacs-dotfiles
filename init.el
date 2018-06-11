@@ -630,6 +630,18 @@
 (use-package racket-mode
   :mode ("\\.rkt\\'" . racket-mode))
 
+;;; System Verilog
+(use-package verilog-mode :ensure nil
+  :mode ("\\.[ds]?vh?\\'" . verilog-mode)
+  :init
+  (setq verilog-indent-level 4)
+  (setq verilog-indent-level-module 4)
+  (setq verilog-indent-level-declaration 4)
+  (setq verilog-indent-level-behavioral 4)
+  (setq verilog-case-indent 0)
+  (setq verilog-linter "verilator --lint-only"))
+
+;;; Custom functions
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing"
   (interactive)
