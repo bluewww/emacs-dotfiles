@@ -520,6 +520,12 @@
     :config
     (auctex-latexmk-setup)))
 
+;;; Org
+(use-package org
+  :mode ("\\.org\\'" . org-mode))
+(use-package org-ref
+  :after org)
+
 ;;; Python
 (use-package python
   :mode ("\\.py\\'" . python-mode)
