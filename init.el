@@ -712,7 +712,7 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (winum which-key use-package rainbow-delimiters racket-mode pdf-tools general evil-surround evil-matchit evil-magit cquery counsel-projectile clang-format auto-virtualenv auctex-latexmk anaconda-mode)))
+    (winum which-key use-package rainbow-delimiters racket-mode org-ref general evil-surround evil-matchit evil-magit cquery counsel-projectile clang-format avy auto-virtualenv auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (custom-set-faces
