@@ -639,6 +639,7 @@
   (setq verilog-indent-level-declaration 4)
   (setq verilog-indent-level-behavioral 4)
   (setq verilog-case-indent 0)
+  (setq verilog-cexp-indent 4)
   (setq verilog-linter "verilator --lint-only"))
 
 ;;; Custom functions
