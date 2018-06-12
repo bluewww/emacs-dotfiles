@@ -9,3 +9,4 @@ session.*
 recentf
 projectile.cache
 projectile-bookmarks.eld
+/change-author.sh
