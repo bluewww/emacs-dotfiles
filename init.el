@@ -642,6 +642,9 @@
 (use-package verilog-mode :ensure nil
   :mode ("\\.[ds]?vh?\\'" . verilog-mode)
   :init
+  (add-hook 'verilog-mode-hook
+            '(lambda () (setq indent-tabs-mode nil)))
+  :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
   (setq verilog-indent-level-declaration 4)
