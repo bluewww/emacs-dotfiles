@@ -454,6 +454,14 @@
               'completion-at-point)))
 
 ;;;; Custom Layers
+;;; Tagging
+(use-package counsel-etags
+  :commands
+  counsel-etags-find-tag-at-point
+  counsel-etags-virtual-update-tags
+  :init
+  (setq tags-revert-without-query t)
+  (setq large-file-warning-threshold nil))
 
 ;;; pdf
 (use-package pdf-tools
