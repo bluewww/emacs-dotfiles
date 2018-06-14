@@ -649,7 +649,12 @@
   (setq verilog-case-indent 0)
   (setq verilog-cexp-indent 4)
   (setq verilog-auto-lineup 'all)
-  (setq verilog-linter "verilator --lint-only"))
+  (setq verilog-linter "verilator --lint-only")
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'verilog-mode-map
+   "M-." 'counsel-etags-find-tag-at-point))
 
 ;;; Custom functions
 (defun find-dotfile ()
