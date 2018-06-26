@@ -231,7 +231,7 @@
    "ff" 'counsel-find-file
    "fr" 'counsel-recentf
    "fp" 'counsel-git
-   "/"  'counsel-git-grep
+   "/"  'counsel-projectile-grep
    "hb" 'counsel-descbinds
    "hf" 'counsel-describe-function
    "hv" 'counsel-describe-variable
