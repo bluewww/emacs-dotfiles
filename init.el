@@ -599,6 +599,10 @@
 ;   "D"  'disaster
    "mb" 'clang-format-buffer
    "mr" 'clang-format-region)
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'c-mode-map
+   "M-." 'counsel-etags-find-tag-at-point)
   :config
   ;(use-package disaster )
   ;(use-package cwarn
