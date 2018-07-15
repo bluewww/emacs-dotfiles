@@ -23,12 +23,13 @@
  source-directory "/usr/src/debug/emacs-25.3"
  ;; fix bug with maximization
  frame-resize-pixelwise t
- default-fill-column 80
  help-window-select t
  tab-width 4
  ;; scroll just one line when hitting bottom of screen
  scroll-conservatively 10000
  initial-scratch-message "Welcome in Emacs")
+
+(setq-default fill-column 80)
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
