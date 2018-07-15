@@ -432,6 +432,7 @@
 (with-eval-after-load 'compile
   (require 'evil-collection-compile)
   (evil-collection-compile-setup))
+(add-hook 'compilation-mode-hook 'visual-line-mode)
 
 (with-eval-after-load 'package
   (require 'evil-collection-package-menu)
