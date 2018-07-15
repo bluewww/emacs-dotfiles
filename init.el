@@ -80,7 +80,7 @@
 (if (display-graphic-p)
     (progn
       (setq initial-frame-alist
-            '((width . 100) (height . 50)))
+	    '((width . 100) (height . 50)))
       (tool-bar-mode -1)
       (tooltip-mode -1)
       (menu-bar-mode -1)
@@ -91,8 +91,8 @@
 ;; want to use use-package instead
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-                         ("gnu"       . "http://elpa.gnu.org/packages/")
-                         ("melpa"     . "https://melpa.org/packages/")))
+			 ("gnu"       . "http://elpa.gnu.org/packages/")
+			 ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
 (setq package-check-signature nil)
@@ -115,7 +115,8 @@
 (use-package iso-transl :ensure nil)
 
 (use-package general)
-;; just take the override map and increase its precedence to the maximum (for evil)
+;; just take the override map and increase its precedence to the maximum (for
+;; evil)
 ;; is is already an intercept map
 ;;(evil-make-intercept-map general-override-mode-map)
 ;; the mapping has to be introduced as minor mode
@@ -134,7 +135,7 @@
   (evil-mode)
   :general
   (general-define-key                   ; evil-mode seems to use it, so we unmap
-                                        ; it to make xref work
+					; it to make xref work
    :states 'normal
    "M-." nil)
   (general-define-key
@@ -315,10 +316,10 @@
  "<escape>" 'keyboard-quit)
 (general-define-key
  :keymaps '(minibuffer-local-map
-            minibuffer-local-ns-map
-            minibuffer-local-completion-map
-            minibuffer-local-must-match-map
-            minibuffer-local-isearch-map)
+	    minibuffer-local-ns-map
+	    minibuffer-local-completion-map
+	    minibuffer-local-must-match-map
+	    minibuffer-local-isearch-map)
  "<escape>" 'minibuffer-keyboard-quit)
 
 (general-define-key
@@ -441,7 +442,7 @@
   (setq tramp-default-method "ssh")
   ;(setq tramp-verbose 6) ; debugging mode
   (setq tramp-shell-prompt-pattern ; fix parsing bug of fancy remote  prompts
-        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+	"\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 ;; https://emacs.stackexchange.com/
 ;; questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
@@ -450,9 +451,9 @@
   (require 'evil-collection-eshell)
   (evil-collection-eshell-setup))
 (add-hook 'eshell-mode-hook
-          (lambda ()
-            (define-key eshell-mode-map (kbd "<tab>")
-              'completion-at-point)))
+	  (lambda ()
+	    (define-key eshell-mode-map (kbd "<tab>")
+	      'completion-at-point)))
 
 ;;;; Custom Layers
 ;;; Tagging
@@ -610,7 +611,7 @@
   ;  :config
   ;  (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux"                 ;GNU style is really shit
-        c-basic-offset 4))
+	c-basic-offset 4))
 
 ;;; Emacs Lisp
 (use-package elisp-mode :ensure nil
@@ -648,7 +649,7 @@
   :mode ("\\.[ds]?vh?\\'" . verilog-mode)
   :init
   (add-hook 'verilog-mode-hook
-            '(lambda () (setq indent-tabs-mode nil)))
+	    '(lambda () (setq indent-tabs-mode nil)))
   :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
@@ -689,7 +690,7 @@ buffer is not visiting a file."
   (interactive "P")
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:"
-                         (ido-read-file-name "Find file(as root): ")))
+			 (ido-read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun kill-other-buffers ()
@@ -700,14 +701,14 @@ buffer is not visiting a file."
 (defun clean-mode-line ()
   (interactive)
   (cl-loop for cleaner in mode-line-cleaner-alist
-           do (let* ((mode (car cleaner))
-                     (mode-str (cdr cleaner))
-                     (old-mode-str (cdr (assq mode minor-mode-alist))))
-                (when old-mode-str
-                  (setcar old-mode-str mode-str))
-                ;; major mode
-                (when (eq mode major-mode)
-                  (setq mode-name mode-str)))))
+	   do (let* ((mode (car cleaner))
+		     (mode-str (cdr cleaner))
+		     (old-mode-str (cdr (assq mode minor-mode-alist))))
+		(when old-mode-str
+		  (setcar old-mode-str mode-str))
+		;; major mode
+		(when (eq mode major-mode)
+		  (setq mode-name mode-str)))))
 ;; do it after definition
 ;; always apply the changes
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
@@ -729,12 +730,18 @@ buffer is not visiting a file."
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes
    (quote
-    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59" "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default)))
+    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59"
+     "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
+     default)))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (winum which-key use-package rainbow-delimiters racket-mode org-ref general evil-surround evil-matchit evil-magit cquery counsel-projectile clang-format avy auto-virtualenv auctex-latexmk anaconda-mode)))
+    (zoutline winum which-key use-package restart-emacs rainbow-delimiters
+	      racket-mode org-ref iedit general evil-surround evil-matchit
+	      evil-magit evil-ediff disaster cquery counsel-projectile
+	      counsel-etags clang-format auto-virtualenv auctex-latexmk
+	      anaconda-mode)))
  '(truncate-lines t))
 
 (custom-set-faces
@@ -742,4 +749,7 @@ buffer is not visiting a file."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 95 :width normal :foundry "unknown" :family "Inconsolata LGC")))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil
+			 :strike-through nil :overline nil :underline nil :slant
+			 normal :weight normal :height 140 :width normal
+			 :foundry "unknown" :family "Inconsolata LGC")))))
