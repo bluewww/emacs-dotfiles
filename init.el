@@ -578,8 +578,9 @@
 (use-package cquery
   :commands lsp-cquery-enable
   :init
-  (setq cquery-executable "/usr/local/bin/cquery")
-  (add-hook 'c-mode-common-hook #'cquery//enable))
+  (setq cquery-executable "/home/msc18f22/.local/bin/cquery")
+  ;;(add-hook 'c-mode-common-hook #'cquery//enable)
+  )
 
 (defun cquery//enable ()
   (condition-case nil
