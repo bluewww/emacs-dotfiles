@@ -431,6 +431,7 @@
 
 (with-eval-after-load 'compile
   (require 'evil-collection-compile)
+  (setq compilation-scroll-output t)
   (evil-collection-compile-setup))
 (add-hook 'compilation-mode-hook 'visual-line-mode)
 
