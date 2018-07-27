@@ -222,6 +222,9 @@
    :non-normal-prefix "M-SPC"
    "bb" 'ivy-switch-buffer
    "bo" 'ivy-switch-buffer-other-window))
+(use-package ivy-xref
+  :after ivy
+  :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package counsel
   :general
@@ -740,11 +743,10 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (zoutline winum which-key use-package restart-emacs rainbow-delimiters
-	      racket-mode org-ref iedit general evil-surround evil-matchit
-	      evil-magit evil-ediff disaster cquery counsel-projectile
-	      counsel-etags clang-format auto-virtualenv auctex-latexmk
-	      anaconda-mode)))
+    (ivy-xref winum which-key use-package rainbow-delimiters
+	      racket-mode org-ref general evil-surround evil-matchit
+	      evil-magit cquery counsel-projectile clang-format avy
+	      auto-virtualenv auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (custom-set-faces
