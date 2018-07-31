@@ -221,7 +221,7 @@
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "bb" 'ivy-switch-buffer
-   "bo" 'ivy-switch-buffer-other-window))
+   "bo" 'move-buffer-other-window))
 (use-package ivy-xref
   :after ivy
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
@@ -715,6 +715,15 @@ buffer is not visiting a file."
 		;; major mode
 		(when (eq mode major-mode)
 		  (setq mode-name mode-str)))))
+
+(defun move-buffer-other-window ()
+  "Move current buffer to other window, display previous buffer in
+  this window."
+  (interactive)
+  (save-selected-window
+    (switch-to-buffer-other-window (current-buffer)))
+  (switch-to-buffer (other-buffer)))
+
 ;; do it after definition
 ;; always apply the changes
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
