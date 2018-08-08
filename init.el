@@ -131,6 +131,7 @@
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t)
+  (setq evil-want-integration nil)
   :config
   (evil-mode)
   :general
@@ -408,8 +409,9 @@
  "<C-mouse-5>" 'text-scale-decrease)
 
 ;;; general settings and lazy evilification of built-in stuff
-;(with-eval-after-load "ediff"
-;  (use-package evil-collection-ediff ))
+ (with-eval-after-load 'ediff
+   (require 'evil-collection-ediff)
+   (evil-collection-ediff-setup))
 
 (with-eval-after-load 'image-mode
   (require 'evil-collection-image)
@@ -673,7 +675,7 @@
 
 ;;; Custom functions
 (defun find-dotfile ()
-  "Opens the emacs dotfile for quick editing"
+  "Opens the emacs dotfile for quick editing."
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
