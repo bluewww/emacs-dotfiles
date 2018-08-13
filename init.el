@@ -293,10 +293,7 @@
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
-   "gs" 'magit-status
-   "gm" 'magit-dispatch-popup
-   "gS" 'magit-stage-file
-   "gU" 'magit-unstage-file)
+   "g" 'magit-status)
   :config
   (setq magit-completing-read-function 'ivy-completing-read))
 
