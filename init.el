@@ -356,7 +356,7 @@
  "wm" 'maximize-window
  "ws" 'split-window-below
  "wv" 'split-window-right
- "ww" 'other-window
+ "wo" 'other-window
  "wu" 'winner-undo
  "wU" 'winner-redo
 
