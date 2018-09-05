@@ -435,6 +435,8 @@
 (with-eval-after-load 'compile
   (require 'evil-collection-compile)
   (setq compilation-scroll-output t)
+  (add-to-list 'compilation-error-regexp-alist
+	       '("^\\*\\\* Error: \\(.*?\\)(\\(.*?\\)):" 1 2))
   (evil-collection-compile-setup))
 (add-hook 'compilation-mode-hook 'visual-line-mode)
 
