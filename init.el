@@ -104,6 +104,7 @@
   (require 'use-package))
 ;; loading time
 (setq use-package-verbose t)
+(setq use-package-always-ensure t)
 
 (add-to-list
  'load-path
@@ -458,8 +459,16 @@
 	  (lambda ()
 	    (define-key eshell-mode-map (kbd "<tab>")
 	      'completion-at-point)))
+(add-hook 'eshell-mode-hook #'visual-line-mode)
 
 ;;;; Custom Layers
+
+;;; Large files
+(use-package vlf
+  :config
+  (require 'vlf-setup)
+  (setq vlf-application 'dont-ask))
+
 ;;; Tagging
 (use-package counsel-etags
   :commands
@@ -655,6 +664,8 @@
   :init
   (add-hook 'verilog-mode-hook
 	    '(lambda () (setq indent-tabs-mode nil)))
+  (add-hook 'verilog-mode-hook
+	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
