@@ -417,7 +417,8 @@
 
 (with-eval-after-load 'doc-view
   (require 'evil-collection-doc-view)
-  (evil-collection-doc-view-setup))
+  (evil-collection-doc-view-setup)
+  (setq doc-view-resolution 400))
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
 (with-eval-after-load 'dired
@@ -481,14 +482,14 @@
   (setq large-file-warning-threshold nil))
 
 ;;; pdf
-(use-package pdf-tools
-  :mode ("\\.pdf\\'" . pdf-view-mode)
-  :init
-  (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
-  :config
-  (pdf-tools-install)
-  (require 'evil-collection-pdf)
-  (evil-collection-pdf-setup))
+;; (use-package pdf-tools
+;;   :mode ("\\.pdf\\'" . pdf-view-mode)
+;;   :init
+;;   (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
+;;   :config
+;;   (pdf-tools-install)
+;;   (require 'evil-collection-pdf)
+;;   (evil-collection-pdf-setup))
 
 ;;; LaTeX
 ;; (use-package auctex  :defer t)
