@@ -255,7 +255,7 @@
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
-   "ss" 'swiper
+   "ss" 'counsel-grep-or-swiper
    "sb" 'swiper-all))
 
 ;; Project managment
