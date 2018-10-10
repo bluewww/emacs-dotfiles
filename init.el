@@ -417,7 +417,8 @@
 
 (with-eval-after-load 'doc-view
   (require 'evil-collection-doc-view)
-  (evil-collection-doc-view-setup))
+  (evil-collection-doc-view-setup)
+  (setq doc-view-resolution 400))
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
 (with-eval-after-load 'dired
@@ -481,14 +482,14 @@
   (setq large-file-warning-threshold nil))
 
 ;;; pdf
-(use-package pdf-tools
-  :mode ("\\.pdf\\'" . pdf-view-mode)
-  :init
-  (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
-  :config
-  (pdf-tools-install)
-  (require 'evil-collection-pdf)
-  (evil-collection-pdf-setup))
+;; (use-package pdf-tools
+;;   :mode ("\\.pdf\\'" . pdf-view-mode)
+;;   :init
+;;   (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
+;;   :config
+;;   (pdf-tools-install)
+;;   (require 'evil-collection-pdf)
+;;   (evil-collection-pdf-setup))
 
 ;;; LaTeX
 ;; (use-package auctex  :defer t)
@@ -764,10 +765,10 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (ivy-xref winum which-key use-package rainbow-delimiters
-	      racket-mode org-ref general evil-surround evil-matchit
-	      evil-magit cquery counsel-projectile clang-format avy
-	      auto-virtualenv auctex-latexmk anaconda-mode)))
+    (winum which-key vlf use-package rainbow-delimiters racket-mode org-ref
+	   ivy-xref general evil-surround evil-matchit evil-magit cquery
+	   counsel-projectile counsel-etags clang-format avy auto-virtualenv
+	   auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (custom-set-faces
