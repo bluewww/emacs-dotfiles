@@ -4,7 +4,7 @@
 ;; sane defaults
 (setq
  ;; 50 MB, default is 800kb
- gc-cons-threshold 50000000
+ gc-cons-threshold (* 50 1000 1000)
  ;; backup file settings
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
  backup-by-copying t
@@ -80,7 +80,7 @@
 (if (display-graphic-p)
     (progn
       (setq initial-frame-alist
-	    '((width . 100) (height . 50)))
+	    '((width . 200) (height . 70)))
       (tool-bar-mode -1)
       (tooltip-mode -1)
       (menu-bar-mode -1)
@@ -113,7 +113,9 @@
 ;;;; All packages
 
 ;; temporary patch for dead keys, instead of env XMODIFIERS= emacs
-(use-package iso-transl :ensure nil)
+(use-package iso-transl
+  :defer t
+  :ensure nil)
 
 (use-package general)
 ;; just take the override map and increase its precedence to the maximum (for
@@ -130,11 +132,12 @@
  "?" 'general-describe-keybindings)
 
 (use-package evil
+  :demand
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-want-integration nil)
   :config
-  (evil-mode)
+  (evil-mode 1)
   :general
   (general-define-key                   ; evil-mode seems to use it, so we unmap
 					; it to make xref work
@@ -191,6 +194,7 @@
 
 
 (use-package winner
+  :defer t
   :config
   (winner-mode))
 
@@ -468,6 +472,7 @@
 
 ;;; Large files
 (use-package vlf
+  :defer t
   :config
   (require 'vlf-setup)
   (setq vlf-application 'dont-ask))
@@ -684,6 +689,14 @@
    :keymaps 'verilog-mode-map
    "M-." 'counsel-etags-find-tag-at-point))
 
+;; measure startup time
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    (message "Emacs ready in %s with %d garbage collections."
+		     (format "%.2f seconds"
+			     (float-time
+			      (time-subtract after-init-time before-init-time)))
+		     gcs-done)))
 ;;; Custom functions
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing."
@@ -778,5 +791,5 @@ buffer is not visiting a file."
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil
 			 :strike-through nil :overline nil :underline nil :slant
-			 normal :weight normal :height 140 :width normal
-			 :foundry "unknown" :family "Inconsolata LGC")))))
+			 normal :weight normal :height 110 :width normal
+			 :foundry "unknown" :family "DejaVu Sans Mono")))))
