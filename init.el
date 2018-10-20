@@ -424,6 +424,7 @@
   (evil-collection-doc-view-setup)
   (setq doc-view-resolution 400))
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+(add-hook 'doc-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
 
 (with-eval-after-load 'dired
   (require 'evil-collection-dired)
