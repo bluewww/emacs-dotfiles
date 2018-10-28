@@ -41,8 +41,9 @@
 
 ;; line numbers
 (if (version<= "26.1" emacs-version)
-    (global-display-line-numbers-mode) ; welcome to the 21th century
-  (global-linum-mode))
+    (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook 'linum-mode))
+
 
 (add-hook 'text-mode-hook 'show-paren-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
