@@ -782,10 +782,10 @@ buffer is not visiting a file."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (winum which-key vlf use-package rainbow-delimiters racket-mode org-ref
-	   ivy-xref general evil-surround evil-matchit evil-magit esup cquery
-	   counsel-projectile counsel-etags clang-format auto-virtualenv
-	   auctex-latexmk anaconda-mode)))
+    (avy winum which-key vlf use-package rainbow-delimiters racket-mode org-ref
+	 ivy-xref general evil-surround evil-matchit evil-magit esup cquery
+	 counsel-projectile counsel-etags clang-format auto-virtualenv
+	 auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (put 'dired-find-alternate-file 'disabled nil)
