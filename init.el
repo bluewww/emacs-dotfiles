@@ -79,8 +79,6 @@
 ;; disable window stuff
 (if (display-graphic-p)
     (progn
-      (setq initial-frame-alist
-	    '((width . 200) (height . 70)))
       (tool-bar-mode -1)
       (tooltip-mode -1)
       (menu-bar-mode -1)
