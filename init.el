@@ -505,13 +505,6 @@
 ;;   (evil-collection-pdf-setup))
 
 ;;; LaTeX
-;; (use-package auctex  :defer t)
-;; (use-package tex-site )
-;; (require 'tex-site)
-;; (use-package auctex ; Don't understand how auctext work,
-;; it just ignores the :config section... but now acutex won't
-;; be installed automatically
-
 (use-package auctex
   :mode ("\\.tex\\'" . TeX-latex-mode)
   :general
@@ -598,7 +591,6 @@
   (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
 
 ;;; C-C++
-;; usage:
 (use-package lsp-mode
   :hook c-mode)
 
@@ -649,26 +641,26 @@
   :init
   (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1))))
 
-;; paredit-like parenthesis editing
-;(use-package lispy
-;  :defer t)
-;;; :init
-;;; enable for elisp
-;;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-;
-;(use-package lispyville
-;  :defer t
-;  :init
-;  ;; always enable too
-;  (add-hook 'emacs-lisp-mode-hook (lambda () (lispyville-mode 1)))
-;  (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1)))
-;  :config
-;  (lispyville-set-key-theme
-;   '(operators
-;     slurp/barf-lispy
-;     (additional normal visual)
-;     (additional-movement normal visual motion))))
-;;; (add-hook 'lispy-mode-hook #'lispyville-mode)
+;; ;; paredit-like parenthesis editing
+;; (use-package lispy
+;;   :defer t)
+;; ;; :init
+;; ;; enable for elisp
+;; ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+
+;; (use-package lispyville
+;;   :defer t
+;;   :init
+;;   ;; always enable too
+;;   (add-hook 'emacs-lisp-mode-hook (lambda () (lispyville-mode 1)))
+;;   (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1)))
+;;   :config
+;;   (lispyville-set-key-theme
+;;    '(operators
+;;      slurp/barf-lispy
+;;      (additional normal visual)
+;;      (additional-movement normal visual motion))))
+;; ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 
 ;;; Racket
 (use-package racket-mode
@@ -697,6 +689,8 @@
    :keymaps 'verilog-mode-map
    "M-." 'counsel-etags-find-tag-at-point))
 
+;;; Custom functions
+
 ;; measure startup time
 (add-hook 'emacs-startup-hook
 	  (lambda ()
@@ -705,13 +699,14 @@
 			     (float-time
 			      (time-subtract after-init-time before-init-time)))
 		     gcs-done)))
-;;; Custom functions
+
+;; quickly open dotfile
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing."
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
-;; esc quits
+;; esc quits everywhere
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
 In Delete Selection mode, if the mark is active, just deactivate it;
