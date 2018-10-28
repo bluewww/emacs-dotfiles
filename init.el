@@ -77,13 +77,12 @@
  want to use in the modeline *in lieu of* the original.")
 
 ;; disable window stuff
-(if (display-graphic-p)
-    (progn
-      (tool-bar-mode -1)
-      (tooltip-mode -1)
-      (menu-bar-mode -1)
-      (scroll-bar-mode -1)
-      (blink-cursor-mode -1)))
+(when (display-graphic-p)
+  (tool-bar-mode -1)
+  (tooltip-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (blink-cursor-mode -1))
 
 (require 'package)
 ;; want to use use-package instead
