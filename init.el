@@ -195,7 +195,15 @@
 (use-package winner
   :defer t
   :config
-  (winner-mode))
+  (winner-mode)
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "wu" 'winner-undo
+   "wU" 'winner-redo))
 
 (use-package rainbow-delimiters
   :defer t
@@ -362,8 +370,6 @@
  "ws" 'split-window-below
  "wv" 'split-window-right
  "wo" 'other-window
- "wu" 'winner-undo
- "wU" 'winner-redo
 
  ;; TODO
  ;; t for toggle
