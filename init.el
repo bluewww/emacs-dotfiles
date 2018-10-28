@@ -268,6 +268,8 @@
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'counsel-grep-or-swiper
+   "sf" 'counsel-file-jump
+   "sg" 'counsel-git-grep
    "sb" 'swiper-all))
 
 ;; Project managment
