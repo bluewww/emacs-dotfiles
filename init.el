@@ -800,3 +800,4 @@ buffer is not visiting a file."
 			 :strike-through nil :overline nil :underline nil :slant
 			 normal :weight normal :height 110 :width normal
 			 :foundry "unknown" :family "DejaVu Sans Mono")))))
+(put 'dired-find-alternate-file 'disabled nil)
