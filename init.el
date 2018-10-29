@@ -31,6 +31,10 @@
  scroll-conservatively 10000
  initial-scratch-message "Welcome in Emacs")
 
+;; save so that we can later restore after startup
+(defvar old-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
 (setq-default fill-column 80)
 
 ;; UTF-8 as default encoding
@@ -694,8 +698,7 @@
    :keymaps 'verilog-mode-map
    "M-." 'counsel-etags-find-tag-at-point))
 
-;;; Custom functions
-
+;;; Restore hooks
 ;; measure startup time
 (add-hook 'emacs-startup-hook
 	  (lambda ()
@@ -711,6 +714,12 @@
 	    (setq gc-cons-threshold 16777216
 		  gc-cons-percentage 0.1)))
 
+;; restore file name handlers
+(add-hook 'emacs-startup-hook
+	  (lambda()
+	    (setq file-name-handler-alist old-file-name-handler-alist)))
+
+;;; Custom functions
 ;; quickly open dotfile
 (defun find-dotfile ()
   "Opens the emacs dotfile for quick editing."
@@ -808,4 +817,4 @@ buffer is not visiting a file."
 
 ;; set default font
 (add-to-list 'default-frame-alist
-             '(font . "DejaVu Sans Mono-11"))
+	     '(font . "DejaVu Sans Mono-11"))
