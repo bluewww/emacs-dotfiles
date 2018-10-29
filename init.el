@@ -3,8 +3,10 @@
 ;; Global configuration
 ;; sane defaults
 (setq
- ;; 50 MB, default is 800kb
- gc-cons-threshold (* 50 1000 1000)
+ ;; this improves starutp time, default is 800kb
+ ;; only set during startup
+ gc-cons-threshold 402653184
+ gc-cons-percentage 0.6
  ;; backup file settings
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
  backup-by-copying t
@@ -702,6 +704,12 @@
 			     (float-time
 			      (time-subtract after-init-time before-init-time)))
 		     gcs-done)))
+
+;; reset gc to good values after startup
+(add-hook 'emacs-startup-hook
+	  (lambda()
+	    (setq gc-cons-threshold 16777216
+		  gc-cons-percentage 0.1)))
 
 ;; quickly open dotfile
 (defun find-dotfile ()
