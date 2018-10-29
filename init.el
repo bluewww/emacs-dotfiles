@@ -451,8 +451,10 @@
   (setq compilation-scroll-output t)
   (add-to-list 'compilation-error-regexp-alist
 	       '("^\\*\\\* Error: \\(.*?\\)(\\(.*?\\)):" 1 2))
-  (evil-collection-compile-setup))
+  (evil-collection-compile-setup)
+  (require 'ansi-color))
 (add-hook 'compilation-mode-hook 'visual-line-mode)
+(add-hook 'compilation-filter-hook #'colorize-compilation)
 
 (with-eval-after-load 'package
   (require 'evil-collection-package-menu)
@@ -753,6 +755,12 @@ buffer is not visiting a file."
   (save-selected-window
     (switch-to-buffer-other-window (current-buffer)))
   (switch-to-buffer (other-buffer)))
+
+(defun colorize-compilation()
+  "Colorize from `compilation-filter-start' to `point'."
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region
+     compilation-filter-start (point))))
 
 ;; do it after definition
 ;; always apply the changes
