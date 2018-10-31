@@ -586,7 +586,16 @@
 
 ;;; Org
 (use-package org
-  :mode ("\\.org\\'" . org-mode))
+  :mode ("\\.org\\'" . org-mode)
+  :init
+  (add-hook 'org-mode-hook 'auto-fill-mode)
+  :config
+  (setq org-file-apps
+	'((auto-mode . emacs)
+	  ("\\.mm\\'" . default)
+	  ("\\.x?html?\\'" . default)
+	  ("\\.pdf\\'" . "evince %s"))))
+
 (use-package org-ref
   :after org)
 
@@ -820,8 +829,8 @@ this window and move pointer to other window."
       "dvi2tty")
      ((output-dvi style-pstricks)
       "dvips and gv")
-     (output-dvi "Okular")
-     (output-pdf "PDF Tools")
+     (output-dvi "Evince")
+     (output-pdf "Evince")
      (output-html "xdg-open"))))
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes
