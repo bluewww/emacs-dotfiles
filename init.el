@@ -42,8 +42,8 @@
 
 ;; we want a portable python environment
 (setenv "PATH" (concat "$HOME/.pyenv/bin:" (getenv "PATH")))
-;(getenv "PATH")
-;(add-to-list 'exec-path "/opt/miniconda3/bin")
+;; (getenv "PATH")
+;; (add-to-list 'exec-path "/opt/miniconda3/bin")
 
 ;; line numbers
 (if (version<= "26.1" emacs-version)
@@ -68,11 +68,11 @@
     (undo-tree-mode . "")
     (which-key-mode . "")
     (ivy-mode . "")
-    ;(lispyville-mode . " lispyv")
-    ; TODO: probably don't need to show this
+    ;; (lispyville-mode . " lispyv")
+     ;; TODO: probably don't need to show this
     (anaconda-mode . " γ")
-    ;projectile has its own setting
-    ;(projectile-mode . projectile-mode-line)
+    ;; projectile has its own setting
+    ;; (projectile-mode . projectile-mode-line)
     (eldoc-mode . " ε")
     ;; Major modes
     (lisp-interaction-mode . "λ")
@@ -488,9 +488,9 @@
 (use-package tramp
   :defer t
   :config
-  ;(setq projectile-mode-line " Projectile")
+  ;; (setq projectile-mode-line " Projectile")
   (setq tramp-default-method "ssh")
-  ;(setq tramp-verbose 6) ; debugging mode
+  ;; (setq tramp-verbose 6) ; debugging mode
   (setq tramp-shell-prompt-pattern ; fix parsing bug of fancy remote  prompts
 	"\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
@@ -606,9 +606,9 @@
    "mf" 'python-shell-send-file
    "mc" 'python-check)
   :config
-  ;(setq python-shell-interpreter "/opt/miniconda3/bin/python3")
-  ;(setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
-  ;(setq python-indent-guess-indent-offset nil)
+  ;; (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
+  ;; (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
+  ;; (setq python-indent-guess-indent-offset nil)
   )
 (use-package anaconda-mode
   :after python
@@ -653,7 +653,7 @@
    :prefix "SPC"
    "ma" 'projectile-find-other-file
    "mA" 'projectile-find-other-file-other-window
-;   "D"  'disaster
+   ;; "D"  'disaster
    "mb" 'clang-format-buffer
    "mr" 'clang-format-region)
   (general-define-key
