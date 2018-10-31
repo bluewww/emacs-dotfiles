@@ -795,11 +795,12 @@ themselfes there in a predefined, abbreviated fashion as given in
 
 (defun move-buffer-other-window ()
   "Move current buffer to other window, display previous buffer in
-  this window."
+this window and move pointer to other window."
   (interactive)
   (save-selected-window
     (switch-to-buffer-other-window (current-buffer)))
-  (switch-to-buffer (other-buffer)))
+  (switch-to-buffer (other-buffer))
+  (other-window 1))
 
 (defun colorize-compilation()
   "Colorize from `compilation-filter-start' to `point'."
