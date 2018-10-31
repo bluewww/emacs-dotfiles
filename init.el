@@ -630,13 +630,12 @@
   :commands lsp-cquery-enable
   :init
   (setq cquery-executable "/home/msc18f22/.local/bin/cquery")
-  ;;(add-hook 'c-mode-common-hook #'cquery//enable)
-  )
-
-(defun cquery//enable ()
-  (condition-case nil
-      (lsp-cquery-enable)
-    (user-error nil)))
+  ;;(add-hook 'c-mode-common-hook #'cquery-enable-wrap)
+  :preface
+  (defun cquery-enable-wrap ()
+    (condition-case nil
+	(lsp-cquery-enable)
+      (user-error nil))))
 
 (use-package clang-format
   :after c-mode)
@@ -671,7 +670,7 @@
 (use-package elisp-mode :ensure nil
   :mode ("\\.el\\'" . emacs-lisp-mode)
   :init
-  (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1))))
+  (add-hook 'emacs-lisp-mode-hook 'electric-pair-local-mode))
 
 ;; ;; paredit-like parenthesis editing
 ;; (use-package lispy
@@ -768,7 +767,7 @@ buffer is not visiting a file."
   (interactive "P")
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:"
-			 (ido-read-file-name "Find file(as root): ")))
+			 (read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun kill-other-buffers ()
@@ -777,6 +776,9 @@ buffer is not visiting a file."
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (defun clean-mode-line ()
+  "Clean the mode line by only allowing specific modes to show
+themselfes there in a predefined, abbreviated fashion as given in
+`mode-line-cleaner-alist'."
   (interactive)
   (cl-loop for cleaner in mode-line-cleaner-alist
 	   do (let* ((mode (car cleaner))
@@ -787,6 +789,9 @@ buffer is not visiting a file."
 		;; major mode
 		(when (eq mode major-mode)
 		  (setq mode-name mode-str)))))
+
+;; do it after definition
+(add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
 (defun move-buffer-other-window ()
   "Move current buffer to other window, display previous buffer in
@@ -802,10 +807,7 @@ buffer is not visiting a file."
     (ansi-color-apply-on-region
      compilation-filter-start (point))))
 
-;; do it after definition
-;; always apply the changes
-(add-hook 'after-change-major-mode-hook 'clean-mode-line)
-
+;;; Stuff from customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
