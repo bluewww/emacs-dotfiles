@@ -425,48 +425,69 @@
  "<C-mouse-5>" 'text-scale-decrease)
 
 ;;; general settings and lazy evilification of built-in stuff
- (with-eval-after-load 'ediff
-   (require 'evil-collection-ediff)
-   (evil-collection-ediff-setup))
+(use-package ediff
+  :defer t
+  :config
+  (require 'evil-collection-ediff)
+  (evil-collection-ediff-setup))
 
-(with-eval-after-load 'image-mode
+(use-package image-mode :ensure nil
+  :defer t
+  :config
   (require 'evil-collection-image)
   (evil-collection-image-setup))
 
-(with-eval-after-load 'doc-view
+(use-package doc-view
+  :defer t
+  :init
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  (add-hook 'doc-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
+  :config
   (require 'evil-collection-doc-view)
   (evil-collection-doc-view-setup)
   (setq doc-view-resolution 400))
-(add-hook 'doc-view-mode-hook 'auto-revert-mode)
-(add-hook 'doc-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
 
-(with-eval-after-load 'dired
+(use-package dired :ensure nil
+  :defer t
+  :config
   (require 'evil-collection-dired)
   (evil-collection-dired-setup))
 
- (with-eval-after-load 'info
-   (require 'evil-collection-info)
-   (evil-collection-info-setup))
+(use-package info
+  :defer t
+  :config
+  (require 'evil-collection-info)
+  (evil-collection-info-setup))
 
-(with-eval-after-load 'comint
+(use-package comint :ensure nil
+  :defer t
+  :config
   (require 'evil-collection-comint)
   (evil-collection-comint-setup))
 
-(with-eval-after-load 'compile
+(use-package compile
+  :defer t
+  :no-require
+  :init
+  (add-hook 'compilation-mode-hook 'visual-line-mode)
+  (add-hook 'compilation-filter-hook #'colorize-compilation)
+  :config
   (require 'evil-collection-compile)
   (setq compilation-scroll-output t)
   (add-to-list 'compilation-error-regexp-alist
 	       '("^\\*\\\* Error: \\(.*?\\)(\\(.*?\\)):" 1 2))
   (evil-collection-compile-setup)
   (require 'ansi-color))
-(add-hook 'compilation-mode-hook 'visual-line-mode)
-(add-hook 'compilation-filter-hook #'colorize-compilation)
 
-(with-eval-after-load 'package
+(use-package package
+  :defer t
+  :config
   (require 'evil-collection-package-menu)
   (evil-collection-package-menu-setup))
 
-(with-eval-after-load 'tramp
+(use-package tramp
+  :defer t
+  :config
   ;(setq projectile-mode-line " Projectile")
   (setq tramp-default-method "ssh")
   ;(setq tramp-verbose 6) ; debugging mode
@@ -476,14 +497,17 @@
 ;; https://emacs.stackexchange.com/
 ;; questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
 ;; eshell
-(with-eval-after-load 'eshell
+(use-package eshell
+  :defer t
+  :init
+  (add-hook 'eshell-mode-hook
+	    (lambda ()
+	      (define-key eshell-mode-map (kbd "<tab>")
+		'completion-at-point)))
+  (add-hook 'eshell-mode-hook #'visual-line-mode)
+  :config
   (require 'evil-collection-eshell)
   (evil-collection-eshell-setup))
-(add-hook 'eshell-mode-hook
-	  (lambda ()
-	    (define-key eshell-mode-map (kbd "<tab>")
-	      'completion-at-point)))
-(add-hook 'eshell-mode-hook #'visual-line-mode)
 
 ;;;; Custom Layers
 
