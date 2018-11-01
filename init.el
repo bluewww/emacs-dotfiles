@@ -594,7 +594,8 @@
 	'((auto-mode . emacs)
 	  ("\\.mm\\'" . default)
 	  ("\\.x?html?\\'" . default)
-	  ("\\.pdf\\'" . "evince %s"))))
+	  ("pdf" . "evince %s")
+	  ("\\.pdf::\\([0-9]+\\)\\'" . "evince -p %1 %s"))))
 
 (use-package org-ref
   :after org)
