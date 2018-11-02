@@ -597,7 +597,9 @@
 	  ("\\.pdf::\\([0-9]+\\)\\'" . "evince -p %1 %s"))))
 
 (use-package org-ref
-  :after org)
+  :after org
+  :config
+  (org-ref-ivy-cite-completion))
 
 ;;; Python
 (use-package python
