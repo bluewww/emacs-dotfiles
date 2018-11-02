@@ -440,7 +440,6 @@
   :defer t
   :init
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  (add-hook 'doc-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
   :config
   (require 'evil-collection-doc-view)
   (evil-collection-doc-view-setup)
