@@ -180,22 +180,26 @@
   :config
   (which-key-mode))
 
-(use-package winum
+(use-package eyebrowse
   :defer t
   :config
-  (winum-mode)
+  (eyebrowse-mode)
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
-    "1" 'winum-select-window-1
-    "2" 'winum-select-window-2
-    "3" 'winum-select-window-3
-    "4" 'winum-select-window-4
-    "5" 'winum-select-window-5))
-
+    "ea" 'eyebrowse-create-window-config
+    "ed" 'eyebrowse-close-window-config
+    "er" 'eyebrowse-rename-window-config
+    "eb" 'eyebrowse-switch-to-window-config
+    "1" 'eyebrowse-switch-to-window-config-0
+    "2" 'eyebrowse-switch-to-window-config-1
+    "3" 'eyebrowse-switch-to-window-config-2
+    "4" 'eyebrowse-switch-to-window-config-3
+    "5" 'eyebrowse-switch-to-window-config-4
+    "6" 'eyebrowse-switch-to-window-config-5))
 
 (use-package winner
   :defer t
@@ -844,10 +848,10 @@ this window and move pointer to other window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (avy winum which-key vlf use-package rainbow-delimiters racket-mode org-ref
-	 ivy-xref general evil-surround evil-matchit evil-magit esup cquery
-	 counsel-projectile counsel-etags clang-format auto-virtualenv
-	 auctex-latexmk anaconda-mode)))
+    (eyebrowse avy which-key vlf use-package rainbow-delimiters racket-mode
+	       org-ref ivy-xref general evil-surround evil-matchit evil-magit
+	       esup cquery counsel-projectile counsel-etags clang-format
+	       auto-virtualenv auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (put 'dired-find-alternate-file 'disabled nil)
