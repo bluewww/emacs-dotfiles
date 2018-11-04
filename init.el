@@ -30,11 +30,33 @@
  ;; scroll just one line when hitting bottom of screen
  scroll-conservatively 10000)
 
+(setq-default fill-column 80)
+
 ;; save so that we can later restore after startup
 (defvar old-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-(setq-default fill-column 80)
+;;; Restore hooks
+;; measure startup time
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    (message "Emacs ready in %s with %d garbage collections."
+		     (format "%.2f seconds"
+			     (float-time
+			      (time-subtract after-init-time before-init-time)))
+		     gcs-done)))
+
+;; reset gc to good values after startup
+(add-hook 'emacs-startup-hook
+	  (lambda()
+	    (setq gc-cons-threshold 16777216
+		  gc-cons-percentage 0.1)))
+
+;; restore file name handlers
+(add-hook 'emacs-startup-hook
+	  (lambda()
+	    (setq file-name-handler-alist old-file-name-handler-alist)))
+
 
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
@@ -734,27 +756,6 @@
    :states '(normal visual insert emacs motion)
    :keymaps 'verilog-mode-map
    "M-." 'counsel-etags-find-tag-at-point))
-
-;;; Restore hooks
-;; measure startup time
-(add-hook 'emacs-startup-hook
-	  (lambda ()
-	    (message "Emacs ready in %s with %d garbage collections."
-		     (format "%.2f seconds"
-			     (float-time
-			      (time-subtract after-init-time before-init-time)))
-		     gcs-done)))
-
-;; reset gc to good values after startup
-(add-hook 'emacs-startup-hook
-	  (lambda()
-	    (setq gc-cons-threshold 16777216
-		  gc-cons-percentage 0.1)))
-
-;; restore file name handlers
-(add-hook 'emacs-startup-hook
-	  (lambda()
-	    (setq file-name-handler-alist old-file-name-handler-alist)))
 
 ;;; Custom functions
 ;; quickly open dotfile
