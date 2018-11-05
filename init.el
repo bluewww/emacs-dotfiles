@@ -83,9 +83,9 @@
 (column-number-mode)
 
 ;; change the modeline descriptions to make them shorter
-(setq projectile-mode-line '(:eval (format " π[%s]" (projectile-project-name))))
 (defvar mode-line-cleaner-alist
   `((auto-revert-mode . " α")
+    (auto-fille-mode . " φ")
     (undo-tree-mode . "")
     (which-key-mode . "")
     (ivy-mode . "")
