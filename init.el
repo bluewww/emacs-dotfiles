@@ -320,7 +320,11 @@
    "pd" 'counsel-projectile-find-dir)
   :config
   (projectile-mode)
-  (setq projectile-completion-system 'ivy))
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-dynamic-mode-line t)
+  (setq projectile-mode-line-prefix " π")
+  (setq projectile-mode-line-function
+      '(lambda () (format " π[%s]" (projectile-project-name)))))
 
 (use-package counsel-projectile
   :after projectile
