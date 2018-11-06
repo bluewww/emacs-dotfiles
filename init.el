@@ -85,7 +85,7 @@
 ;; change the modeline descriptions to make them shorter
 (defvar mode-line-cleaner-alist
   `((auto-revert-mode . " α")
-    (auto-fille-mode . " φ")
+    (auto-fill-mode . " φ")
     (undo-tree-mode . "")
     (which-key-mode . "")
     (ivy-mode . "")
