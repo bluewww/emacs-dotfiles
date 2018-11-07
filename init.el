@@ -629,8 +629,8 @@
 
 (use-package org-ref
   :after org
-  :config
-  (org-ref-ivy-cite-completion))
+  :init
+  (setq org-ref-completion-library 'org-ref-ivy-cite))
 
 ;;; Python
 (use-package python
