@@ -1,7 +1,16 @@
+;;; init.el --- Emacs configuration that uses evil-mode and SPC as leader key
 ;;; -*- lexical-binding: t; -*-
-;;
-;; Global configuration
-;; sane defaults
+
+;;; Commentary:
+
+;; Inspired by spacemacs, but very minimal and lightweight. Startup time was
+;; made to sure be kept low, so that non-server workflows are usuable. The main
+;; bulk of configuration is done with the help of `use-package' and
+;; `general-mode'.
+
+;;; Code:
+
+;; sane defaults for general settings
 (setq
  ;; this improves starutp time, default is 800kb
  ;; only set during startup
@@ -101,7 +110,7 @@
     (python-mode . "py")
     (emacs-lisp-mode . "elisp"))
   "Alist for `clean-mode-line'.
- When you add a new element to the alist, keep in mind that you
+When you add a new element to the alist, keep in mind that you
  must pass the correct minor/major mode symbol and a string you
  want to use in the modeline *in lieu of* the original.")
 
@@ -765,7 +774,7 @@
 ;;; Custom functions
 ;; quickly open dotfile
 (defun find-dotfile ()
-  "Opens the emacs dotfile for quick editing."
+  "Opens the Emacs dotfile for quick editing."
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
@@ -797,8 +806,9 @@ buffer is not visiting a file."
   (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 (defun clean-mode-line ()
-  "Clean the mode line by only allowing specific modes to show
-themselfes there in a predefined, abbreviated fashion as given in
+  "Clean the mode line.
+only allow specific modes to show themselfes there in a
+predefined, abbreviated fashion as given in
 `mode-line-cleaner-alist'."
   (interactive)
   (cl-loop for cleaner in mode-line-cleaner-alist
@@ -815,8 +825,9 @@ themselfes there in a predefined, abbreviated fashion as given in
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
 (defun move-buffer-other-window ()
-  "Move current buffer to other window, display previous buffer in
-this window and move pointer to other window."
+  "Move current buffer to other window.
+Display previous buffer in this window and move pointer to other
+window."
   (interactive)
   (save-selected-window
     (switch-to-buffer-other-window (current-buffer)))
