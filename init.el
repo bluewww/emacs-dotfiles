@@ -84,10 +84,11 @@
 
 ;; change the modeline descriptions to make them shorter
 (defvar mode-line-cleaner-alist
-  `((auto-revert-mode . " α")
-    (auto-fill-mode . " φ")
+  `((auto-revert-mode . " ρ")
+    (auto-fill-function . " φ")
     (undo-tree-mode . "")
     (which-key-mode . "")
+    (visual-line-mode . " σ")
     (ivy-mode . "")
     ;; (lispyville-mode . " lispyv")
      ;; TODO: probably don't need to show this
