@@ -578,6 +578,9 @@ When you add a new element to the alist, keep in mind that you
 ;;; LaTeX
 (use-package auctex
   :mode ("\\.tex\\'" . TeX-latex-mode)
+  :init
+  ;; font-lock for custom keywords
+  (setq font-latex-match-reference-keywords '(("cref" "{")))
   :general
   (general-define-key
    :states 'normal
