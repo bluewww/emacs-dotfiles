@@ -99,8 +99,6 @@
     (which-key-mode . "")
     (visual-line-mode . " σ")
     (ivy-mode . "")
-    ;; (lispyville-mode . " lispyv")
-     ;; TODO: probably don't need to show this
     (anaconda-mode . " γ")
     ;; projectile has its own setting
     ;; (projectile-mode . projectile-mode-line)
@@ -154,10 +152,8 @@ When you add a new element to the alist, keep in mind that you
 
 (use-package general)
 ;; just take the override map and increase its precedence to the maximum (for
-;; evil)
-;; is is already an intercept map
-;;(evil-make-intercept-map general-override-mode-map)
-;; the mapping has to be introduced as minor mode
+;; evil) is is already an intercept map (evil-make-intercept-map
+;; general-override-mode-map) the mapping has to be introduced as minor mode
 (general-override-mode)
 (general-define-key
  :states '(normal insert emacs visual motion)
@@ -194,19 +190,10 @@ When you add a new element to the alist, keep in mind that you
     "w;" 'evil-window-increase-width
     "w:" 'evil-window-decrease-width))
 
-
 (use-package evil-surround
   :after evil
   :config
   (global-evil-surround-mode 1))
-
-
-;; (use-package evil-matchit :ensure t
-;;   :after evil
-;;   :config
-;;   (global-evil-matchit-mode 1))
-
-;;(use-package evil-search-highlight-persist )
 
 (use-package which-key
   :config
@@ -276,6 +263,7 @@ When you add a new element to the alist, keep in mind that you
    :non-normal-prefix "M-SPC"
    "bb" 'ivy-switch-buffer
    "bo" 'move-buffer-other-window))
+
 (use-package ivy-xref
   :after ivy
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
@@ -532,8 +520,6 @@ When you add a new element to the alist, keep in mind that you
   (setq tramp-shell-prompt-pattern ; fix parsing bug of fancy remote  prompts
 	"\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
-;; https://emacs.stackexchange.com/
-;; questions/27849/how-can-i-setup-eshell-to-use-ivy-for-tab-completion
 ;; eshell
 (use-package eshell
   :defer t
@@ -725,27 +711,6 @@ When you add a new element to the alist, keep in mind that you
   :mode ("\\.el\\'" . emacs-lisp-mode)
   :init
   (add-hook 'emacs-lisp-mode-hook 'electric-pair-local-mode))
-
-;; ;; paredit-like parenthesis editing
-;; (use-package lispy
-;;   :defer t)
-;; ;; :init
-;; ;; enable for elisp
-;; ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-
-;; (use-package lispyville
-;;   :defer t
-;;   :init
-;;   ;; always enable too
-;;   (add-hook 'emacs-lisp-mode-hook (lambda () (lispyville-mode 1)))
-;;   (add-hook 'emacs-lisp-mode-hook (lambda () (electric-pair-local-mode 1)))
-;;   :config
-;;   (lispyville-set-key-theme
-;;    '(operators
-;;      slurp/barf-lispy
-;;      (additional normal visual)
-;;      (additional-movement normal visual motion))))
-;; ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
 
 ;;; Racket
 (use-package racket-mode
