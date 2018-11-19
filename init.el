@@ -744,6 +744,10 @@ When you add a new element to the alist, keep in mind that you
   :defer t)
 
 ;;; Tracing
+(use-package trdb-mode
+  :commands (trdb-mode trdb-process-trace)
+  :load-path "trdb/")
+
 ;;; Assembly
 (use-package riscv-mode
   :commands riscv-mode)
