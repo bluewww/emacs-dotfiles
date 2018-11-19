@@ -121,6 +121,8 @@
 Argument EXECUTABLE is the original binary that was executed to produce TRACE-FILE.
 Argument TRACE-FILE is the aptured, compressed traces to view."
   (interactive "fexecutable:")
+  (when (buffer-live-p (get-buffer trdb-buffer))
+    (kill-buffer trdb-buffer))
   (let ((asmbuf (get-buffer-create trdb-buffer))
 	(file (or trace-file (buffer-file-name))))
     (shell-command
@@ -131,6 +133,7 @@ Argument TRACE-FILE is the aptured, compressed traces to view."
      asmbuf)
     (with-current-buffer asmbuf
       (trdb-mode)
+      (buffer-disable-undo)
       ;; (trdb--shadow-non-assembly-code)
       (compilation-minor-mode))))
 

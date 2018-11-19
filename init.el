@@ -750,6 +750,7 @@ When you add a new element to the alist, keep in mind that you
 ;;; Tracing
 (use-package trdb-mode
   :commands (trdb-mode trdb-process-trace)
+  :mode ("\\.trdb\\'" . trdb-mode)
   :load-path "trdb/")
 
 ;;; Assembly
