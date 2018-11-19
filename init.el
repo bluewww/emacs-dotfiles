@@ -739,6 +739,15 @@ When you add a new element to the alist, keep in mind that you
    :keymaps 'verilog-mode-map
    "M-." 'counsel-etags-find-tag-at-point))
 
+;;; Decompiling
+(use-package rmsbolt
+  :defer t)
+
+;;; Tracing
+;;; Assembly
+(use-package riscv-mode
+  :commands riscv-mode)
+
 ;;; Custom functions
 ;; quickly open dotfile
 (defun find-dotfile ()
@@ -833,10 +842,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (eyebrowse avy which-key vlf use-package rainbow-delimiters racket-mode
-	       org-ref ivy-xref general evil-surround evil-matchit evil-magit
-	       esup cquery counsel-projectile counsel-etags clang-format
-	       auto-virtualenv auctex-latexmk anaconda-mode)))
+    (riscv-mode rmsbolt eyebrowse avy which-key vlf use-package
+		rainbow-delimiters racket-mode org-ref ivy-xref general
+		evil-surround evil-matchit evil-magit esup cquery
+		counsel-projectile counsel-etags clang-format auto-virtualenv
+		auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (put 'dired-find-alternate-file 'disabled nil)
