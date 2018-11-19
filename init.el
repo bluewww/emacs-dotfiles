@@ -17,14 +17,18 @@
  gc-cons-threshold 402653184
  gc-cons-percentage 0.6
  ;; backup file settings
- backup-directory-alist `(("." . "~/.emacs.d/backups"))
+ backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
  backup-by-copying t
  version-control t
  keep-new-version 6
  keep-old-version 2
  delete-old-versions t
  ;; transform backups file name
- auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))
+ auto-save-file-name-transforms `((".*"
+				   ,(concat
+				    user-emacs-directory
+				    "auto-save-list/")
+				   t))
  inhibit-startup-screen t
  ;; silent bell when you make a mistake
  ring-bell-function 'ignore
@@ -858,3 +862,6 @@ window."
 ;; set default font
 (add-to-list 'default-frame-alist
 	     '(font . "DejaVu Sans Mono-11"))
+
+(provide 'init)
+
