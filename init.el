@@ -716,6 +716,9 @@ When you add a new element to the alist, keep in mind that you
   :init
   (add-hook 'emacs-lisp-mode-hook 'electric-pair-local-mode))
 
+(use-package package-lint
+  :commands package-lint-current-buffer)
+
 ;;; Racket
 (use-package racket-mode
   :mode ("\\.rkt\\'" . racket-mode))
@@ -851,11 +854,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (riscv-mode rmsbolt eyebrowse avy which-key vlf use-package
-		rainbow-delimiters racket-mode org-ref ivy-xref general
-		evil-surround evil-matchit evil-magit esup cquery
-		counsel-projectile counsel-etags clang-format auto-virtualenv
-		auctex-latexmk anaconda-mode)))
+    (package-lint riscv-mode rmsbolt eyebrowse avy which-key vlf use-package
+		  rainbow-delimiters racket-mode org-ref ivy-xref general
+		  evil-surround evil-matchit evil-magit esup cquery
+		  counsel-projectile counsel-etags clang-format auto-virtualenv
+		  auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (put 'dired-find-alternate-file 'disabled nil)
