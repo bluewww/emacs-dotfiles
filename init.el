@@ -765,7 +765,7 @@ When you add a new element to the alist, keep in mind that you
 (defun find-dotfile ()
   "Opens the Emacs dotfile for quick editing."
   (interactive)
-  (find-file-existing "~/.emacs.d/init.el"))
+  (find-file-existing (concat user-emacs-directory "init.el")))
 
 ;; esc quits everywhere
 (defun minibuffer-keyboard-quit ()
@@ -868,4 +868,3 @@ window."
 	     '(font . "DejaVu Sans Mono-11"))
 
 (provide 'init)
-
