@@ -866,5 +866,3 @@ window."
 ;; set default font
 (add-to-list 'default-frame-alist
 	     '(font . "DejaVu Sans Mono-11"))
-
-(provide 'init)
