@@ -861,7 +861,8 @@ window."
 		  evil-surround evil-matchit evil-magit esup cquery
 		  counsel-projectile counsel-etags clang-format auto-virtualenv
 		  auctex-latexmk anaconda-mode)))
- '(truncate-lines t))
+ '(truncate-lines t)
+ '(xterm-mouse-mode t))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
