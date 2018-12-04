@@ -571,46 +571,47 @@ When you add a new element to the alist, keep in mind that you
   :init
   ;; font-lock for custom keywords
   (setq font-latex-match-reference-keywords '(("cref" "{")))
-  :general
-  (general-define-key
-   :states 'normal
-   :keymaps 'LaTeX-mode-map
-   :prefix ","
-   "\\"  'TeX-insert-macro
-   "-"   'TeX-recenter-output-buffer
-   "%"   'TeX-comment-or-uncomment-paragraph
-   ";"   'TeX-comment-or-uncomment-region
-   ;; run compile open
-   "a"   'TeX-command-run-all
-   "b"   'TeX-command-master
-   "k"   'TeX-kill-job
-   "l"   'TeX-recenter-output-buffer
-   "m"   'TeX-insert-macro
-   "v"   'TeX-view
-   "hd"  'TeX-doc
-   "*"   'LaTeX-mark-section      ;; C-c *
-   "."   'LaTeX-mark-environment  ;; C-c .
-   "c"   'LaTeX-close-environment ;; C-c ]
-   "e"   'LaTeX-environment       ;; C-c C-e
-   "ii"  'LaTeX-insert-item       ;; C-c C-j
-   "s"   'LaTeX-section           ;; C-c C-s
-   "fe"  'LaTeX-fill-environment  ;; C-c C-q C-e
-   "fp"  'LaTeX-fill-paragraph    ;; C-c C-q C-p
-   "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
-   "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
-   "fb"  'LaTeX-fill-buffer
-   "pb"  'preview-buffer
-   "pd"  'preview-document
-   "pe"  'preview-environment
-   "pf"  'preview-cache-preamble
-   "pp"  'preview-at-point
-   "ps"  'preview-section
-   "pr"  'preview-region
-   "rb"  'preview-clearout-buffer
-   "rr"  'preview-clearout
-   "rd"  'preview-clearout-document
-   "rs"  'preview-clearout-section
-   "rp"  'preview-clearout-at-point))
+  ;; :general
+  ;; (general-define-key
+  ;;  :states 'normal
+  ;;  :keymaps 'LaTeX-mode-map
+  ;;  :prefix ","
+  ;;  "\\"  'TeX-insert-macro
+  ;;  "-"   'TeX-recenter-output-buffer
+  ;;  "%"   'TeX-comment-or-uncomment-paragraph
+  ;;  ";"   'TeX-comment-or-uncomment-region
+  ;;  ;; run compile open
+  ;;  "a"   'TeX-command-run-all
+  ;;  "b"   'TeX-command-master
+  ;;  "k"   'TeX-kill-job
+  ;;  "l"   'TeX-recenter-output-buffer
+  ;;  "m"   'TeX-insert-macro
+  ;;  "v"   'TeX-view
+  ;;  "hd"  'TeX-doc
+  ;;  "*"   'LaTeX-mark-section      ;; C-c *
+  ;;  "."   'LaTeX-mark-environment  ;; C-c .
+  ;;  "c"   'LaTeX-close-environment ;; C-c ]
+  ;;  "e"   'LaTeX-environment       ;; C-c C-e
+  ;;  "ii"  'LaTeX-insert-item       ;; C-c C-j
+  ;;  "s"   'LaTeX-section           ;; C-c C-s
+  ;;  "fe"  'LaTeX-fill-environment  ;; C-c C-q C-e
+  ;;  "fp"  'LaTeX-fill-paragraph    ;; C-c C-q C-p
+  ;;  "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
+  ;;  "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
+  ;;  "fb"  'LaTeX-fill-buffer
+  ;;  "pb"  'preview-buffer
+  ;;  "pd"  'preview-document
+  ;;  "pe"  'preview-environment
+  ;;  "pf"  'preview-cache-preamble
+  ;;  "pp"  'preview-at-point
+  ;;  "ps"  'preview-section
+  ;;  "pr"  'preview-region
+  ;;  "rb"  'preview-clearout-buffer
+  ;;  "rr"  'preview-clearout
+  ;;  "rd"  'preview-clearout-document
+  ;;  "rs"  'preview-clearout-section
+  ;;  "rp"  'preview-clearout-at-point)
+  )
 (with-eval-after-load "TeX"
   (use-package auctex-latexmk
     :config
