@@ -761,6 +761,12 @@ When you add a new element to the alist, keep in mind that you
 (use-package riscv-mode
   :commands riscv-mode)
 
+(use-package asm-mode
+  :init
+  ;; uses ;; as comment delimiter by default, breaks riscv
+  (add-hook 'asm-mode-hook
+	    (lambda () (setq comment-start "/* " comment-end " */"))))
+
 ;;; Custom functions
 ;; quickly open dotfile
 (defun find-dotfile ()
