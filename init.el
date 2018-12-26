@@ -281,6 +281,7 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ff" 'counsel-find-file
+   "fj" 'counsel-file-jump
    "fr" 'counsel-recentf
    "fp" 'counsel-git
    "/"  'counsel-projectile-grep
@@ -301,7 +302,6 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'counsel-grep-or-swiper
-   "sf" 'counsel-file-jump
    "sg" 'counsel-git-grep
    "sb" 'swiper-all))
 
@@ -397,7 +397,6 @@ When you add a new element to the alist, keep in mind that you
  ;; file handling
  "fs" 'save-buffer
  "fed" 'find-dotfile
- "fj" 'dired-jump
  "fD" 'delete-file
  "fc" 'copy-file
  "fR" 'rename-file
