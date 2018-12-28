@@ -173,6 +173,7 @@ When you add a new element to the alist, keep in mind that you
   (setq evil-want-integration nil)
   :config
   (evil-mode 1)
+  (global-undo-tree-mode 1)
   :general
   (general-define-key                   ; evil-mode seems to use it, so we unmap
 					; it to make xref work
