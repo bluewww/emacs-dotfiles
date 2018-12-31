@@ -285,7 +285,6 @@ When you add a new element to the alist, keep in mind that you
    "fj" 'counsel-file-jump
    "fr" 'counsel-recentf
    "fp" 'counsel-git
-   "/"  'counsel-projectile-grep
    "hb" 'counsel-descbinds
    "hf" 'counsel-describe-function
    "hv" 'counsel-describe-variable
@@ -314,6 +313,7 @@ When you add a new element to the alist, keep in mind that you
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
+   "/"  'counsel-projectile-grep
    "pc" 'counsel-projectile-compile-project
    "pf" 'counsel-projectile-find-file
    "pb" 'counsel-projectile-switch-to-buffer
