@@ -323,7 +323,9 @@ When you add a new element to the alist, keep in mind that you
    "pd" 'counsel-projectile-find-dir)
   :config
   (projectile-mode)
+  (projectile-update-mode-line)		; sometimes doesn't happen
   (setq projectile-completion-system 'ivy)
+  :init
   (setq projectile-dynamic-mode-line t)
   (setq projectile-mode-line-prefix " π")
   (setq projectile-mode-line-function
@@ -547,13 +549,13 @@ When you add a new element to the alist, keep in mind that you
   (setq vlf-application 'dont-ask))
 
 ;;; Tagging
-(use-package counsel-etags
-  :commands
-  counsel-etags-find-tag-at-point
-  counsel-etags-virtual-update-tags
-  :init
-  (setq tags-revert-without-query t)
-  (setq large-file-warning-threshold nil))
+;; (use-package counsel-etags
+;;   :commands
+;;   counsel-etags-find-tag-at-point
+;;   counsel-etags-virtual-update-tags
+;;   :init
+;;   (setq tags-revert-without-query t)
+;;   (setq large-file-warning-threshold nil))
 
 ;;; pdf
 ;; (use-package pdf-tools
@@ -668,19 +670,31 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
 
 ;;; C-C++
-(use-package lsp-mode
-  :hook c-mode)
+;; this is a hack for eglot to use projectile-project-root for finding project
+;; roots
+(defun aid-projectile-project-find-function (dir)
+  (require 'projectile)
+  (let ((root (projectile-project-root dir)))
+    (and root (cons 'transient root))))
 
-(use-package cquery
-  :commands lsp-cquery-enable
-  :init
-  (setq cquery-executable "/home/msc18f22/.local/bin/cquery")
-  ;;(add-hook 'c-mode-common-hook #'cquery-enable-wrap)
-  :preface
-  (defun cquery-enable-wrap ()
-    (condition-case nil
-	(lsp-cquery-enable)
-      (user-error nil))))
+(use-package project
+  :defer t
+  :config
+  (add-to-list 'project-find-functions 'aid-projectile-project-find-function))
+
+(use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+  ;; eglot doesn't get to have its own mode-line entry
+  ;; TODO: add on-click functionality
+  (setq mode-line-misc-info
+	(assq-delete-all 'eglot--managed-mode mode-line-misc-info))
+  (add-to-list 'minor-mode-alist '(eglot--managed-mode " η"))
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'c-mode-map
+   "M-." 'xref-find-definitions))
 
 (use-package clang-format
   :after c-mode)
@@ -696,18 +710,13 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    "ma" 'projectile-find-other-file
    "mA" 'projectile-find-other-file-other-window
-   ;; "D"  'disaster
    "mb" 'clang-format-buffer
    "mr" 'clang-format-region)
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'c-mode-map
-   "M-." 'counsel-etags-find-tag-at-point)
+  ;; (general-define-key
+  ;;  :states '(normal visual insert emacs motion)
+  ;;  :keymaps 'c-mode-map
+  ;;  "M-." 'counsel-etags-find-tag-at-point)
   :config
-  ;(use-package disaster )
-  ;(use-package cwarn
-  ;  :config
-  ;  (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux"                 ;GNU style is really shit
 	c-basic-offset 4))
 
@@ -730,8 +739,8 @@ When you add a new element to the alist, keep in mind that you
   :init
   (add-hook 'verilog-mode-hook
 	    '(lambda () (setq indent-tabs-mode nil)))
-  (add-hook 'verilog-mode-hook
-	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
+  ;; (add-hook 'verilog-mode-hook
+  ;;	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
@@ -742,10 +751,11 @@ When you add a new element to the alist, keep in mind that you
   (setq verilog-auto-lineup 'all)
   (setq verilog-linter "verilator --lint-only")
   :general
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'verilog-mode-map
-   "M-." 'counsel-etags-find-tag-at-point))
+  ;; (general-define-key
+  ;;  :states '(normal visual insert emacs motion)
+  ;;  :keymaps 'verilog-mode-map
+  ;;  "M-." 'counsel-etags-find-tag-at-point)
+  )
 
 ;;; Decompiling
 (use-package rmsbolt
@@ -762,6 +772,7 @@ When you add a new element to the alist, keep in mind that you
   :commands riscv-mode)
 
 (use-package asm-mode
+  :defer t
   :init
   ;; uses ;; as comment delimiter by default, breaks riscv
   (add-hook 'asm-mode-hook
@@ -861,11 +872,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (package-lint riscv-mode rmsbolt eyebrowse avy which-key vlf use-package
-		  rainbow-delimiters racket-mode org-ref ivy-xref general
-		  evil-surround evil-matchit evil-magit esup cquery
-		  counsel-projectile counsel-etags clang-format auto-virtualenv
-		  auctex-latexmk anaconda-mode)))
+    (eglot package-lint riscv-mode rmsbolt eyebrowse avy which-key vlf
+	   use-package rainbow-delimiters racket-mode org-ref ivy-xref general
+	   evil-surround evil-matchit evil-magit esup cquery counsel-projectile
+	   counsel-etags clang-format auto-virtualenv auctex-latexmk
+	   anaconda-mode)))
  '(truncate-lines t))
 
 (put 'dired-find-alternate-file 'disabled nil)
