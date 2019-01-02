@@ -270,7 +270,7 @@ When you add a new element to the alist, keep in mind that you
    "bo" 'move-buffer-other-window))
 
 (use-package ivy-xref
-  :after ivy
+  :defer t
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package counsel
