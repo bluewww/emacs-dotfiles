@@ -142,6 +142,7 @@ When you add a new element to the alist, keep in mind that you
 ;; loading time
 (setq use-package-verbose t)
 (setq use-package-always-ensure t)
+(setq use-package-compute-statistics t)
 
 (add-to-list
  'load-path
