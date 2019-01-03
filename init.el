@@ -721,6 +721,11 @@ When you add a new element to the alist, keep in mind that you
   (setq c-default-style "linux"                 ;GNU style is really shit
 	c-basic-offset 4))
 
+(use-package bison-mode
+  :mode (("\\.y\\'" . bison-mode)
+	 ("\\.l\\'" . bison-mode)
+	 ("\\.jison\\'" . jison-mode)))
+
 ;;; Emacs Lisp
 (use-package elisp-mode :ensure nil
   :mode ("\\.el\\'" . emacs-lisp-mode)
@@ -873,11 +878,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (eglot package-lint riscv-mode rmsbolt eyebrowse avy which-key vlf
-	   use-package rainbow-delimiters racket-mode org-ref ivy-xref general
-	   evil-surround evil-matchit evil-magit esup cquery counsel-projectile
-	   counsel-etags clang-format auto-virtualenv auctex-latexmk
-	   anaconda-mode)))
+    (bison-mode eglot package-lint riscv-mode rmsbolt eyebrowse avy which-key
+		vlf use-package rainbow-delimiters racket-mode org-ref ivy-xref
+		general evil-surround evil-matchit evil-magit esup cquery
+		counsel-projectile counsel-etags clang-format auto-virtualenv
+		auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (put 'dired-find-alternate-file 'disabled nil)
