@@ -381,6 +381,18 @@ When you add a new element to the alist, keep in mind that you
 
 (general-define-key
  :states '(normal visual insert emacs motion)
+ :keymaps 'global-map
+ :prefix "SPC"
+ :non-normal-prefix "M-SPC"
+
+ ;; elisp interaction
+ "xe" 'eval-last-sexp
+ "xb" 'eval-buffer
+ "xr" 'eval-region
+ "xj" 'eval-print-last-sexp)
+
+(general-define-key
+ :states '(normal visual insert emacs motion)
  :keymaps 'override
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
@@ -432,12 +444,6 @@ When you add a new element to the alist, keep in mind that you
 
  ;; eshell
  "'" 'eshell
-
- ;; elisp interaction
- "xe" 'eval-last-sexp
- "xb" 'eval-buffer
- "xr" 'eval-region
- "xj" 'eval-print-last-sexp
 
  ;; exiting
  "qQ" 'kill-emacs
@@ -739,6 +745,19 @@ When you add a new element to the alist, keep in mind that you
 (use-package racket-mode
   :mode ("\\.rkt\\'" . racket-mode))
 
+;;; Scheme
+(use-package geiser
+  :init
+  (add-hook 'geiser-mode-hook 'electric-pair-local-mode)
+  :general
+  (general-define-key
+   :states 'normal
+   :keymaps '(geiser-mode-map)
+   :prefix "SPC"
+   "xe" 'geiser-eval-last-sexp
+   "xb" 'geiser-eval-buffer
+   "xr" 'geiser-eval-region))
+
 ;;; System Verilog
 (use-package verilog-mode :ensure nil
   :mode ("\\.[ds]?vh?\\'" . verilog-mode)
@@ -878,11 +897,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (bison-mode eglot package-lint riscv-mode rmsbolt eyebrowse avy which-key
-		vlf use-package rainbow-delimiters racket-mode org-ref ivy-xref
-		general evil-surround evil-matchit evil-magit esup cquery
-		counsel-projectile counsel-etags clang-format auto-virtualenv
-		auctex-latexmk anaconda-mode)))
+    (geiser bison-mode eglot package-lint riscv-mode rmsbolt eyebrowse avy
+	    which-key vlf use-package rainbow-delimiters racket-mode org-ref
+	    ivy-xref general evil-surround evil-matchit evil-magit esup cquery
+	    counsel-projectile counsel-etags clang-format auto-virtualenv
+	    auctex-latexmk anaconda-mode)))
  '(truncate-lines t))
 
 (put 'dired-find-alternate-file 'disabled nil)
