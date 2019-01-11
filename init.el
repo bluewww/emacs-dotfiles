@@ -756,7 +756,8 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    "xe" 'geiser-eval-last-sexp
    "xb" 'geiser-eval-buffer
-   "xr" 'geiser-eval-region))
+   "xr" 'geiser-eval-region
+   "hd" 'geiser-doc-symbol-at-point))
 
 ;;; System Verilog
 (use-package verilog-mode :ensure nil
