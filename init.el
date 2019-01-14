@@ -142,6 +142,7 @@ When you add a new element to the alist, keep in mind that you
 ;; loading time
 (setq use-package-verbose t)
 (setq use-package-always-ensure t)
+(setq use-package-compute-statistics t)
 
 (add-to-list
  'load-path
@@ -173,6 +174,7 @@ When you add a new element to the alist, keep in mind that you
   (setq evil-want-integration nil)
   :config
   (evil-mode 1)
+  (global-undo-tree-mode 1)
   :general
   (general-define-key                   ; evil-mode seems to use it, so we unmap
 					; it to make xref work
@@ -269,7 +271,7 @@ When you add a new element to the alist, keep in mind that you
    "bo" 'move-buffer-other-window))
 
 (use-package ivy-xref
-  :after ivy
+  :defer t
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package counsel
@@ -281,9 +283,9 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ff" 'counsel-find-file
+   "fj" 'counsel-file-jump
    "fr" 'counsel-recentf
    "fp" 'counsel-git
-   "/"  'counsel-projectile-grep
    "hb" 'counsel-descbinds
    "hf" 'counsel-describe-function
    "hv" 'counsel-describe-variable
@@ -301,7 +303,6 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'counsel-grep-or-swiper
-   "sf" 'counsel-file-jump
    "sg" 'counsel-git-grep
    "sb" 'swiper-all))
 
@@ -313,6 +314,7 @@ When you add a new element to the alist, keep in mind that you
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
+   "/"  'counsel-projectile-grep
    "pc" 'counsel-projectile-compile-project
    "pf" 'counsel-projectile-find-file
    "pb" 'counsel-projectile-switch-to-buffer
@@ -322,7 +324,9 @@ When you add a new element to the alist, keep in mind that you
    "pd" 'counsel-projectile-find-dir)
   :config
   (projectile-mode)
+  (projectile-update-mode-line)		; sometimes doesn't happen
   (setq projectile-completion-system 'ivy)
+  :init
   (setq projectile-dynamic-mode-line t)
   (setq projectile-mode-line-prefix " π")
   (setq projectile-mode-line-function
@@ -377,6 +381,18 @@ When you add a new element to the alist, keep in mind that you
 
 (general-define-key
  :states '(normal visual insert emacs motion)
+ :keymaps 'global-map
+ :prefix "SPC"
+ :non-normal-prefix "M-SPC"
+
+ ;; elisp interaction
+ "xe" 'eval-last-sexp
+ "xb" 'eval-buffer
+ "xr" 'eval-region
+ "xj" 'eval-print-last-sexp)
+
+(general-define-key
+ :states '(normal visual insert emacs motion)
  :keymaps 'override
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
@@ -397,7 +413,6 @@ When you add a new element to the alist, keep in mind that you
  ;; file handling
  "fs" 'save-buffer
  "fed" 'find-dotfile
- "fj" 'dired-jump
  "fD" 'delete-file
  "fc" 'copy-file
  "fR" 'rename-file
@@ -429,12 +444,6 @@ When you add a new element to the alist, keep in mind that you
 
  ;; eshell
  "'" 'eshell
-
- ;; elisp interaction
- "xe" 'eval-last-sexp
- "xb" 'eval-buffer
- "xr" 'eval-region
- "xj" 'eval-print-last-sexp
 
  ;; exiting
  "qQ" 'kill-emacs
@@ -547,13 +556,13 @@ When you add a new element to the alist, keep in mind that you
   (setq vlf-application 'dont-ask))
 
 ;;; Tagging
-(use-package counsel-etags
-  :commands
-  counsel-etags-find-tag-at-point
-  counsel-etags-virtual-update-tags
-  :init
-  (setq tags-revert-without-query t)
-  (setq large-file-warning-threshold nil))
+;; (use-package counsel-etags
+;;   :commands
+;;   counsel-etags-find-tag-at-point
+;;   counsel-etags-virtual-update-tags
+;;   :init
+;;   (setq tags-revert-without-query t)
+;;   (setq large-file-warning-threshold nil))
 
 ;;; pdf
 ;; (use-package pdf-tools
@@ -573,46 +582,47 @@ When you add a new element to the alist, keep in mind that you
   (setq font-latex-match-reference-keywords '(("cref" "{")))
   :config
   (add-to-list 'TeX-command-list '("Make" "make" TeX-run-compile t t))
-  :general
-  (general-define-key
-   :states 'normal
-   :keymaps 'LaTeX-mode-map
-   :prefix ","
-   "\\"  'TeX-insert-macro
-   "-"   'TeX-recenter-output-buffer
-   "%"   'TeX-comment-or-uncomment-paragraph
-   ";"   'TeX-comment-or-uncomment-region
-   ;; run compile open
-   "a"   'TeX-command-run-all
-   "b"   'TeX-command-master
-   "k"   'TeX-kill-job
-   "l"   'TeX-recenter-output-buffer
-   "m"   'TeX-insert-macro
-   "v"   'TeX-view
-   "hd"  'TeX-doc
-   "*"   'LaTeX-mark-section      ;; C-c *
-   "."   'LaTeX-mark-environment  ;; C-c .
-   "c"   'LaTeX-close-environment ;; C-c ]
-   "e"   'LaTeX-environment       ;; C-c C-e
-   "ii"  'LaTeX-insert-item       ;; C-c C-j
-   "s"   'LaTeX-section           ;; C-c C-s
-   "fe"  'LaTeX-fill-environment  ;; C-c C-q C-e
-   "fp"  'LaTeX-fill-paragraph    ;; C-c C-q C-p
-   "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
-   "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
-   "fb"  'LaTeX-fill-buffer
-   "pb"  'preview-buffer
-   "pd"  'preview-document
-   "pe"  'preview-environment
-   "pf"  'preview-cache-preamble
-   "pp"  'preview-at-point
-   "ps"  'preview-section
-   "pr"  'preview-region
-   "rb"  'preview-clearout-buffer
-   "rr"  'preview-clearout
-   "rd"  'preview-clearout-document
-   "rs"  'preview-clearout-section
-   "rp"  'preview-clearout-at-point))
+  ;; :general
+  ;; (general-define-key
+  ;;  :states 'normal
+  ;;  :keymaps 'LaTeX-mode-map
+  ;;  :prefix ","
+  ;;  "\\"  'TeX-insert-macro
+  ;;  "-"   'TeX-recenter-output-buffer
+  ;;  "%"   'TeX-comment-or-uncomment-paragraph
+  ;;  ";"   'TeX-comment-or-uncomment-region
+  ;;  ;; run compile open
+  ;;  "a"   'TeX-command-run-all
+  ;;  "b"   'TeX-command-master
+  ;;  "k"   'TeX-kill-job
+  ;;  "l"   'TeX-recenter-output-buffer
+  ;;  "m"   'TeX-insert-macro
+  ;;  "v"   'TeX-view
+  ;;  "hd"  'TeX-doc
+  ;;  "*"   'LaTeX-mark-section      ;; C-c *
+  ;;  "."   'LaTeX-mark-environment  ;; C-c .
+  ;;  "c"   'LaTeX-close-environment ;; C-c ]
+  ;;  "e"   'LaTeX-environment       ;; C-c C-e
+  ;;  "ii"  'LaTeX-insert-item       ;; C-c C-j
+  ;;  "s"   'LaTeX-section           ;; C-c C-s
+  ;;  "fe"  'LaTeX-fill-environment  ;; C-c C-q C-e
+  ;;  "fp"  'LaTeX-fill-paragraph    ;; C-c C-q C-p
+  ;;  "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
+  ;;  "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
+  ;;  "fb"  'LaTeX-fill-buffer
+  ;;  "pb"  'preview-buffer
+  ;;  "pd"  'preview-document
+  ;;  "pe"  'preview-environment
+  ;;  "pf"  'preview-cache-preamble
+  ;;  "pp"  'preview-at-point
+  ;;  "ps"  'preview-section
+  ;;  "pr"  'preview-region
+  ;;  "rb"  'preview-clearout-buffer
+  ;;  "rr"  'preview-clearout
+  ;;  "rd"  'preview-clearout-document
+  ;;  "rs"  'preview-clearout-section
+  ;;  "rp"  'preview-clearout-at-point)
+  )
 (with-eval-after-load "TeX"
   (use-package auctex-latexmk
     :config
@@ -669,19 +679,31 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
 
 ;;; C-C++
-(use-package lsp-mode
-  :hook c-mode)
+;; this is a hack for eglot to use projectile-project-root for finding project
+;; roots
+(defun aid-projectile-project-find-function (dir)
+  (require 'projectile)
+  (let ((root (projectile-project-root dir)))
+    (and root (cons 'transient root))))
 
-(use-package cquery
-  :commands lsp-cquery-enable
-  :init
-  (setq cquery-executable "/home/msc18f22/.local/bin/cquery")
-  ;;(add-hook 'c-mode-common-hook #'cquery-enable-wrap)
-  :preface
-  (defun cquery-enable-wrap ()
-    (condition-case nil
-	(lsp-cquery-enable)
-      (user-error nil))))
+(use-package project
+  :defer t
+  :config
+  (add-to-list 'project-find-functions 'aid-projectile-project-find-function))
+
+(use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+  ;; eglot doesn't get to have its own mode-line entry
+  ;; TODO: add on-click functionality
+  (setq mode-line-misc-info
+	(assq-delete-all 'eglot--managed-mode mode-line-misc-info))
+  (add-to-list 'minor-mode-alist '(eglot--managed-mode " η"))
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'c-mode-map
+   "M-." 'xref-find-definitions))
 
 (use-package clang-format
   :after c-mode)
@@ -697,20 +719,20 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    "ma" 'projectile-find-other-file
    "mA" 'projectile-find-other-file-other-window
-   ;; "D"  'disaster
    "mb" 'clang-format-buffer
    "mr" 'clang-format-region)
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'c-mode-map
-   "M-." 'counsel-etags-find-tag-at-point)
+  ;; (general-define-key
+  ;;  :states '(normal visual insert emacs motion)
+  ;;  :keymaps 'c-mode-map
+  ;;  "M-." 'counsel-etags-find-tag-at-point)
   :config
-  ;(use-package disaster )
-  ;(use-package cwarn
-  ;  :config
-  ;  (add-hook 'c-mode-common-hook 'cwarn-mode))
   (setq c-default-style "linux"                 ;GNU style is really shit
 	c-basic-offset 4))
+
+(use-package bison-mode
+  :mode (("\\.y\\'" . bison-mode)
+	 ("\\.l\\'" . bison-mode)
+	 ("\\.jison\\'" . jison-mode)))
 
 ;;; Emacs Lisp
 (use-package elisp-mode :ensure nil
@@ -725,14 +747,28 @@ When you add a new element to the alist, keep in mind that you
 (use-package racket-mode
   :mode ("\\.rkt\\'" . racket-mode))
 
+;;; Scheme
+(use-package geiser
+  :init
+  (add-hook 'geiser-mode-hook 'electric-pair-local-mode)
+  :general
+  (general-define-key
+   :states 'normal
+   :keymaps '(geiser-mode-map)
+   :prefix "SPC"
+   "xe" 'geiser-eval-last-sexp
+   "xb" 'geiser-eval-buffer
+   "xr" 'geiser-eval-region
+   "hd" 'geiser-doc-symbol-at-point))
+
 ;;; System Verilog
 (use-package verilog-mode :ensure nil
   :mode ("\\.[ds]?vh?\\'" . verilog-mode)
   :init
   (add-hook 'verilog-mode-hook
 	    '(lambda () (setq indent-tabs-mode nil)))
-  (add-hook 'verilog-mode-hook
-	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
+  ;; (add-hook 'verilog-mode-hook
+  ;;	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
@@ -743,10 +779,11 @@ When you add a new element to the alist, keep in mind that you
   (setq verilog-auto-lineup 'all)
   (setq verilog-linter "verilator --lint-only")
   :general
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'verilog-mode-map
-   "M-." 'counsel-etags-find-tag-at-point))
+  ;; (general-define-key
+  ;;  :states '(normal visual insert emacs motion)
+  ;;  :keymaps 'verilog-mode-map
+  ;;  "M-." 'counsel-etags-find-tag-at-point)
+  )
 
 ;;; Decompiling
 (use-package rmsbolt
@@ -762,12 +799,19 @@ When you add a new element to the alist, keep in mind that you
 (use-package riscv-mode
   :commands riscv-mode)
 
+(use-package asm-mode
+  :defer t
+  :init
+  ;; uses ;; as comment delimiter by default, breaks riscv
+  (add-hook 'asm-mode-hook
+	    (lambda () (setq comment-start "/* " comment-end " */"))))
+
 ;;; Custom functions
 ;; quickly open dotfile
 (defun find-dotfile ()
   "Opens the Emacs dotfile for quick editing."
   (interactive)
-  (find-file-existing "~/.emacs.d/init.el"))
+  (find-file-existing (concat user-emacs-directory "init.el")))
 
 ;; esc quits everywhere
 (defun minibuffer-keyboard-quit ()
@@ -856,11 +900,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (package-lint riscv-mode rmsbolt eyebrowse avy which-key vlf use-package
-		  rainbow-delimiters racket-mode org-ref ivy-xref general
-		  evil-surround evil-matchit evil-magit esup cquery
-		  counsel-projectile counsel-etags clang-format auto-virtualenv
-		  auctex-latexmk anaconda-mode)))
+    (geiser bison-mode eglot package-lint riscv-mode rmsbolt eyebrowse avy
+	    which-key vlf use-package rainbow-delimiters racket-mode org-ref
+	    ivy-xref general evil-surround evil-matchit evil-magit esup cquery
+	    counsel-projectile counsel-etags clang-format auto-virtualenv
+	    auctex-latexmk anaconda-mode)))
  '(truncate-lines t)
  '(xterm-mouse-mode t))
 
@@ -869,6 +913,3 @@ window."
 ;; set default font
 (add-to-list 'default-frame-alist
 	     '(font . "DejaVu Sans Mono-11"))
-
-(provide 'init)
-
