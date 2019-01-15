@@ -707,7 +707,9 @@ When you add a new element to the alist, keep in mind that you
    "M-." 'xref-find-definitions))
 
 (use-package clang-format
-  :after c-mode)
+  :after c-mode
+  :init
+  (setq clang-format-executable "~/.local/bin/clang-format"))
 
 (use-package cc-mode
   :mode ("\\.c\\'" . c-mode)            ;TODO: add c++ mode
