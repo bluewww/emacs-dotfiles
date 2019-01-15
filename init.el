@@ -175,6 +175,7 @@ When you add a new element to the alist, keep in mind that you
   :config
   (evil-mode 1)
   (global-undo-tree-mode 1)
+  (evil-set-initial-state 'term-mode 'emacs)
   :general
   (general-define-key                   ; evil-mode seems to use it, so we unmap
 					; it to make xref work
