@@ -515,7 +515,13 @@ When you add a new element to the alist, keep in mind that you
   (require 'evil-collection-compile)
   (setq compilation-scroll-output t)
   (add-to-list 'compilation-error-regexp-alist
-	       '("^\\*\\\* Error: \\(.*?\\)(\\(.*?\\)):" 1 2))
+	       '("^# \\*\\\* Error: \\(.*?\\)(\\(.*?\\)):" 1 2))
+  (add-to-list 'compilation-error-regexp-alist
+	       '("^# \\*\\* \\(Warning: (vsim-[[:digit:]]*)\\)"
+		 nil nil nil 1 1 (1 "warning")))
+  (add-to-list 'compilation-error-regexp-alist
+	       '("^# \\*\\* \\(Warning: (vsim-[[:digit:]]*)\\).*\n#.*File: \\(.*?\\) Line: \\([[:digit:]]*\\)"
+		 2 3 nil 1 2 (1 "warning")))
   (evil-collection-compile-setup)
   (require 'ansi-color))
 
