@@ -786,6 +786,7 @@ When you add a new element to the alist, keep in mind that you
   (setq verilog-case-indent 0)
   (setq verilog-cexp-indent 4)
   (setq verilog-auto-lineup 'all)
+  (setq verilog-indent-lists nil) 		; prevent large indents
   (setq verilog-linter "verilator --lint-only")
   :general
   ;; (general-define-key
