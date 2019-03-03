@@ -505,6 +505,12 @@ When you add a new element to the alist, keep in mind that you
   (require 'evil-collection-comint)
   (evil-collection-comint-setup))
 
+(use-package edebug
+  :defer t
+  :config
+  (require 'evil-collection-edebug)
+  (evil-collection-edebug-setup))
+
 (use-package compile
   :defer t
   :no-require
