@@ -95,6 +95,9 @@
 ;; colum numbers
 (column-number-mode)
 
+;; disable abbrev saving
+(setq save-abbrevs nil)
+
 ;; change the modeline descriptions to make them shorter
 (defvar mode-line-cleaner-alist
   `((auto-revert-mode . " ρ")
@@ -782,8 +785,8 @@ When you add a new element to the alist, keep in mind that you
   :init
   (add-hook 'verilog-mode-hook
 	    '(lambda () (setq indent-tabs-mode nil)))
-  ;; (add-hook 'verilog-mode-hook
-  ;;	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
+  (add-hook 'verilog-mode-hook
+  	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
