@@ -897,6 +897,12 @@ window."
     (ansi-color-apply-on-region
      compilation-filter-start (point))))
 
+(defun ansi-colorize-current-buffer ()
+  "Colorize ansi escape sequences in the current buffer."
+  (interactive)
+  (ignore-errors
+    (ansi-color-apply-on-region (point-min) (point-max))))
+
 ;;; Stuff from customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
