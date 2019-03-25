@@ -695,6 +695,8 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
   (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
 
+(use-package yaml-mode
+  :mode ("\\.yml\\'" . yaml-mode))
 ;;; C-C++
 ;; this is a hack for eglot to use projectile-project-root for finding project
 ;; roots
@@ -920,11 +922,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (geiser bison-mode eglot package-lint riscv-mode rmsbolt eyebrowse avy
-	    which-key vlf use-package rainbow-delimiters racket-mode org-ref
-	    ivy-xref general evil-surround evil-matchit evil-magit esup cquery
-	    counsel-projectile counsel-etags clang-format auto-virtualenv
-	    auctex-latexmk anaconda-mode)))
+    (yaml-mode geiser bison-mode eglot package-lint riscv-mode rmsbolt eyebrowse
+	       avy which-key vlf use-package rainbow-delimiters racket-mode
+	       org-ref ivy-xref general evil-surround evil-matchit evil-magit
+	       esup cquery counsel-projectile counsel-etags clang-format
+	       auto-virtualenv auctex-latexmk anaconda-mode)))
  '(truncate-lines t)
  '(xterm-mouse-mode t))
 
