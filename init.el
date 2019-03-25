@@ -355,7 +355,8 @@ When you add a new element to the alist, keep in mind that you
    :non-normal-prefix "M-SPC"
    "g" 'magit-status)
   :config
-  (setq magit-completing-read-function 'ivy-completing-read))
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72))))
 
 (use-package evil-magit
   :after magit)
