@@ -1,3 +1,6 @@
 [submodule "evil-collection"]
 	path = evil-collection
 	url = https://github.com/bluewww/evil-collection
+[submodule "verilog-mode"]
+	path = verilog-mode
+	url = git@github.com:bluewww/verilog-mode.git

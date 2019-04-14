@@ -785,6 +785,7 @@ When you add a new element to the alist, keep in mind that you
 ;;; System Verilog
 (use-package verilog-mode :ensure nil
   :mode ("\\.[ds]?vh?\\'" . verilog-mode)
+  :load-path "verilog-mode/"
   :init
   (add-hook 'verilog-mode-hook
 	    '(lambda () (setq indent-tabs-mode nil)))
