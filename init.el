@@ -79,6 +79,9 @@
 ;; (getenv "PATH")
 ;; (add-to-list 'exec-path "/opt/miniconda3/bin")
 
+;; ctags we like
+(setq path-to-ctags "~/.local/bin/ctags")
+
 ;; line numbers
 (if (version<= "26.1" emacs-version)
     (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -903,6 +906,15 @@ window."
   (interactive)
   (ignore-errors
     (ansi-color-apply-on-region (point-min) (point-max))))
+
+(defun generate-tags ()
+  "Generate TAG file for current project."
+  (interactive)
+  (let ((root (projectile-project-root)))
+    (when root
+      (shell-command (format "%s -f TAGS -e -R %s"
+			     path-to-ctags
+			     (directory-file-name root))))))
 
 ;;; Stuff from customize
 (custom-set-variables
