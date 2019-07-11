@@ -821,6 +821,11 @@ When you add a new element to the alist, keep in mind that you
   :mode ("\\.trdb\\'" . trdb-mode)
   :load-path "trdb/")
 
+;;; Dwarf
+(use-package dwarf-mode
+  :commands (dwarf-mode dwarf-browse)
+  :load-path "dwarf/")
+
 ;;; Assembly
 (use-package riscv-mode
   :commands riscv-mode)
