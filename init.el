@@ -294,6 +294,7 @@ When you add a new element to the alist, keep in mind that you
    :non-normal-prefix "M-SPC"
    "ff" 'counsel-find-file
    "fj" 'counsel-file-jump
+   "fl" 'counsel-locate
    "fr" 'counsel-recentf
    "fp" 'counsel-git
    "hb" 'counsel-descbinds
