@@ -314,8 +314,10 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'counsel-grep-or-swiper
+   "sr" 'counsel-grep-or-swiper-backward
    "sg" 'counsel-git-grep
-   "sb" 'swiper-all))
+   "sb" 'swiper-all
+   "st" 'swiper-thing-at-poin))
 
 ;; Project managment
 (use-package projectile
