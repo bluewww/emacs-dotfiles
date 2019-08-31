@@ -283,6 +283,26 @@ When you add a new element to the alist, keep in mind that you
    :keymaps 'ivy-switch-buffer-map
    "C-k" 'ivy-previous-line		; we have to set it here again
    "C-b" 'ivy-switch-buffer-kill)
+  (general-define-key
+   :states '(normal)
+   :keymaps 'ivy-occur-mode-map
+   [mouse-1] 'ivy-occur-click		; TODO: doesn't work
+    "j" 'ivy-occur-next-line
+    "k" 'ivy-occur-previous-line
+    "h" 'evil-backward-char
+    "l" 'evil-forward-char
+    "g" nil
+    "gg" 'evil-goto-first-line		; TODO: doesn't work
+    "gf" 'ivy-occur-press
+    "ga" 'ivy-occur-read-action
+    "go" 'ivy-occur-dispatch
+    "gc" 'ivy-occur-toggle-calling
+
+    ;; refresh
+    "gr" 'ivy-occur-revert-buffer
+
+    ;; quit
+    "q" 'quit-window))
 
 (use-package ivy-xref
   :defer t
