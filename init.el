@@ -757,6 +757,10 @@ When you add a new element to the alist, keep in mind that you
    :keymaps 'c-mode-map
    "M-." 'xref-find-definitions))
 
+(use-package realgud
+  :defer t
+  :commands (realgud:pdb  realgud:gdb))
+
 (use-package clang-format
   :after c-mode
   :init
