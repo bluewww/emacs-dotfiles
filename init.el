@@ -788,6 +788,10 @@ When you add a new element to the alist, keep in mind that you
 	 ("\\.l\\'" . bison-mode)
 	 ("\\.jison\\'" . jison-mode)))
 
+;;; Rust
+(use-package rust-mode
+  :mode (("\\.rs\\'" . rust-mode)))
+
 ;;; Emacs Lisp
 (use-package elisp-mode :ensure nil
   :mode ("\\.el\\'" . emacs-lisp-mode)
