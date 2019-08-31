@@ -278,7 +278,11 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "bb" 'ivy-switch-buffer
-   "bo" 'move-buffer-other-window))
+   "bo" 'move-buffer-other-window)
+  (general-define-key			; unbind killing of buffers with C-k
+   :keymaps 'ivy-switch-buffer-map
+   "C-k" 'ivy-previous-line		; we have to set it here again
+   "C-b" 'ivy-switch-buffer-kill)
 
 (use-package ivy-xref
   :defer t
