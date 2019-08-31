@@ -831,17 +831,21 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'verilog-mode-hook
 	    '(lambda () (setq indent-tabs-mode nil)))
   (add-hook 'verilog-mode-hook
-  	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
+	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
   (setq verilog-indent-level-declaration 4)
   (setq verilog-indent-level-behavioral 4)
-  (setq verilog-case-indent 0)
+  (setq verilog-case-indent 4)
   (setq verilog-cexp-indent 4)
   (setq verilog-auto-lineup 'all)
   (setq verilog-indent-lists nil)		; prevent large indents
   (setq verilog-linter "verilator --lint-only")
+  (setq verilog-highlight-grouping-keywords t)
+  (setq verilog-highlight-includes nil)
+  (setq verilog-highlight-modules t)
+  (setq verilog-auto-newline nil)
   :general
   ;; (general-define-key
   ;;  :states '(normal visual insert emacs motion)
