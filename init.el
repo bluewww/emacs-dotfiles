@@ -717,6 +717,8 @@ When you add a new element to the alist, keep in mind that you
    "mr" 'python-shell-send-region
    "mf" 'python-shell-send-file
    "mc" 'python-check)
+  :init
+  (add-hook 'python-mode-hook 'flymake-mode)
   :config
   ;; (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
   ;; (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
