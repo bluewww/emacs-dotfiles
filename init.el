@@ -366,6 +366,8 @@ When you add a new element to the alist, keep in mind that you
   (projectile-mode)
   (projectile-update-mode-line)		; sometimes doesn't happen
   (setq projectile-completion-system 'ivy)
+  ;; https://github.com/bbatsov/projectile/issues/1270
+  (setq projectile-project-compilation-cmd "")
   :init
   (setq projectile-dynamic-mode-line t)
   (setq projectile-mode-line-prefix " π")
