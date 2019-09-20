@@ -354,8 +354,8 @@ When you add a new element to the alist, keep in mind that you
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
-   "pg"  'counsel-projectile-grep
-   "pc" 'counsel-projectile-compile-project
+   "pg" 'counsel-projectile-grep
+   "pc" 'projectile-compile-project
    "pf" 'counsel-projectile-find-file
    "pb" 'counsel-projectile-switch-to-buffer
    "pp" 'counsel-projectile-switch-project
