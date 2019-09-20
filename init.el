@@ -302,7 +302,10 @@ When you add a new element to the alist, keep in mind that you
     "gr" 'ivy-occur-revert-buffer
 
     ;; quit
-    "q" 'quit-window))
+    "q" 'quit-window)
+  (general-define-key
+   :keymaps 'ivy-occur-grep-mode-map
+   "C-d" 'evil-scroll-down))
 
 (use-package ivy-xref
   :defer t
