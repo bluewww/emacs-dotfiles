@@ -596,6 +596,13 @@ When you add a new element to the alist, keep in mind that you
   (require 'evil-collection-eshell)
   (evil-collection-eshell-setup))
 
+;; exec path from shell
+(use-package exec-path-from-shell
+  :defer t
+  :config
+  (when (memq window-system '(ns x))
+    (exec-path-from-shell-initialize)))
+
 ;;;; Custom Layers
 
 ;;; Large files
