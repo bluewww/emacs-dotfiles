@@ -722,6 +722,7 @@ When you add a new element to the alist, keep in mind that you
   :config
   ;; (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
   ;; (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
+  (setq python-flymake-command '("flake8" "-"))
   ;; (setq python-indent-guess-indent-offset nil)
   )
 (use-package anaconda-mode
