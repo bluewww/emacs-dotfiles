@@ -811,6 +811,45 @@ When you add a new element to the alist, keep in mind that you
 (use-package rust-mode
   :mode (("\\.rs\\'" . rust-mode)))
 
+;;; Ocaml
+(use-package tuareg
+  :mode (("\\.ml[ily]?$" . tuareg-mode)
+	 ("\\.topml$" . tuareg-mode))
+  :init
+  ;;(add-hook 'tuareg-mode-hook 'tuarget-imenu-set-imenu)
+  (autoload 'utop "utop" "Toplevel for OCaml" t)
+  (add-hook 'tuareg-mode-hook 'utop-minor-mode)
+  (add-hook 'tuareg-mode-hook 'merlin-mode))
+
+(use-package merlin
+  :after tuareg
+  :config
+  (setq merlin-use-auto-complete-mode t)
+  (setq merlin-error-after-save nil)
+  (setq merlin-command "ocamlmerlin")
+  ;; use auto-complete
+  (setq merlin-ac-setup 'easy))
+
+(use-package utop
+  :commands utop
+  :hook
+  (tuareg-mode . utop-minor-mode)
+  :init
+  ;; Use the opam installed utop
+  (setq utop-command "opam config exec -- utop -emacs")
+
+  ;; Setup environment variables using opam
+  (dolist (var (car (read-from-string (shell-command-to-string "opam config env --sexp"))))
+    (setenv (car var) (cadr var)))
+
+  ;; Update the emacs path
+  (setq exec-path (append (parse-colon-path (getenv "PATH"))
+			  (list exec-directory)))
+
+  ;; Update the emacs load path
+  (add-to-list 'load-path (expand-file-name "../../share/emacs/site-lisp"
+					    (getenv "OCAML_TOPLEVEL_PATH"))))
+
 ;;; Emacs Lisp
 (use-package elisp-mode :ensure nil
   :mode ("\\.el\\'" . emacs-lisp-mode)
@@ -1003,11 +1042,11 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (yaml-mode geiser bison-mode eglot package-lint riscv-mode rmsbolt eyebrowse
-	       avy which-key vlf use-package rainbow-delimiters racket-mode
-	       org-ref ivy-xref general evil-surround evil-matchit evil-magit
-	       esup cquery counsel-projectile counsel-etags clang-format
-	       auto-virtualenv auctex-latexmk anaconda-mode)))
+    (merlin yaml-mode geiser bison-mode eglot package-lint riscv-mode rmsbolt
+	    eyebrowse avy which-key vlf use-package rainbow-delimiters
+	    racket-mode org-ref ivy-xref general evil-surround evil-matchit
+	    evil-magit esup cquery counsel-projectile counsel-etags clang-format
+	    auto-virtualenv auctex-latexmk anaconda-mode)))
  '(truncate-lines t)
  '(xterm-mouse-mode t))
 
@@ -1016,3 +1055,12 @@ window."
 ;; set default font
 (add-to-list 'default-frame-alist
 	     '(font . "DejaVu Sans Mono-11"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+;; ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
+;; (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+;; ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
