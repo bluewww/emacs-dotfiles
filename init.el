@@ -817,28 +817,10 @@ When you add a new element to the alist, keep in mind that you
 	 ("\\.topml$" . tuareg-mode))
   :init
   ;;(add-hook 'tuareg-mode-hook 'tuarget-imenu-set-imenu)
-  (autoload 'utop "utop" "Toplevel for OCaml" t)
-  (add-hook 'tuareg-mode-hook 'utop-minor-mode)
-  (add-hook 'tuareg-mode-hook 'merlin-mode))
-
-(use-package merlin
-  :after tuareg
+  ;; (autoload 'utop "utop" "Toplevel for OCaml" t)
+  ;; (add-hook 'tuareg-mode-hook 'utop-minor-mode)
+  (add-hook 'tuareg-mode-hook 'merlin-mode)
   :config
-  (setq merlin-use-auto-complete-mode t)
-  (setq merlin-error-after-save nil)
-  (setq merlin-command "ocamlmerlin")
-  ;; use auto-complete
-  (setq merlin-ac-setup 'easy))
-
-(use-package utop
-  :commands utop
-  :hook
-  (tuareg-mode . utop-minor-mode)
-  :init
-  ;; Use the opam installed utop
-  (setq utop-command "opam config exec -- utop -emacs")
-
-  ;; Setup environment variables using opam
   (dolist (var (car (read-from-string (shell-command-to-string "opam config env --sexp"))))
     (setenv (car var) (cadr var)))
 
@@ -849,6 +831,36 @@ When you add a new element to the alist, keep in mind that you
   ;; Update the emacs load path
   (add-to-list 'load-path (expand-file-name "../../share/emacs/site-lisp"
 					    (getenv "OCAML_TOPLEVEL_PATH"))))
+
+(use-package merlin
+  :after tuareg
+  :config
+  (setq merlin-use-auto-complete-mode t)
+  (setq merlin-error-after-save nil)
+  (setq merlin-command "ocamlmerlin")
+  ;; use auto-complete
+  (setq merlin-ac-setup 'easy))
+
+;; utop doesn't as usuable tuareg-mode repl in emacs
+;; (use-package utop
+;;   :commands utop
+;;   :hook
+;;   (tuareg-mode . utop-minor-mode)
+;;   :init
+;;   ;; Use the opam installed utop
+;;   (setq utop-command "opam config exec -- utop -emacs")
+
+;; ;; Setup environment variables using opam
+;; (dolist (var (car (read-from-string (shell-command-to-string "opam config env --sexp"))))
+;;   (setenv (car var) (cadr var)))
+
+;; ;; Update the emacs path
+;; (setq exec-path (append (parse-colon-path (getenv "PATH"))
+;;			  (list exec-directory)))
+
+;; ;; Update the emacs load path
+;; (add-to-list 'load-path (expand-file-name "../../share/emacs/site-lisp"
+;;					    (getenv "OCAML_TOPLEVEL_PATH"))))
 
 ;;; Emacs Lisp
 (use-package elisp-mode :ensure nil
