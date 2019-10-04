@@ -839,7 +839,13 @@ When you add a new element to the alist, keep in mind that you
   (setq merlin-error-after-save nil)
   (setq merlin-command "ocamlmerlin")
   ;; use auto-complete
-  (setq merlin-ac-setup 'easy))
+  (setq merlin-ac-setup 'easy)
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'merlin-mode-map
+   "M-." 'merlin-locate
+   "M-," 'merlin-pop-stack))
 
 ;; utop doesn't as usuable tuareg-mode repl in emacs
 ;; (use-package utop
