@@ -705,6 +705,15 @@ When you add a new element to the alist, keep in mind that you
 	  ("pdf" . "evince %s")
 	  ("\\.pdf::\\([0-9]+\\)\\'" . "evince -p %1 %s"))))
 
+(defun bwww-org-ref-open-pdf-at-point ()
+  "Open the pdf for bibtex key under point if it exists."
+  (interactive)
+  (let* ((results (org-ref-get-bibtex-key-and-file))
+	 (key (car results))
+	 (pdf-file (car (bibtex-completion-find-pdf key))))
+    (if (file-exists-p pdf-file)
+	(org-open-file pdf-file)
+      (message "No PDF found for %s" key))))
 (use-package org-ref
   :after org
   :init
