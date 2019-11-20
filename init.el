@@ -533,6 +533,7 @@ When you add a new element to the alist, keep in mind that you
 (use-package dired :ensure nil
   :defer t
   :config
+  (setq dired-dwim-target t)
   (require 'evil-collection-dired)
   (evil-collection-dired-setup))
 
