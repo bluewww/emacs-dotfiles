@@ -267,6 +267,7 @@ When you add a new element to the alist, keep in mind that you
    "C-j" 'ivy-next-line
    "C-k" 'ivy-previous-line
    "C-h" (kbd "DEL")                    ; hack
+   "<tab>" 'ivy-partial-or-done
    "C-l" 'ivy-alt-done
    "C-d" 'ivy-scroll-up-command
    "C-u" 'ivy-scroll-down-command
