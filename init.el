@@ -344,7 +344,7 @@ When you add a new element to the alist, keep in mind that you
    "sr" 'counsel-grep-or-swiper-backward
    "sg" 'counsel-git-grep
    "sb" 'swiper-all
-   "st" 'swiper-thing-at-poin))
+   "st" 'swiper-thing-at-point))
 
 ;; Project managment
 (use-package projectile
