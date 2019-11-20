@@ -717,7 +717,17 @@ When you add a new element to the alist, keep in mind that you
 (use-package org-ref
   :after org
   :init
-  (setq org-ref-completion-library 'org-ref-ivy-cite))
+  (setq org-ref-completion-library 'org-ref-ivy-cite)
+  (setq reftex-default-bibliography '("~/documents/biblio/refs.bib"))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/documents/biblio/notes.org"
+	org-ref-default-bibliography '("~/documents/biblio/refs.bib")
+	org-ref-pdf-directory "~/documents/biblio/bibtex-pdfs/")
+  :config
+  (setq bibtex-completion-pdf-field "file") ; make it work with zotero
+
+  (setq org-ref-open-pdf-function 'bwww-org-ref-open-pdf-at-point))
 
 ;;; Python
 (use-package python
