@@ -35,7 +35,7 @@
  ;; sentence SHOULD end with only a point.
  sentence-end-double-space nil
  ;; source path
- source-directory "/usr/src/debug/emacs-26.1-lp150.309.6.x86_64"
+ source-directory "/usr/src/debug/emacs-26.3-1.2.x86_64"
  ;; fix bug with maximization
  frame-resize-pixelwise t
  help-window-select t
