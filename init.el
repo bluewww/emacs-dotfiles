@@ -746,6 +746,7 @@ When you add a new element to the alist, keep in mind that you
    "mc" 'python-check)
   :init
   (add-hook 'python-mode-hook 'flymake-mode)
+  (add-hook 'python-mode-hook (lambda () (setq fill-column 79)))
   :config
   ;; (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
   ;; (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
