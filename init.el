@@ -512,6 +512,7 @@ When you add a new element to the alist, keep in mind that you
 (use-package ediff
   :defer t
   :config
+  (setq ediff-split-window-function (quote split-window-horizontally))
   (require 'evil-collection-ediff)
   (evil-collection-ediff-setup))
 
