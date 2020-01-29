@@ -516,6 +516,12 @@ When you add a new element to the alist, keep in mind that you
   (require 'evil-collection-ediff)
   (evil-collection-ediff-setup))
 
+(use-package arc-mode
+  :defer t
+  :config
+  (require 'evil-collection-arc-mode)
+  (evil-collection-arc-mode-setup))
+
 (use-package image-mode :ensure nil
   :defer t
   :config
