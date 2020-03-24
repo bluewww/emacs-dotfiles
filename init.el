@@ -378,6 +378,10 @@ When you add a new element to the alist, keep in mind that you
 (use-package counsel-projectile
   :after projectile
   :config
+  ;; BUGFIX for counsel-projectile https://github.com/ericdanan/counsel-projectile/issues/150
+  ;; HACK the -i (case insensitivity) is added because ivy--case-fold-p is often true
+  ;; INSTEAD OF "grep -rnEI %s -- %%s %s"
+  (setq counsel-projectile-grep-base-command "grep -rnEI -i %s %%s %s")
   ;; taking only what we need from (counsel-projectile-on)
   (setq projectile-switch-project-action 'counsel-projectile))
 
