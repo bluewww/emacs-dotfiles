@@ -1086,21 +1086,18 @@ window."
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes
    (quote
-    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59"
-     "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f"
-     default)))
+    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59" "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default)))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (merlin yaml-mode geiser bison-mode eglot package-lint riscv-mode rmsbolt
-	    eyebrowse avy which-key vlf use-package rainbow-delimiters
-	    racket-mode org-ref ivy-xref general evil-surround evil-matchit
-	    evil-magit esup cquery counsel-projectile counsel-etags clang-format
-	    auto-virtualenv auctex-latexmk anaconda-mode)))
- '(truncate-lines t)
- '(xterm-mouse-mode t))
-
+    (anaconda-mode yaml-mode which-key vlf use-package tuareg
+ rust-mode rmsbolt riscv-mode realgud rainbow-delimiters
+ racket-mode package-lint org-ref merlin ivy-xref general geiser
+ eyebrowse exec-path-from-shell evil-surround evil-matchit
+ evil-magit esup eglot cquery counsel-projectile counsel-etags
+ clang-format bison-mode avy auto-virtualenv auctex-latexmk)))
+ '(truncate-lines t) '(xterm-mouse-mode t))
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; set default font
