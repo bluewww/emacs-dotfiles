@@ -929,6 +929,10 @@ When you add a new element to the alist, keep in mind that you
    "xr" 'geiser-eval-region
    "hd" 'geiser-doc-symbol-at-point))
 
+;;; Tcl
+;; Stop braindead tab/space mixture asap
+(add-hook 'tcl-mode-hook '(lambda () (setq indent-tabs-mode nil)))
+
 ;;; System Verilog
 (use-package verilog-mode :ensure nil
   :mode ("\\.[ds]?vh?\\'" . verilog-mode)
