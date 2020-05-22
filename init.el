@@ -309,8 +309,18 @@ When you add a new element to the alist, keep in mind that you
    "C-d" 'evil-scroll-down))
 
 (use-package ivy-xref
-  :defer t
-  :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+  :ensure t
+  :init
+  ;; xref initialization is different in Emacs 27 - there are two different
+  ;; variables which can be set rather than just one
+  (when (>= emacs-major-version 27)
+    (setq xref-show-definitions-function #'ivy-xref-show-defs)
+    (setq xref-show-definitions-function #'ivy-xref-show-xrefs))
+  ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+  ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+  ;; as well
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+  (setq xref-show-definitions-function #'ivy-xref-show-xrefs))
 
 (use-package counsel
   :defer t
