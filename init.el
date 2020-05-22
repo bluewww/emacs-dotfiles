@@ -1104,13 +1104,14 @@ window."
  '(doc-view-continuous t)
  '(package-selected-packages
    (quote
-    (anaconda-mode yaml-mode which-key vlf use-package tuareg
- rust-mode rmsbolt riscv-mode realgud rainbow-delimiters
- racket-mode package-lint org-ref merlin ivy-xref general geiser
- eyebrowse exec-path-from-shell evil-surround evil-matchit
- evil-magit esup eglot cquery counsel-projectile counsel-etags
- clang-format bison-mode avy auto-virtualenv auctex-latexmk)))
- '(truncate-lines t) '(xterm-mouse-mode t))
+    (zotxt yaml-mode which-key vlf use-package tuareg rust-mode
+    rmsbolt riscv-mode realgud rainbow-delimiters racket-mode
+    package-lint org-ref org-noter merlin ivy-xref general geiser
+    eyebrowse exec-path-from-shell evil-surround evil-magit esup
+    eglot cquery counsel-projectile counsel-etags clang-format
+    bison-mode avy auto-virtualenv auctex-latexmk
+    anaconda-mode))))
+
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; set default font
