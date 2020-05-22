@@ -964,6 +964,8 @@ When you add a new element to the alist, keep in mind that you
   (setq verilog-highlight-includes nil)
   (setq verilog-highlight-modules t)
   (setq verilog-auto-newline nil)
+  (setq verilog-auto-arg-sort nil)
+  (setq verilog-auto-endcomments t)
   :general
   ;; (general-define-key
   ;;  :states '(normal visual insert emacs motion)
