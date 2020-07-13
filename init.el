@@ -45,6 +45,9 @@
 
 (setq-default fill-column 80)
 
+;; fix bad answer default
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; save so that we can later restore after startup
 (defvar old-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
