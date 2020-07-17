@@ -832,7 +832,7 @@ When you add a new element to the alist, keep in mind that you
   :commands (realgud:pdb  realgud:gdb))
 
 (use-package clang-format
-  :after c-mode
+  :after cc-mode
   :init
   (setq clang-format-executable "~/.local/bin/clang-format"))
 
