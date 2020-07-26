@@ -41,7 +41,9 @@
  help-window-select t
  tab-width 4
  ;; scroll just one line when hitting bottom of screen
- scroll-conservatively 10000)
+ scroll-conservatively 10000
+ ;; better copy/paste behavior
+ select-enable-clipboard t)
 
 (setq-default fill-column 80)
 
