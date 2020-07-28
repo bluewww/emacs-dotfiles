@@ -1137,6 +1137,8 @@ window."
     evil-magit esup eglot cquery counsel-projectile counsel-etags
     clang-format bison-mode avy auto-virtualenv auctex-latexmk
     anaconda-mode)))
+ '(truncate-lines t)
+ '(xterm-mouse-mode t))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
