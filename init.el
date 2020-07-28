@@ -327,6 +327,15 @@ When you add a new element to the alist, keep in mind that you
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   (setq xref-show-definitions-function #'ivy-xref-show-xrefs))
 
+(use-package ivy-bibtex
+  :defer t
+  :init
+  (setq bibtex-completion-bibliography
+	'("/home/balasr/documents/biblio/zotero_refs.bib"))
+  (setq bibtex-completion-pdf-field "File")
+  ;; Open with pdf viewer
+  (setq bibtex-completion-pdf-open-function 'org-open-file))
+
 (use-package counsel
   :defer t
   :general
