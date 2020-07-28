@@ -740,29 +740,29 @@ When you add a new element to the alist, keep in mind that you
 (use-package org-noter
   :after org)
 
-(defun bwww-org-ref-open-pdf-at-point ()
-  "Open the pdf for bibtex key under point if it exists."
-  (interactive)
-  (let* ((results (org-ref-get-bibtex-key-and-file))
-	 (key (car results))
-	 (pdf-file (car (bibtex-completion-find-pdf key))))
-    (if (file-exists-p pdf-file)
-	(org-open-file pdf-file)
-      (message "No PDF found for %s" key))))
-(use-package org-ref
-  :after org
-  :init
-  (setq org-ref-completion-library 'org-ref-ivy-cite)
-  (setq reftex-default-bibliography '("~/documents/biblio/refs.bib"))
+;; (defun bwww-org-ref-open-pdf-at-point ()
+;;   "Open the pdf for bibtex key under point if it exists."
+;;   (interactive)
+;;   (let* ((results (org-ref-get-bibtex-key-and-file))
+;; 	 (key (car results))
+;; 	 (pdf-file (car (bibtex-completion-find-pdf key))))
+;;     (if (file-exists-p pdf-file)
+;; 	(org-open-file pdf-file)
+;;       (message "No PDF found for %s" key))))
+;; (use-package org-ref
+;;   :after org
+;;   :init
+;;   (setq org-ref-completion-library 'org-ref-ivy-cite)
+;;   (setq reftex-default-bibliography '("~/documents/biblio/refs.bib"))
 
-  ;; see org-ref for use of these variables
-  (setq org-ref-bibliography-notes "~/documents/biblio/notes.org"
-	org-ref-default-bibliography '("~/documents/biblio/refs.bib")
-	org-ref-pdf-directory "~/documents/biblio/bibtex-pdfs/")
-  :config
-  (setq bibtex-completion-pdf-field "file") ; make it work with zotero
+;;   ;; see org-ref for use of these variables
+;;   (setq org-ref-bibliography-notes "~/documents/biblio/notes.org"
+;; 	org-ref-default-bibliography '("~/documents/biblio/refs.bib")
+;; 	org-ref-pdf-directory "~/documents/biblio/bibtex-pdfs/")
+;;   :config
+;;   (setq bibtex-completion-pdf-field "file") ; make it work with zotero
 
-  (setq org-ref-open-pdf-function 'bwww-org-ref-open-pdf-at-point))
+;;   (setq org-ref-open-pdf-function 'bwww-org-ref-open-pdf-at-point))
 
 ;;; Python
 (use-package python
