@@ -334,7 +334,10 @@ When you add a new element to the alist, keep in mind that you
 	'("/home/balasr/documents/biblio/zotero_refs.bib"))
   (setq bibtex-completion-pdf-field "File")
   ;; Open with pdf viewer
-  (setq bibtex-completion-pdf-open-function 'org-open-file))
+  (setq bibtex-completion-pdf-open-function 'org-open-file)
+  (setq bibtex-completion-format-citation-functions
+  '((org-mode      . bibtex-completion-format-citation-org-link-to-PDF)
+    (latex-mode    . bibtex-completion-format-citation-cite))))
 
 (use-package counsel
   :defer t
