@@ -1117,30 +1117,21 @@ window."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(TeX-view-program-selection
-   (quote
-    (((output-dvi has-no-display-manager)
+   '(((output-dvi has-no-display-manager)
       "dvi2tty")
      ((output-dvi style-pstricks)
       "dvips and gv")
      (output-dvi "Evince")
      (output-pdf "Evince")
-     (output-html "xdg-open"))))
- '(custom-enabled-themes (quote (wombat)))
+     (output-html "xdg-open")))
+ '(custom-enabled-themes '(wombat))
  '(custom-safe-themes
-   (quote
-    ("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59" "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default)))
+   '("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59" "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
  '(merlin-completion-with-doc t)
  '(package-selected-packages
-   (quote
-    (ivy-bibtex zotxt yaml-mode which-key vlf use-package tuareg
-    rust-mode rmsbolt riscv-mode realgud rainbow-delimiters
-    racket-mode package-lint org-ref org-noter merlin ivy-xref
-    general geiser eyebrowse exec-path-from-shell evil-surround
-    evil-magit esup eglot cquery counsel-projectile counsel-etags
-    clang-format bison-mode avy auto-virtualenv auctex-latexmk
-    anaconda-mode)))
+   '(ivy-bibtex zotxt yaml-mode which-key vlf use-package tuareg rust-mode rmsbolt riscv-mode realgud rainbow-delimiters racket-mode package-lint org-ref org-noter merlin ivy-xref general geiser eyebrowse exec-path-from-shell evil-surround evil-magit esup eglot cquery counsel-projectile counsel-etags clang-format bison-mode avy auto-virtualenv auctex-latexmk anaconda-mode))
  '(truncate-lines t)
  '(xterm-mouse-mode t))
 
@@ -1148,7 +1139,7 @@ window."
 
 ;; set default font
 (add-to-list 'default-frame-alist
-	     '(font . "DejaVu Sans Mono-11"))
+	     '(font . "DejaVu Sans Mono-10"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
