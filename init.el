@@ -1086,7 +1086,7 @@ window."
   (interactive)
   (save-selected-window
     (switch-to-buffer-other-window (current-buffer)))
-  (switch-to-buffer (other-buffer))
+  (previous-buffer)
   (other-window 1))
 
 (defun colorize-compilation()
