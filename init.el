@@ -1110,10 +1110,9 @@ window."
  '(doc-view-continuous t)
  '(merlin-completion-with-doc t)
  '(package-selected-packages
-   '(ivy-bibtex zotxt yaml-mode which-key vlf use-package tuareg rust-mode rmsbolt riscv-mode realgud rainbow-delimiters racket-mode package-lint org-ref org-noter merlin ivy-xref general geiser eyebrowse exec-path-from-shell evil-surround evil-magit esup eglot cquery counsel-projectile counsel-etags clang-format bison-mode avy auto-virtualenv auctex-latexmk anaconda-mode))
+   '(ivy-bibtex zotxt yaml-mode which-key vlf use-package tuareg rust-mode rmsbolt riscv-mode realgud rainbow-delimiters racket-mode package-lint org-ref org-noter merlin ivy-xref general geiser exec-path-from-shell evil-surround evil-magit esup eglot cquery counsel-projectile counsel-etags clang-format bison-mode avy auto-virtualenv auctex-latexmk anaconda-mode))
  '(truncate-lines t)
  '(xterm-mouse-mode t))
-
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; set default font
