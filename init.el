@@ -1089,6 +1089,20 @@ window."
 			     path-to-ctags
 			     (directory-file-name root))))))
 
+(defun c-gnu-style ()
+  "Enable gnu c style. Useful shorthand."
+  (interactive)
+  (progn
+    (setq-default c-default-style "gnu")
+    (setq-default c-basic-offset 2)))
+
+(defun c-sane-style ()
+  "Enable gnu c style. Useful shorthand."
+  (interactive)
+  (progn
+    (setq-default c-default-style "linux")
+    (setq-default c-basic-offset 4)))
+
 ;;; Stuff from customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
