@@ -220,27 +220,6 @@ When you add a new element to the alist, keep in mind that you
   :config
   (which-key-mode))
 
-(use-package eyebrowse
-  :defer t
-  :config
-  (eyebrowse-mode)
-  :general
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'override
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-    "ea" 'eyebrowse-create-window-config
-    "ed" 'eyebrowse-close-window-config
-    "er" 'eyebrowse-rename-window-config
-    "eb" 'eyebrowse-switch-to-window-config
-    "1" 'eyebrowse-switch-to-window-config-0
-    "2" 'eyebrowse-switch-to-window-config-1
-    "3" 'eyebrowse-switch-to-window-config-2
-    "4" 'eyebrowse-switch-to-window-config-3
-    "5" 'eyebrowse-switch-to-window-config-4
-    "6" 'eyebrowse-switch-to-window-config-5))
-
 (use-package winner
   :defer t
   :config
