@@ -862,8 +862,9 @@ When you add a new element to the alist, keep in mind that you
 
 ;;; Ocaml
 (use-package tuareg
-  :mode (("\\.ml[ily]?$" . tuareg-mode)
-	 ("\\.topml$" . tuareg-mode))
+  :mode (("\\.ml[il]?$" . tuareg-mode)
+	 ("\\.topml$" . tuareg-mode)
+	 ("\\.mly$" . tuareg-menhir-mode))
   :init
   ;;(add-hook 'tuareg-mode-hook 'tuarget-imenu-set-imenu)
   ;; (autoload 'utop "utop" "Toplevel for OCaml" t)
