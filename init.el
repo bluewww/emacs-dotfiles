@@ -211,10 +211,10 @@ When you add a new element to the alist, keep in mind that you
     "w;" 'evil-window-increase-width
     "w:" 'evil-window-decrease-width))
 
-(use-package evil-surround
-  :after evil
-  :config
-  (global-evil-surround-mode 1))
+;; (use-package evil-surround
+;;   :after evil
+;;   :config
+;;   (global-evil-surround-mode 1))
 
 (use-package which-key
   :config
