@@ -881,6 +881,10 @@ When you add a new element to the alist, keep in mind that you
   (add-to-list 'load-path (expand-file-name "../../share/emacs/site-lisp"
 					    (getenv "OCAML_TOPLEVEL_PATH"))))
 
+(use-package ocamlformat
+  :ensure nil
+  :after tuareg)
+
 (use-package merlin
   :after tuareg
   :config
