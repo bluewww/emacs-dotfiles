@@ -211,6 +211,9 @@ When you add a new element to the alist, keep in mind that you
     "w;" 'evil-window-increase-width
     "w:" 'evil-window-decrease-width))
 
+(use-package undo-tree
+  :after evil)
+
 ;; (use-package evil-surround
 ;;   :after evil
 ;;   :config
