@@ -294,6 +294,7 @@ When you add a new element to the alist, keep in mind that you
 
 (use-package ivy-xref
   :ensure t
+  :after ivy
   :init
   ;; xref initialization is different in Emacs 27 - there are two different
   ;; variables which can be set rather than just one
