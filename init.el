@@ -189,6 +189,8 @@ When you add a new element to the alist, keep in mind that you
   :config
   (evil-mode 1)
   (global-undo-tree-mode 1)
+  (setq evil-undo-system 'undo-tree)
+  (evil-set-undo-system 'undo-tree)
   (evil-set-initial-state 'term-mode 'emacs)
   :general
   (general-define-key                   ; evil-mode seems to use it, so we unmap
