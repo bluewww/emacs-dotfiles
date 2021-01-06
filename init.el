@@ -277,6 +277,7 @@ When you add a new element to the alist, keep in mind that you
    :states '(normal)
    :keymaps 'ivy-occur-mode-map
    [mouse-1] 'ivy-occur-click		; TODO: doesn't work
+    "<return>" 'ivy-occur-press-and-switch
     "j" 'ivy-occur-next-line
     "k" 'ivy-occur-previous-line
     "h" 'evil-backward-char
