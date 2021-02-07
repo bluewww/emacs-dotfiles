@@ -225,19 +225,6 @@ When you add a new element to the alist, keep in mind that you
   :config
   (which-key-mode))
 
-(use-package winner
-  :defer t
-  :config
-  (winner-mode)
-  :general
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'override
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-   "wu" 'winner-undo
-   "wU" 'winner-redo))
-
 (use-package rainbow-delimiters
   :defer t
   :config
