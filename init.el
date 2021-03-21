@@ -849,6 +849,17 @@ When you add a new element to the alist, keep in mind that you
 	 ("\\.l\\'" . bison-mode)
 	 ("\\.jison\\'" . jison-mode)))
 
+(use-package disaster
+  :config
+  (setq disaster-cflags "-O2 -g3")
+  (setq disaster-cxxflags "-O2 -g3")
+  :general
+  (general-define-key
+   :states 'normal
+   :keymaps '(c-mode-map c++-mode-map)
+   :prefix "SPC"
+   "o" 'disaster))
+
 ;;; Rust
 (use-package rust-mode
   :mode (("\\.rs\\'" . rust-mode)))
