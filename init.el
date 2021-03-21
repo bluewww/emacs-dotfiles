@@ -143,13 +143,14 @@ When you add a new element to the alist, keep in mind that you
 			 ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
-(setq package-check-signature nil)
+(setq package-check-signature t)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
 (eval-when-compile
   (require 'use-package))
+
 ;; loading time
 (setq use-package-verbose t)
 (setq use-package-always-ensure t)
