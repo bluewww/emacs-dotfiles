@@ -516,6 +516,7 @@ When you add a new element to the alist, keep in mind that you
 
 ;;; general settings and lazy evilification of built-in stuff
 (use-package ediff
+  :ensure nil
   :defer t
   :config
   (setq ediff-split-window-function (quote split-window-horizontally))
@@ -523,18 +524,21 @@ When you add a new element to the alist, keep in mind that you
   (evil-collection-ediff-setup))
 
 (use-package arc-mode
+  :ensure nil
   :defer t
   :config
   (require 'evil-collection-arc-mode)
   (evil-collection-arc-mode-setup))
 
-(use-package image-mode :ensure nil
+(use-package image-mode
+  :ensure nil
   :defer t
   :config
   (require 'evil-collection-image)
   (evil-collection-image-setup))
 
 (use-package doc-view
+  :ensure nil
   :defer t
   :init
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
@@ -543,7 +547,8 @@ When you add a new element to the alist, keep in mind that you
   (evil-collection-doc-view-setup)
   (setq doc-view-resolution 400))
 
-(use-package dired :ensure nil
+(use-package dired
+  :ensure nil
   :defer t
   :config
   (setq dired-dwim-target t)
@@ -552,24 +557,28 @@ When you add a new element to the alist, keep in mind that you
   (evil-collection-dired-setup))
 
 (use-package info
+  :ensure nil
   :defer t
   :config
   (require 'evil-collection-info)
   (evil-collection-info-setup))
 
-(use-package comint :ensure nil
+(use-package comint
+  :ensure nil
   :defer t
   :config
   (require 'evil-collection-comint)
   (evil-collection-comint-setup))
 
 (use-package edebug
+  :ensure nil
   :defer t
   :config
   (require 'evil-collection-edebug)
   (evil-collection-edebug-setup))
 
 (use-package compile
+  :ensure nil
   :defer t
   :no-require
   :init
@@ -590,12 +599,14 @@ When you add a new element to the alist, keep in mind that you
   (require 'ansi-color))
 
 (use-package package
+  :ensure nil
   :defer t
   :config
   (require 'evil-collection-package-menu)
   (evil-collection-package-menu-setup))
 
 (use-package tramp
+  :ensure nil
   :defer t
   :config
   ;; (setq projectile-mode-line " Projectile")
@@ -606,6 +617,7 @@ When you add a new element to the alist, keep in mind that you
 
 ;; eshell
 (use-package eshell
+  :ensure nil
   :defer t
   :init
   (add-hook 'eshell-mode-hook
@@ -825,6 +837,7 @@ When you add a new element to the alist, keep in mind that you
   (setq clang-format-executable "~/.local/bin/clang-format"))
 
 (use-package cc-mode
+  :ensure nil
   :mode ("\\.c\\'" . c-mode)            ;TODO: add c++ mode
   :init
   (add-hook 'c-mode-common-hook 'electric-pair-local-mode)
@@ -1010,6 +1023,7 @@ When you add a new element to the alist, keep in mind that you
   :commands riscv-mode)
 
 (use-package asm-mode
+  :ensure nil
   :defer t
   :init
   ;; uses ;; as comment delimiter by default, breaks riscv
