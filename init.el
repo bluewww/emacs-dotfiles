@@ -138,8 +138,8 @@ When you add a new element to the alist, keep in mind that you
 (require 'package)
 ;; want to use use-package instead
 (setq package-enable-at-startup nil)
-(setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-			 ("gnu"       . "http://elpa.gnu.org/packages/")
+(setq package-archives '(("org"       . "https://orgmode.org/elpa/")
+			 ("gnu"       . "https://elpa.gnu.org/packages/")
 			 ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
