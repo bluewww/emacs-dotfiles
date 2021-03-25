@@ -164,7 +164,6 @@ When you add a new element to the alist, keep in mind that you
 
 ;; temporary patch for dead keys, instead of env XMODIFIERS= emacs
 (use-package iso-transl
-  :defer t
   :ensure nil)
 
 (use-package general)
