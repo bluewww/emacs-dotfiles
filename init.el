@@ -880,9 +880,8 @@ When you add a new element to the alist, keep in mind that you
 
 ;;; Ocaml
 (use-package tuareg
-  :mode (("\\.ml[il]?$" . tuareg-mode)
-	 ("\\.topml$" . tuareg-mode)
-	 ("\\.mly$" . tuareg-menhir-mode))
+  :mode (("\\.ml[ily]?$" . tuareg-mode)
+	 ("\\.topml$" . tuareg-mode))
   :init
   ;;(add-hook 'tuareg-mode-hook 'tuarget-imenu-set-imenu)
   ;; (autoload 'utop "utop" "Toplevel for OCaml" t)
@@ -899,10 +898,6 @@ When you add a new element to the alist, keep in mind that you
   ;; Update the emacs load path
   (add-to-list 'load-path (expand-file-name "../../share/emacs/site-lisp"
 					    (getenv "OCAML_TOPLEVEL_PATH"))))
-
-(use-package ocamlformat
-  :ensure nil
-  :after tuareg)
 
 (use-package merlin
   :after tuareg
