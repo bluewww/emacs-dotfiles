@@ -131,9 +131,10 @@ When you add a new element to the alist, keep in mind that you
 (when (display-graphic-p)
   (tool-bar-mode -1)
   (tooltip-mode -1)
-  (menu-bar-mode -1)
   (scroll-bar-mode -1)
   (blink-cursor-mode -1))
+
+(menu-bar-mode -1)
 
 (require 'package)
 ;; want to use use-package instead
