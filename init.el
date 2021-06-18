@@ -237,6 +237,7 @@ When you add a new element to the alist, keep in mind that you
   (setq ivy-wrap t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-height 20)
   :general
   (general-define-key
    :keymaps 'ivy-minibuffer-map
