@@ -553,7 +553,7 @@ When you add a new element to the alist, keep in mind that you
   :defer t
   :config
   (setq dired-dwim-target t)
-  (setq dired-listing-switches "-alh")
+  (setq dired-listing-switches "-alh --group-directories-first")
   (require 'evil-collection-dired)
   (evil-collection-dired-setup))
 
