@@ -9,3 +9,7 @@ recentf
 projectile.cache
 projectile-bookmarks.eld
 /change-author.sh
+transient/
+elpa/gnupg
+/elpa/archives/gnu/archive-contents.signed
+/projects
