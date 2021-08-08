@@ -388,6 +388,9 @@ When you add a new element to the alist, keep in mind that you
   ;; taking only what we need from (counsel-projectile-on)
   (setq projectile-switch-project-action 'counsel-projectile))
 
+;; editing grep
+(use-package wgrep)
+
 ;; git intergration
 (use-package magit
   :init
