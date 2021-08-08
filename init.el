@@ -144,7 +144,7 @@ When you add a new element to the alist, keep in mind that you
 			 ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
-(setq package-check-signature t)
+;; (setq package-check-signature t)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
