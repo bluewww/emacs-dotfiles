@@ -184,6 +184,7 @@ When you add a new element to the alist, keep in mind that you
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-want-integration nil)
+  (setq evil-want-fine-undo t)
   (when (not (display-graphic-p))
     (setq evil-want-C-i-jump nil))
   ;(setq evil-want-minibuffer t)
