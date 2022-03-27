@@ -1127,6 +1127,7 @@ window."
   (interactive)
   (progn
     (setq-default c-default-style "linux")
+    (setq-default indent-tabs-mode nil)
     (setq-default c-basic-offset 4)))
 
 ;; Add a cc-mode style for editing LLVM C and C++ code
@@ -1140,6 +1141,14 @@ window."
 				   (innamespace . 0)
 				   (member-init-intro . ++)
 				   (statement-cont . llvm-lineup-statement)))))
+
+;; Add a cc-mode style for editing generic 4 spaces C and C++ code
+(c-add-style "generic-4"
+             '("linux"
+	       (fill-column . 80)
+	       (c-basic-offset . 4)
+	       (indent-tabs-mode . nil)))
+
 ;;; Stuff from customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
