@@ -376,7 +376,7 @@ When you add a new element to the alist, keep in mind that you
   (setq projectile-dynamic-mode-line t)
   (setq projectile-mode-line-prefix " π")
   (setq projectile-mode-line-function
-      '(lambda () (format " π[%s]" (projectile-project-name)))))
+      #'(lambda () (format " π[%s]" (projectile-project-name)))))
 
 (use-package counsel-projectile
   :after projectile
@@ -970,7 +970,7 @@ When you add a new element to the alist, keep in mind that you
 
 ;;; Tcl
 ;; Stop braindead tab/space mixture asap
-(add-hook 'tcl-mode-hook '(lambda () (setq indent-tabs-mode nil)))
+(add-hook 'tcl-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
 
 ;;; System Verilog
 (use-package verilog-mode :ensure nil
@@ -978,9 +978,9 @@ When you add a new element to the alist, keep in mind that you
   :load-path "verilog-mode/"
   :init
   (add-hook 'verilog-mode-hook
-	    '(lambda () (setq indent-tabs-mode nil)))
+	    #'(lambda () (setq indent-tabs-mode nil)))
   (add-hook 'verilog-mode-hook
-	    '(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
+	    #'(lambda () (clear-abbrev-table verilog-mode-abbrev-table)))
   :config
   (setq verilog-indent-level 4)
   (setq verilog-indent-level-module 4)
