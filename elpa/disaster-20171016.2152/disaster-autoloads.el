@@ -1,4 +1,4 @@
-;;; disaster-autoloads.el --- automatically extracted autoloads
+;;; disaster-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -33,7 +33,7 @@ is used.
 
 \(fn &optional FILE LINE)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "disaster" '("disaster-")))
+(register-definition-prefixes "disaster" '("disaster-"))
 
 ;;;***
 

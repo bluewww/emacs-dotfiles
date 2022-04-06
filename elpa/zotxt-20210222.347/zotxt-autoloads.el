@@ -1,4 +1,4 @@
-;;; zotxt-autoloads.el --- automatically extracted autoloads
+;;; zotxt-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -15,17 +15,26 @@ With no argument, this command toggles the mode.
 Non-null prefix argument turns on the mode.
 Null prefix argument turns off the mode.
 
-If called interactively, enable Org-Zotxt mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Org-Zotxt mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `org-zotxt-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 This is a minor mode for managing your citations with Zotero in a
 org-mode document.
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-zotxt" '("org-zotxt-")))
+(register-definition-prefixes "org-zotxt" '("org-zotxt-"))
 
 ;;;***
 
@@ -33,7 +42,7 @@ org-mode document.
 ;;;;;;  0 0))
 ;;; Generated autoloads from org-zotxt-noter.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-zotxt-noter" '("org-zotxt-noter")))
+(register-definition-prefixes "org-zotxt-noter" '("org-zotxt-noter"))
 
 ;;;***
 
@@ -46,10 +55,19 @@ With no argument, this command toggles the mode.
 Non-null prefix argument turns on the mode.
 Null prefix argument turns off the mode.
 
-If called interactively, enable Zotxt-Citekey mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+This is a minor mode.  If called interactively, toggle the
+`Zotxt-Citekey mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `zotxt-citekey-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 This is a minor mode for managing your citekey citations,
 including completion.
@@ -58,7 +76,7 @@ including completion.
 
 (define-obsolete-function-alias 'zotxt-easykey-mode #'zotxt-citekey-mode "6.0")
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "zotxt" '("zotxt-")))
+(register-definition-prefixes "zotxt" '("zotxt-"))
 
 ;;;***
 

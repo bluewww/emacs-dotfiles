@@ -1,2 +1,0 @@
-;;; Generated package description from /home/bluew/.emacs.d/elpa/auto-virtualenv-20200729.2204/auto-virtualenv.el  -*- no-byte-compile: t -*-
-(define-package "auto-virtualenv" "20200729.2204" "Auto activate python virtualenvs" '((cl-lib "0.5") (pyvenv "1.9") (s "1.10.0")) :commit "214604ebd3366078d03814a344c3249268d1f15a" :keywords '("python" "virtualenv" "tools") :authors '(("Marcwebbie" . "marcwebbie@gmail.com")) :maintainer '("Marcwebbie" . "marcwebbie@gmail.com") :url "http://github.com/marcwebbie/auto-virtualenv")
