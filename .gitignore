@@ -13,3 +13,9 @@ transient/
 elpa/gnupg
 /elpa/archives/gnu/archive-contents.signed
 /projects
+*.elc
+image-dired/
+url/
+ede-projects.el
+bookmarks
+abbrev_defs
