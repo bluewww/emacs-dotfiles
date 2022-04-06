@@ -838,7 +838,9 @@ When you add a new element to the alist, keep in mind that you
 (use-package clang-format
   :after cc-mode
   :init
-  (setq clang-format-executable "~/.local/bin/clang-format"))
+  (setq clang-format-executable "/usr/bin/clang-format")
+  (when (string= user-login-name "balasr")
+    (setq clang-format-executable "~/.local/bin/clang-format")))
 
 (use-package cc-mode
   :ensure nil
