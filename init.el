@@ -216,7 +216,9 @@ When you add a new element to the alist, keep in mind that you
     "w:" 'evil-window-decrease-width))
 
 (use-package undo-tree
-  :after evil)
+  :after evil
+  :config
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
 ;; (use-package evil-surround
 ;;   :after evil
