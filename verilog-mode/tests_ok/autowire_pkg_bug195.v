@@ -6,7 +6,7 @@ package testcase_pkg;
    
    localparam           uint SIZE = 8;
    
-   typedef enum         {ENUM1, ENUM2} enum_t;
+   typedef enum {ENUM1, ENUM2} enum_t;
    
 endpackage
 
@@ -21,8 +21,8 @@ module testcase_top
    /*AUTOWIRE*/
    // Beginning of automatic wires (for undeclared instantiated-module outputs)
    testcase_pkg::enum_t sub_enum;               // From testcase_sub1 of testcase_sub1.v
-   logic [testcase_pkg::SIZE-1:0] sub_in; // From testcase_sub1 of testcase_sub1.v
-   logic [testcase_pkg::SIZE-1:0] sub_out;      // From testcase_sub2 of testcase_sub2.v
+   logic [testcase_pkg::SIZE-1:0] sub_in;  // From testcase_sub1 of testcase_sub1.v
+   logic [testcase_pkg::SIZE-1:0] sub_out; // From testcase_sub2 of testcase_sub2.v
    // End of automatics
    assign top_out = sub_out;
    testcase_sub1 testcase_sub1 (.*,
