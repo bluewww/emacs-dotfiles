@@ -1,2 +1,0 @@
-;;; Generated package description from auto-virtualenv.el  -*- no-byte-compile: t -*-
-(define-package "auto-virtualenv" "20211215.907" "Auto activate python virtualenvs" '((cl-lib "0.5") (pyvenv "1.9") (s "1.10.0")) :commit "07064e05feb62277991b8a7c04f7cdad50acaddf" :authors '(("Marcwebbie" . "marcwebbie@gmail.com")) :maintainer '("Marcwebbie" . "marcwebbie@gmail.com") :keywords '("python" "virtualenv" "tools") :url "http://github.com/marcwebbie/auto-virtualenv")

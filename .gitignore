@@ -20,3 +20,4 @@ ede-projects.el
 bookmarks
 abbrev_defs
 *.~undo-tree~
+eln-cache/

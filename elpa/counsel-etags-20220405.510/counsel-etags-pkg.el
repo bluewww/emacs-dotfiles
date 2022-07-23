@@ -1,2 +1,0 @@
-;;; Generated package description from counsel-etags.el  -*- no-byte-compile: t -*-
-(define-package "counsel-etags" "20220405.510" "Fast and complete Ctags/Etags solution using ivy" '((emacs "25.1") (counsel "0.13.4")) :commit "c74ae94297c4a2dc0b6878c2e9460a4f386158d4" :authors '(("Chen Bin <chenbin dot sh AT gmail dot com>")) :maintainer '("Chen Bin <chenbin dot sh AT gmail dot com>") :keywords '("tools" "convenience") :url "http://github.com/redguardtoo/counsel-etags")
