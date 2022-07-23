@@ -616,6 +616,9 @@ When you add a new element to the alist, keep in mind that you
   (when (memq window-system '(ns x))
     (exec-path-from-shell-initialize)))
 
+;; Esup bug workaround
+(setq esup-depth 0)
+
 ;;;; Custom Layers
 
 ;;; Large files
