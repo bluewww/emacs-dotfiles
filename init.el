@@ -521,65 +521,40 @@ When you add a new element to the alist, keep in mind that you
  "<C-mouse-5>" 'text-scale-decrease)
 
 ;;; general settings and lazy evilification of built-in stuff
-(use-package ediff
-  :ensure nil
-  :defer t
-  :config
+(with-eval-after-load 'ediff
   (setq ediff-split-window-function (quote split-window-horizontally))
   (require 'evil-collection-ediff)
   (evil-collection-ediff-setup))
 
-(use-package arc-mode
-  :ensure nil
-  :defer t
-  :config
+(with-eval-after-load 'arc-mode
   (require 'evil-collection-arc-mode)
   (evil-collection-arc-mode-setup))
 
-(use-package image-mode
-  :ensure nil
-  :defer t
-  :config
+(with-eval-after-load 'image-mode
   (require 'evil-collection-image)
   (evil-collection-image-setup))
 
-(use-package doc-view
-  :ensure nil
-  :defer t
-  :init
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  :config
+(with-eval-after-load 'doc-view
   (require 'evil-collection-doc-view)
   (evil-collection-doc-view-setup)
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   (setq doc-view-resolution 400))
 
-(use-package dired
-  :ensure nil
-  :defer t
-  :config
+(with-eval-after-load 'dired
   (setq dired-dwim-target t)
   (setq dired-listing-switches "-alh --group-directories-first")
   (require 'evil-collection-dired)
   (evil-collection-dired-setup))
 
-(use-package info
-  :ensure nil
-  :defer t
-  :config
+(with-eval-after-load 'info
   (require 'evil-collection-info)
   (evil-collection-info-setup))
 
-(use-package comint
-  :ensure nil
-  :defer t
-  :config
+(with-eval-after-load 'comint
   (require 'evil-collection-comint)
   (evil-collection-comint-setup))
 
-(use-package edebug
-  :ensure nil
-  :defer t
-  :config
+(with-eval-after-load 'edebug
   (require 'evil-collection-edebug)
   (evil-collection-edebug-setup))
 
@@ -630,8 +605,9 @@ When you add a new element to the alist, keep in mind that you
 	    (lambda ()
 	      (define-key eshell-mode-map (kbd "<tab>")
 		'completion-at-point)))
-  (add-hook 'eshell-mode-hook #'visual-line-mode)
-  :config
+  (add-hook 'eshell-mode-hook #'visual-line-mode))
+
+(with-eval-after-load 'eshell
   (require 'evil-collection-eshell)
   (evil-collection-eshell-setup))
 
