@@ -130,7 +130,6 @@ When you add a new element to the alist, keep in mind that you
 ;; disable window stuff
 (when (display-graphic-p)
   (tool-bar-mode -1)
-  (tooltip-mode -1)
   (scroll-bar-mode -1)
   (blink-cursor-mode -1))
 
