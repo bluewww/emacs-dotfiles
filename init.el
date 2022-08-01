@@ -1011,6 +1011,22 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'asm-mode-hook
 	    (lambda () (setq comment-start "/* " comment-end " */"))))
 
+;;; llvm
+(use-package llvm-mode
+  :mode ("\\.ll\\'" . llvm-mode)
+  :load-path "llvm/")
+
+;;; tablegen
+(use-package tablegen-mode
+  :mode ("\\.td\\'" . tablegen-mode)
+  :load-path "tablegen/")
+
+;;; mlir
+(use-package mlir-mode
+  :mode ("\\.mlir\\'" . mlir-mode)
+  :load-path "mlir/")
+
+
 ;;; Custom functions
 ;; quickly open dotfile
 (defun find-dotfile ()
