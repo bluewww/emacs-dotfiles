@@ -1174,6 +1174,11 @@ window."
  '(xterm-mouse-mode t))
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; initial frame size
+(add-to-list 'default-frame-alist
+	     '(width . 120))
+(add-to-list 'default-frame-alist
+	     '(height . 80))
 ;; set default font
 (add-to-list 'default-frame-alist
 	     '(font . "DejaVu Sans Mono-10"))
