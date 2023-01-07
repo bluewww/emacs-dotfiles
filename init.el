@@ -1159,6 +1159,7 @@ window."
      (output-dvi "Evince")
      (output-pdf "Evince")
      (output-html "xdg-open")))
+ '(auth-source-save-behavior nil)
  '(custom-enabled-themes '(wombat))
  '(custom-safe-themes
    '("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59" "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default))
