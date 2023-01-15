@@ -43,7 +43,9 @@
  ;; scroll just one line when hitting bottom of screen
  scroll-conservatively 10000
  ;; better copy/paste behavior
- select-enable-clipboard t)
+ select-enable-clipboard t
+ ;; don't split windows horizontally
+ split-height-threshold 160)
 
 (setq-default fill-column 80)
 
