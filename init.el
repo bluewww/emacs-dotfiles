@@ -181,8 +181,9 @@ When you add a new element to the alist, keep in mind that you
 (use-package evil
   :demand
   :init
+  (setq evil-want-keybinding nil)
+  (setq evil-want-integration t)
   (setq evil-want-C-u-scroll t)
-  (setq evil-want-integration nil)
   (setq evil-want-fine-undo nil)
   (when (not (display-graphic-p))
     (setq evil-want-C-i-jump nil))
@@ -408,9 +409,6 @@ When you add a new element to the alist, keep in mind that you
   (setq magit-completing-read-function 'ivy-completing-read)
   (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72))))
 
-(use-package evil-magit
-  :after magit)
-
 (use-package avy
   :general
   (general-define-key
@@ -520,21 +518,24 @@ When you add a new element to the alist, keep in mind that you
  "<C-mouse-5>" 'text-scale-decrease)
 
 ;;; general settings and lazy evilification of built-in stuff
+(use-package evil-collection
+  :ensure nil
+  :after evil)
+
+(with-eval-after-load 'magit
+  (evil-collection-magit-setup))
+
 (with-eval-after-load 'ediff
   (setq ediff-split-window-function (quote split-window-horizontally))
-  (require 'evil-collection-ediff)
   (evil-collection-ediff-setup))
 
 (with-eval-after-load 'arc-mode
-  (require 'evil-collection-arc-mode)
   (evil-collection-arc-mode-setup))
 
 (with-eval-after-load 'image-mode
-  (require 'evil-collection-image)
   (evil-collection-image-setup))
 
 (with-eval-after-load 'doc-view
-  (require 'evil-collection-doc-view)
   (evil-collection-doc-view-setup)
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   (setq doc-view-resolution 400))
@@ -542,19 +543,15 @@ When you add a new element to the alist, keep in mind that you
 (with-eval-after-load 'dired
   (setq dired-dwim-target t)
   (setq dired-listing-switches "-alh --group-directories-first")
-  (require 'evil-collection-dired)
   (evil-collection-dired-setup))
 
 (with-eval-after-load 'info
-  (require 'evil-collection-info)
   (evil-collection-info-setup))
 
 (with-eval-after-load 'comint
-  (require 'evil-collection-comint)
   (evil-collection-comint-setup))
 
 (with-eval-after-load 'edebug
-  (require 'evil-collection-edebug)
   (evil-collection-edebug-setup))
 
 (use-package compile
@@ -565,7 +562,6 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'compilation-mode-hook 'visual-line-mode)
   (add-hook 'compilation-filter-hook #'colorize-compilation)
   :config
-  (require 'evil-collection-compile)
   (setq compilation-scroll-output t)
   (add-to-list 'compilation-error-regexp-alist
 	       '("^# \\*\\\* Error: \\(.*?\\)(\\(.*?\\)):" 1 2))
@@ -578,11 +574,7 @@ When you add a new element to the alist, keep in mind that you
   (evil-collection-compile-setup)
   (require 'ansi-color))
 
-(use-package package
-  :ensure nil
-  :defer t
-  :config
-  (require 'evil-collection-package-menu)
+(with-eval-after-load 'package
   (evil-collection-package-menu-setup))
 
 (use-package tramp
@@ -607,7 +599,6 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'eshell-mode-hook #'visual-line-mode))
 
 (with-eval-after-load 'eshell
-  (require 'evil-collection-eshell)
   (evil-collection-eshell-setup))
 
 ;; exec path from shell
@@ -1169,7 +1160,7 @@ window."
    '(".#*" "*.cmti" "*.cmt" "*.annot" "*.cmi" "*.cmxa" "*.cma" "*.cmx" "*.cmo" "*.o" "*~" "*.bin" "*.lbin" "*.so" "*.a" "*.ln" "*.blg" "*.bbl" "*.elc" "*.lof" "*.glo" "*.idx" "*.lot" "*.fmt" "*.tfm" "*.class" "*.fas" "*.lib" "*.mem" "*.x86f" "*.sparcf" "*.dfsl" "*.pfsl" "*.d64fsl" "*.p64fsl" "*.lx64fsl" "*.lx32fsl" "*.dx64fsl" "*.dx32fsl" "*.fx64fsl" "*.fx32fsl" "*.sx64fsl" "*.sx32fsl" "*.wx64fsl" "*.wx32fsl" "*.fasl" "*.ufsl" "*.fsl" "*.dxl" "*.lo" "*.la" "*.gmo" "*.mo" "*.toc" "*.aux" "*.cp" "*.fn" "*.ky" "*.pg" "*.tp" "*.vr" "*.cps" "*.fns" "*.kys" "*.pgs" "*.tps" "*.vrs" "*.pyc" "*.pyo" "*.d"))
  '(merlin-completion-with-doc t)
  '(package-selected-packages
-   '(wgrep ivy-bibtex riscv-mode org-noter ivy-xref general exec-path-from-shell evil-surround evil-magit esup eglot cquery counsel-projectile counsel-etags clang-format bison-mode avy auto-virtualenv auctex-latexmk anaconda-mode))
+   '(annalist wgrep ivy-bibtex riscv-mode org-noter ivy-xref general exec-path-from-shell evil-surround evil-magit esup eglot cquery counsel-projectile counsel-etags clang-format bison-mode avy auto-virtualenv auctex-latexmk anaconda-mode))
  '(safe-local-variable-values '((rmsbolt-asm-format) (rmsbolt-disassemble)))
  '(truncate-lines t)
  '(xterm-mouse-mode t))
