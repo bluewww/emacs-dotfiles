@@ -587,6 +587,7 @@ When you add a new element to the alist, keep in mind that you
  "bs" 'switch-to-scratch-buffer
  "bn" 'next-buffer
  "bp" 'previous-buffer
+ "bo" 'move-buffer-other-window
  "bw" 'read-only-mode
  "bN" 'new-empty-buffer
  "bR" 'revert-buffer
