@@ -236,124 +236,234 @@ When you add a new element to the alist, keep in mind that you
   :config
   (rainbow-delimiters-mode))
 
-;; Completion framework
-(use-package ivy
-  :config
-  (ivy-mode 1)
-  (setq ivy-wrap t)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-height 20)
-  :general
-  (general-define-key
-   :keymaps 'ivy-minibuffer-map
-   "C-j" 'ivy-next-line
-   "C-k" 'ivy-previous-line
-   "C-h" (kbd "DEL")                    ; hack
-   "<tab>" 'ivy-partial-or-done
-   "C-l" 'ivy-alt-done
-   "C-d" 'ivy-scroll-up-command
-   "C-u" 'ivy-scroll-down-command
-   "C-S-h" help-map
-   "<escape>" 'minibuffer-keyboard-quit)
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'override
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-   "bb" 'ivy-switch-buffer
-   "bo" 'move-buffer-other-window)
-  (general-define-key			; unbind killing of buffers with C-k
-   :keymaps 'ivy-switch-buffer-map
-   "C-k" 'ivy-previous-line		; we have to set it here again
-   "C-b" 'ivy-switch-buffer-kill)
-  (general-define-key
-   :states '(normal)
-   :keymaps 'ivy-occur-mode-map
-   [mouse-1] 'ivy-occur-click		; TODO: doesn't work
-    "<return>" 'ivy-occur-press-and-switch
-    "j" 'ivy-occur-next-line
-    "k" 'ivy-occur-previous-line
-    "h" 'evil-backward-char
-    "l" 'evil-forward-char
-    "g" nil
-    "gg" 'evil-goto-first-line		; TODO: doesn't work
-    "gf" 'ivy-occur-press
-    "ga" 'ivy-occur-read-action
-    "go" 'ivy-occur-dispatch
-    "gc" 'ivy-occur-toggle-calling
+;; ;; Completion framework
+;; (use-package ivy
+;;   :config
+;;   (ivy-mode 1)
+;;   (setq ivy-wrap t)
+;;   (setq ivy-count-format "(%d/%d) ")
+;;   (setq ivy-use-virtual-buffers t)
+;;   (setq ivy-height 20)
+;;   :general
+;;   (general-define-key
+;;    :keymaps 'ivy-minibuffer-map
+;;    "C-j" 'ivy-next-line
+;;    "C-k" 'ivy-previous-line
+;;    "C-h" (kbd "DEL")                    ; hack
+;;    "<tab>" 'ivy-partial-or-done
+;;    "C-l" 'ivy-alt-done
+;;    "C-d" 'ivy-scroll-up-command
+;;    "C-u" 'ivy-scroll-down-command
+;;    "C-S-h" help-map
+;;    "<escape>" 'minibuffer-keyboard-quit)
+;;   (general-define-key
+;;    :states '(normal visual insert emacs motion)
+;;    :keymaps 'override
+;;    :prefix "SPC"
+;;    :non-normal-prefix "M-SPC"
+;;    "bb" 'ivy-switch-buffer
+;;    "bo" 'move-buffer-other-window)
+;;   (general-define-key			; unbind killing of buffers with C-k
+;;    :keymaps 'ivy-switch-buffer-map
+;;    "C-k" 'ivy-previous-line		; we have to set it here again
+;;    "C-b" 'ivy-switch-buffer-kill)
+;;   (general-define-key
+;;    :states '(normal)
+;;    :keymaps 'ivy-occur-mode-map
+;;    [mouse-1] 'ivy-occur-click		; TODO: doesn't work
+;;     "<return>" 'ivy-occur-press-and-switch
+;;     "j" 'ivy-occur-next-line
+;;     "k" 'ivy-occur-previous-line
+;;     "h" 'evil-backward-char
+;;     "l" 'evil-forward-char
+;;     "g" nil
+;;     "gg" 'evil-goto-first-line		; TODO: doesn't work
+;;     "gf" 'ivy-occur-press
+;;     "ga" 'ivy-occur-read-action
+;;     "go" 'ivy-occur-dispatch
+;;     "gc" 'ivy-occur-toggle-calling
 
-    ;; refresh
-    "gr" 'ivy-occur-revert-buffer
+;;     ;; refresh
+;;     "gr" 'ivy-occur-revert-buffer
 
-    ;; quit
-    "q" 'quit-window)
-  (general-define-key
-   :keymaps 'ivy-occur-grep-mode-map
-   "C-d" 'evil-scroll-down))
+;;     ;; quit
+;;     "q" 'quit-window)
+;;   (general-define-key
+;;    :keymaps 'ivy-occur-grep-mode-map
+;;    "C-d" 'evil-scroll-down))
 
-(use-package ivy-xref
-  :ensure t
-  :after ivy
+;; (use-package ivy-xref
+;;   :ensure t
+;;   :after ivy
+;;   :init
+;;   ;; xref initialization is different in Emacs 27 - there are two different
+;;   ;; variables which can be set rather than just one
+;;   (when (>= emacs-major-version 27)
+;;     (setq xref-show-definitions-function #'ivy-xref-show-defs))
+;;   ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+;;   ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+;;   ;; as well
+;;   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+;; (use-package ivy-bibtex
+;;   :defer t
+;;   :init
+;;   (setq bibtex-completion-bibliography
+;; 	'("/home/balasr/documents/biblio/zotero_refs.bib"))
+;;   (setq bibtex-completion-pdf-field "File")
+;;   ;; Open with pdf viewer
+;;   (setq bibtex-completion-pdf-open-function 'org-open-file)
+;;   (setq bibtex-completion-format-citation-functions
+;;   '((org-mode      . bibtex-completion-format-citation-org-link-to-PDF)
+;;     (latex-mode    . bibtex-completion-format-citation-cite))))
+
+;; (use-package counsel
+;;   :defer t
+;;   :general
+;;   (general-define-key
+;;    :states '(normal visual insert emacs motion)
+;;    :keymaps 'override
+;;    :prefix "SPC"
+;;    :non-normal-prefix "M-SPC"
+;;    "ff" 'counsel-find-file
+;;    "fj" 'counsel-file-jump
+;;    "fl" 'counsel-locate
+;;    "fr" 'counsel-recentf
+;;    "fp" 'counsel-git
+;;    "hb" 'counsel-descbinds
+;;    "hf" 'counsel-describe-function
+;;    "hv" 'counsel-describe-variable
+;;    "SPC" 'counsel-M-x)
+;;   :general
+;;   (general-define-key
+;;    "M-x" 'counsel-M-x))
+
+;; ;; Searching
+;; (use-package swiper
+;;   :general
+;;   (general-define-key
+;;    :states '(normal visual insert emacs motion)
+;;    :keymaps 'override
+;;    :prefix "SPC"
+;;    :non-normal-prefix "M-SPC"
+;;    "ss" 'counsel-grep-or-swiper
+;;    "sr" 'counsel-grep-or-swiper-backward
+;;    "sg" 'counsel-git-grep
+;;    "sb" 'swiper-all
+;;    "st" 'swiper-thing-at-point))
+
+;; (use-package fido
+;;   :ensure nil
+;;   :init
+;;   (fido-mode)
+;;   :general
+;;   (general-define-key
+;;    :states '(normal visual insert emacs motion)
+;;    :keymaps 'override
+;;    :prefix "SPC"
+;;    :non-normal-prefix "M-SPC"
+;;    "bb" 'switch-to-buffer
+;;    "ff" 'find-file
+;;    ;; "fj" 'counsel-file-jump
+;;    ;; "fl" 'counsel-locate
+;;    ;; "fr" 'counsel-recentf
+;;    ;; "fp" 'counsel-git
+;;    "hb" 'describe-bindings
+;;    "hf" 'describe-function
+;;    "hv" 'describe-variable
+;;    "SPC" 'execute-extended-command))
+
+;; Enable vertico
+(use-package vertico
   :init
-  ;; xref initialization is different in Emacs 27 - there are two different
-  ;; variables which can be set rather than just one
-  (when (>= emacs-major-version 27)
-    (setq xref-show-definitions-function #'ivy-xref-show-defs))
-  ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-  ;; commands other than xref-find-definitions (e.g. project-find-regexp)
-  ;; as well
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+  (vertico-mode)
+  (setq vertico-count 20)
+  :general
+  (general-define-key
+   :states '(normal visual insert emacs motion)
+   :keymaps 'override
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "bb" 'switch-to-buffer
+   "ff" 'find-file
+   ;; "fj" 'counsel-file-jump
+   ;; "fl" 'counsel-locate
+   ;; "fr" 'counsel-recentf
+   ;; "fp" 'counsel-git
+   "hb" 'describe-bindings
+   "hf" 'describe-function
+   "hv" 'describe-variable
+   "SPC" 'execute-extended-command)
+  ;; instead of
+  ;; (keymap-set vertico-map "?" #'minibuffer-completion-help)
+  :general
+  (general-define-key
+   :keymaps 'vertico-map
+   "?" 'minibuffer-completion-help
+   "C-j" 'vertico-next
+   "C-k" 'vertico-previous
+   "C-d" 'vertico-scroll-up
+   "C-u" 'vertico-scroll-down
+   "C-l" 'vertico-exit
+   "C-w" 'backward-kill-word
+   "S-SPC" '+vertico-restrict-to-matches))
 
-(use-package ivy-bibtex
-  :defer t
+;; ;; Configure grid extension
+;; (use-package vertico-grid
+;;   :after vertico
+;;   :ensure nil
+;;   :init
+;;   (vertico-grid-mode))
+
+;; ivy like S-SPC restrict
+(defun +vertico-restrict-to-matches ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (goto-char (point-max))
+    (insert " ")
+    (add-text-properties (minibuffer-prompt-end) (point-max)
+                         '(invisible t read-only t cursor-intangible t rear-nonsticky t))))
+
+;; Optionally use the `orderless' completion style.
+(use-package orderless
   :init
-  (setq bibtex-completion-bibliography
-	'("/home/balasr/documents/biblio/zotero_refs.bib"))
-  (setq bibtex-completion-pdf-field "File")
-  ;; Open with pdf viewer
-  (setq bibtex-completion-pdf-open-function 'org-open-file)
-  (setq bibtex-completion-format-citation-functions
-  '((org-mode      . bibtex-completion-format-citation-org-link-to-PDF)
-    (latex-mode    . bibtex-completion-format-citation-cite))))
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+  (setq completion-styles '(substring orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
 
-(use-package counsel
-  :defer t
+(use-package consult
+  :init
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+
+  ;; Use `consult-completion-in-region' if Vertico is enabled.
+  ;; Otherwise use the default `completion--in-region' function.
+  (setq completion-in-region-function
+	(lambda (&rest args)
+          (apply (if vertico-mode
+                     #'consult-completion-in-region
+                   #'completion--in-region)
+		 args)))
+
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
-   "ff" 'counsel-find-file
-   "fj" 'counsel-file-jump
-   "fl" 'counsel-locate
-   "fr" 'counsel-recentf
-   "fp" 'counsel-git
-   "hb" 'counsel-descbinds
-   "hf" 'counsel-describe-function
-   "hv" 'counsel-describe-variable
-   "SPC" 'counsel-M-x)
-  :general
-  (general-define-key
-   "M-x" 'counsel-M-x))
-
-;; Searching
-(use-package swiper
-  :general
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'override
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-   "ss" 'counsel-grep-or-swiper
-   "sr" 'counsel-grep-or-swiper-backward
-   "sg" 'counsel-git-grep
-   "sb" 'swiper-all
-   "st" 'swiper-thing-at-point))
+   "ss" 'consult-line
+   "sg" 'consult-git-grep
+   "sb" 'consult-line-multi
+   "fj" 'consult-find
+   "fr" 'consult-recent-file))
 
 ;; Project managment
-(use-package projectile
+(use-package project
+  :ensure nil
   :general
   (general-define-key
    :states '(normal visual insert emacs motion)
@@ -361,35 +471,52 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "pg" 'project-find-regexp
-   "pc" 'projectile-compile-project
-   "pf" 'counsel-projectile-find-file
-   "pb" 'counsel-projectile-switch-to-buffer
-   "pp" 'counsel-projectile-switch-project
-   "pt" 'projectile-find-tag
-   "pD" 'projectile-dired
-   "pd" 'counsel-projectile-find-dir)
-  :config
-  (projectile-mode)
-  (projectile-update-mode-line)		; sometimes doesn't happen
-  (setq projectile-completion-system 'ivy)
-  ;; https://github.com/bbatsov/projectile/issues/1270
-  (setq projectile-project-compilation-cmd "")
-  :init
-  (setq projectile-dynamic-mode-line t)
-  (setq projectile-mode-line-prefix " π")
-  (setq projectile-mode-line-function
-      #'(lambda () (format " π[%s]" (projectile-project-name)))))
+   "pc" 'project-compile
+   "pf" 'project-find-file
+   "pb" 'project-switch-to-buffer
+   "pp" 'project-switch-project
+   ;;"pt" 'projectile-find-tag
+   "pD" 'project-dired
+   "pd" 'project-find-dir))
 
-(use-package counsel-projectile
-  :after projectile
-  :config
-  ;; BUGFIX for counsel-projectile https://github.com/ericdanan/counsel-projectile/issues/150
-  ;; HACK the -i (case insensitivity) is added because ivy--case-fold-p is often true
-  ;; INSTEAD OF "grep -rnEI %s -- %%s %s"
-  ;; (setq counsel-projectile-grep-base-command "grep -rnEI -i %s %%s %s")
-  ;; (setq ivy-case-fold-search-default nil) ; alternative fix
-  ;; taking only what we need from (counsel-projectile-on)
-  (setq projectile-switch-project-action 'counsel-projectile))
+;; ;; Project managment
+;; (use-package projectile
+;;   :general
+;;   (general-define-key
+;;    :states '(normal visual insert emacs motion)
+;;    :keymaps 'override
+;;    :prefix "SPC"
+;;    :non-normal-prefix "M-SPC"
+;;    "pg" 'project-find-regexp
+;;    "pc" 'projectile-compile-project
+;;    "pf" 'counsel-projectile-find-file
+;;    "pb" 'counsel-projectile-switch-to-buffer
+;;    "pp" 'counsel-projectile-switch-project
+;;    "pt" 'projectile-find-tag
+;;    "pD" 'projectile-dired
+;;    "pd" 'counsel-projectile-find-dir)
+;;   :config
+;;   (projectile-mode)
+;;   (projectile-update-mode-line)		; sometimes doesn't happen
+;;   (setq projectile-completion-system 'ivy)
+;;   ;; https://github.com/bbatsov/projectile/issues/1270
+;;   (setq projectile-project-compilation-cmd "")
+;;   :init
+;;   (setq projectile-dynamic-mode-line t)
+;;   (setq projectile-mode-line-prefix " π")
+;;   (setq projectile-mode-line-function
+;;       #'(lambda () (format " π[%s]" (projectile-project-name)))))
+
+;; (use-package counsel-projectile
+;;   :after projectile
+;;   :config
+;;   ;; BUGFIX for counsel-projectile https://github.com/ericdanan/counsel-projectile/issues/150
+;;   ;; HACK the -i (case insensitivity) is added because ivy--case-fold-p is often true
+;;   ;; INSTEAD OF "grep -rnEI %s -- %%s %s"
+;;   ;; (setq counsel-projectile-grep-base-command "grep -rnEI -i %s %%s %s")
+;;   ;; (setq ivy-case-fold-search-default nil) ; alternative fix
+;;   ;; taking only what we need from (counsel-projectile-on)
+;;   (setq projectile-switch-project-action 'counsel-projectile))
 
 ;; editing grep
 (use-package wgrep
@@ -408,7 +535,7 @@ When you add a new element to the alist, keep in mind that you
    :non-normal-prefix "M-SPC"
    "g" 'magit-status)
   :config
-  (setq magit-completing-read-function 'ivy-completing-read)
+;;  (setq magit-completing-read-function 'ivy-completing-read)
   (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72))))
 
 (use-package avy
