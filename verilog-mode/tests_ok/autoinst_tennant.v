@@ -1,8 +1,8 @@
 typedef logic [3:0][1:0] sometype_t;
 
 module top
-  #(parameter X=4,
-    parameter Y=1)
+  #(parameter X = 4,
+    parameter Y = 1)
    
    (input              clk,
     input              rstb,
@@ -63,47 +63,48 @@ module top
 endmodule // top
 
 module xx
-  #(parameter X=4,
-    parameter Y=1)
-   (input              clk,
-    input              rstb,
+  #(parameter X = 4,
+    parameter Y = 1)
+   (input                   clk,
+    input                   rstb,
     
-    input [X-1:0][1:0] xc,
-    input [X-1:0]      xa,
-    input [X-1:0]      xb,
+    input [X-1:0][1:0]      xc,
+    input [X-1:0]           xa,
+    input [X-1:0]           xb,
     
-    input [X-1:0]      cb,
-    output             sometype_t [1:0] st,
+    input [X-1:0]           cb,
+    output sometype_t [1:0] st,
     
-    input [X*Y-1:0]    yb,
+    input [X*Y-1:0]         yb,
     
-    output             foobar
+    output                  foobar
     );
    
 endmodule // xx
 
 module yy
-  #(parameter X=4,
-    parameter Y=1)
-   (input               clk,
-    input               rstb,
+  #(parameter X = 4,
+    parameter Y = 1)
+   (input                  clk,
+    input                  rstb,
     
-    output [X-1:0][1:0] xc,
-    output [X-1:0]      xa,
-    input [X-1:0]       xb,
+    output [X-1:0][1:0]    xc,
+    output [X-1:0]         xa,
+    input [X-1:0]          xb,
     
-    input [X-1:0]       cb,
-    input               sometype_t [1:0] st,
+    input [X-1:0]          cb,
+    input sometype_t [1:0] st,
     
-    output [X*Y-1:0]    yb,
+    output [X*Y-1:0]       yb,
     
-    output [4:0][2:0]   foobar2
+    output [4:0][2:0]      foobar2
     );
    
 endmodule // xx
 
 // Local Variables:
 // verilog-typedef-regexp:"_t$"
+// verilog-align-typedef-regexp: "\\<[a-zA-Z_][a-zA-Z_0-9]*_t\\>"
 // verilog-library-directories:("." )
 // verilog-library-extensions:(".v" ".sv" ".h" ".vr" ".vm")
 // End:

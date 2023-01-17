@@ -86,6 +86,7 @@ logic [1:0] /* embedded comment should NOT get aligned */ t3;
 endmodule
 
 // Local Variables:
-// verilog-align-declaration-comments: nil
+// verilog-align-decl-expr-comments: nil
+// verilog-align-typedef-words: ("user_type")
 // End:
 
