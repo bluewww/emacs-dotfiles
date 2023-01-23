@@ -92,6 +92,9 @@
     (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'linum-mode))
 
+;; if we running on older emacs make sure we load early-init.el anyways
+(when (version< emacs-version "27")
+  (load (concat user-emacs-directory "early-init.el")))
 
 (add-hook 'text-mode-hook 'show-paren-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
