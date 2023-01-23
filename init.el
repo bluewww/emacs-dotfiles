@@ -127,13 +127,10 @@ When you add a new element to the alist, keep in mind that you
  must pass the correct minor/major mode symbol and a string you
  want to use in the modeline *in lieu of* the original.")
 
-;; disable window stuff
+;; disable remaining window stuff
+;; for some reason scroll-bar-mode can't be in early-init.el to take effect
 (when (display-graphic-p)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (blink-cursor-mode -1))
-
-(menu-bar-mode -1)
+  (scroll-bar-mode -1))
 
 (require 'package)
 ;; want to use use-package instead
@@ -1294,14 +1291,6 @@ window."
  '(xterm-mouse-mode t))
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; initial frame size
-(add-to-list 'default-frame-alist
-	     '(width . 120))
-(add-to-list 'default-frame-alist
-	     '(height . 80))
-;; set default font
-(add-to-list 'default-frame-alist
-	     '(font . "DejaVu Sans Mono-10"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
