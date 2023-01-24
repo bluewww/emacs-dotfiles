@@ -1,10 +1,8 @@
 ;;; early init stuff
 
 ;; disable window stuff
-(when (display-graphic-p)
-  (tool-bar-mode -1)
-  (blink-cursor-mode -1))
-
+(blink-cursor-mode -1)
+(tool-bar-mode -1)
 (menu-bar-mode -1)
 
 ;; we do that here because it prevents a "flashing" frame size adjustment during
