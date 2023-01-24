@@ -130,11 +130,6 @@ When you add a new element to the alist, keep in mind that you
  must pass the correct minor/major mode symbol and a string you
  want to use in the modeline *in lieu of* the original.")
 
-;; disable remaining window stuff
-;; for some reason scroll-bar-mode can't be in early-init.el to take effect
-(when (display-graphic-p)
-  (scroll-bar-mode -1))
-
 (require 'package)
 ;; want to use use-package instead
 (setq package-enable-at-startup nil)

@@ -4,6 +4,7 @@
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; we do that here because it prevents a "flashing" frame size adjustment during
 ;; emacs startup
