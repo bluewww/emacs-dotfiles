@@ -1226,6 +1226,14 @@ window."
 			     path-to-ctags
 			     (directory-file-name root))))))
 
+(defun asm-2-space-style ()
+  "Enable asm 2 space style. Useful shorthand."
+  (interactive)
+  (progn
+    (setq-default indent-tabs-mode nil)
+    (setq-default tab-width 2)
+    (setq asm-comment-char ?#)))
+
 (defun c-gnu-style ()
   "Enable gnu c style. Useful shorthand."
   (interactive)
