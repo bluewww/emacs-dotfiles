@@ -183,7 +183,7 @@ When you add a new element to the alist, keep in mind that you
   (when (not (display-graphic-p))
     (setq evil-want-C-i-jump nil))
   (setq evil-search-module 'evil-search)
-  ;(setq evil-want-minibuffer t)
+  (setq evil-want-minibuffer t)
   :config
   (evil-mode 1)
   (global-undo-tree-mode 1)
