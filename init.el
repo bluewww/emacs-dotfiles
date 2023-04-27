@@ -416,7 +416,7 @@ When you add a new element to the alist, keep in mind that you
     (goto-char (point-max))
     (insert " ")
     (add-text-properties (minibuffer-prompt-end) (point-max)
-                         '(invisible t read-only t cursor-intangible t rear-nonsticky t))))
+                         '(invisible t cursor-intangible t rear-nonsticky t))))
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
