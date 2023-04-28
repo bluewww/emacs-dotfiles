@@ -833,8 +833,6 @@ When you add a new element to the alist, keep in mind that you
   :init
   (add-hook 'org-mode-hook 'org-zotxt-mode))
 
-(use-package org-noter
-  :after org)
 
 ;; (defun bwww-org-ref-open-pdf-at-point ()
 ;;   "Open the pdf for bibtex key under point if it exists."
