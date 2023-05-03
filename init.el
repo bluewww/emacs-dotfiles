@@ -646,7 +646,17 @@ When you add a new element to the alist, keep in mind that you
   :after evil)
 
 (with-eval-after-load 'magit
-  (evil-collection-magit-setup))
+  (evil-collection-magit-setup)
+  (evil-collection-define-key 'normal 'magit-blame-mode-map
+    (kbd "RET") 'magit-show-commit)
+  (evil-collection-define-key 'normal 'magit-blame-mode-map
+    "c" 'magit-blame-cycle-style)
+  (evil-collection-define-key 'normal 'magit-blame-mode-map
+    "n" 'magit-blame-next-chunk)
+  (evil-collection-define-key 'normal 'magit-blame-mode-map
+    "p" 'magit-blame-previous-chunk)
+  (evil-collection-define-key 'normal 'magit-blame-mode-map
+    "\M-w" 'magit-blame-copy-hash))
 
 (with-eval-after-load 'ediff
   (setq ediff-split-window-function (quote split-window-horizontally))
