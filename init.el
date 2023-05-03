@@ -377,17 +377,6 @@ When you add a new element to the alist, keep in mind that you
 ;;  (setq magit-completing-read-function 'ivy-completing-read)
   (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72))))
 
-(use-package avy
-  :general
-  (general-define-key
-   "C-'" 'avy-goto-word-1)
-  (general-define-key
-   :states '(normal visual insert emacs motion)
-   :keymaps 'override
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-   "j" 'avy-goto-word-1))
-
 ;; proper vim style escape
 (general-define-key
  :states '(normal visual)
