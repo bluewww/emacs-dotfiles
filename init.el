@@ -673,10 +673,10 @@ When you add a new element to the alist, keep in mind that you
 	  ("pdf" . "evince %s")
 	  ("\\.pdf::\\([0-9]+\\)\\'" . "evince -p %1 %s"))))
 
-(use-package zotxt
-  :after org
-  :init
-  (add-hook 'org-mode-hook 'org-zotxt-mode))
+;; (use-package zotxt
+;;   :after org
+;;   :init
+;;   (add-hook 'org-mode-hook 'org-zotxt-mode))
 
 
 ;; (defun bwww-org-ref-open-pdf-at-point ()
