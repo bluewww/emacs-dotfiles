@@ -495,7 +495,8 @@ When you add a new element to the alist, keep in mind that you
 
 (with-eval-after-load 'ediff
   (setq ediff-split-window-function (quote split-window-horizontally))
-  (evil-collection-ediff-setup))
+  (evil-collection-ediff-setup)
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
 (with-eval-after-load 'arc-mode
   (evil-collection-arc-mode-setup))
