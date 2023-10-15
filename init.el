@@ -1137,8 +1137,7 @@ window."
  '(package-selected-packages
    '(zotxt yaml-mode which-key wgrep vlf vertico use-package undo-tree tuareg rust-mode rmsbolt riscv-mode realgud rainbow-delimiters racket-mode package-lint org-noter orderless merlin magit ivy-xref ivy-bibtex general geiser exec-path-from-shell evil-surround esup eglot disaster cquery counsel-projectile counsel-etags consult clang-format bison-mode avy auto-virtualenv auctex-latexmk annalist anaconda-mode))
  '(safe-local-variable-values '((rmsbolt-asm-format) (rmsbolt-disassemble)))
- '(truncate-lines t)
- '(xterm-mouse-mode t))
+ '(truncate-lines t))
 (put 'dired-find-alternate-file 'disabled nil)
 
 (custom-set-faces
