@@ -189,6 +189,7 @@ When you add a new element to the alist, keep in mind that you
   (setq evil-undo-system 'undo-tree)
   (evil-set-undo-system 'undo-tree)
   (evil-set-initial-state 'term-mode 'emacs)
+  (setq evil-ex-search-vim-style-regexp t)
   :general
   (general-define-key                   ; evil-mode seems to use it, so we unmap
 					; it to make xref work
