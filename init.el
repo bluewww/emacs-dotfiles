@@ -909,7 +909,12 @@ When you add a new element to the alist, keep in mind that you
 
 ;;; Tcl
 ;; Stop braindead tab/space mixture asap
-(add-hook 'tcl-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
+(use-package tcl-mode
+  :ensure nil
+  :mode ("\\.sdc\\'")
+  :init
+  (add-hook 'tcl-mode-hook #'(lambda () (setq indent-tabs-mode nil))))
+
 
 ;;; System Verilog
 (use-package verilog-mode :ensure nil
