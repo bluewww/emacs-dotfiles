@@ -452,7 +452,7 @@ When you add a new element to the alist, keep in mind that you
  "r" 'repeat
 
  ;; zooming
- "zz" 'text-scale-adjust
+ "z" 'text-scale-adjust
 
  ;; eshell
  "'" 'eshell
