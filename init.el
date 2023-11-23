@@ -552,7 +552,7 @@ When you add a new element to the alist, keep in mind that you
   :defer t
   :config
   ;; (setq projectile-mode-line " Projectile")
-  (setq tramp-default-method "ssh")
+  (setq tramp-default-method "rsync")
   ;; (setq tramp-verbose 6) ; debugging mode
   (setq tramp-shell-prompt-pattern ; fix parsing bug of fancy remote  prompts
 	"\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
