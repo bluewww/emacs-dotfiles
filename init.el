@@ -216,19 +216,9 @@ When you add a new element to the alist, keep in mind that you
   :config
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
-;; (use-package evil-surround
-;;   :after evil
-;;   :config
-;;   (global-evil-surround-mode 1))
-
 (use-package which-key
   :config
   (which-key-mode))
-
-(use-package rainbow-delimiters
-  :defer t
-  :config
-  (rainbow-delimiters-mode))
 
 
 ;; (use-package fido
@@ -863,27 +853,6 @@ When you add a new element to the alist, keep in mind that you
    :keymaps 'merlin-mode-map
    "M-." 'merlin-locate
    "M-," 'merlin-pop-stack))
-
-;; utop doesn't as usuable tuareg-mode repl in emacs
-;; (use-package utop
-;;   :commands utop
-;;   :hook
-;;   (tuareg-mode . utop-minor-mode)
-;;   :init
-;;   ;; Use the opam installed utop
-;;   (setq utop-command "opam config exec -- utop -emacs")
-
-;; ;; Setup environment variables using opam
-;; (dolist (var (car (read-from-string (shell-command-to-string "opam config env --sexp"))))
-;;   (setenv (car var) (cadr var)))
-
-;; ;; Update the emacs path
-;; (setq exec-path (append (parse-colon-path (getenv "PATH"))
-;;			  (list exec-directory)))
-
-;; ;; Update the emacs load path
-;; (add-to-list 'load-path (expand-file-name "../../share/emacs/site-lisp"
-;;					    (getenv "OCAML_TOPLEVEL_PATH"))))
 
 ;;; Emacs Lisp
 (use-package elisp-mode :ensure nil
