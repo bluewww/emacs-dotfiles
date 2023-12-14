@@ -29,7 +29,7 @@
 				    user-emacs-directory
 				    "auto-save-list/")
 				   t))
- inhibit-startup-screen t
+ inhibit-startup-screen nil
  ;; silent bell when you make a mistake
  ring-bell-function 'ignore
  ;; sentence SHOULD end with only a point.
