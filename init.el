@@ -340,6 +340,13 @@ When you add a new element to the alist, keep in mind that you
    "fj" 'consult-find
    "fr" 'consult-recent-file))
 
+;; Enable rich annotations using the Marginalia package
+(use-package marginalia
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+  :init
+  (marginalia-mode))
+
 ;; Project managment
 (use-package project
   :ensure nil
@@ -1140,7 +1147,7 @@ window."
    '(".#*" "*.cmti" "*.cmt" "*.annot" "*.cmi" "*.cmxa" "*.cma" "*.cmx" "*.cmo" "*.o" "*~" "*.bin" "*.lbin" "*.so" "*.a" "*.ln" "*.blg" "*.bbl" "*.elc" "*.lof" "*.glo" "*.idx" "*.lot" "*.fmt" "*.tfm" "*.class" "*.fas" "*.lib" "*.mem" "*.x86f" "*.sparcf" "*.dfsl" "*.pfsl" "*.d64fsl" "*.p64fsl" "*.lx64fsl" "*.lx32fsl" "*.dx64fsl" "*.dx32fsl" "*.fx64fsl" "*.fx32fsl" "*.sx64fsl" "*.sx32fsl" "*.wx64fsl" "*.wx32fsl" "*.fasl" "*.ufsl" "*.fsl" "*.dxl" "*.lo" "*.la" "*.gmo" "*.mo" "*.toc" "*.aux" "*.cp" "*.fn" "*.ky" "*.pg" "*.tp" "*.vr" "*.cps" "*.fns" "*.kys" "*.pgs" "*.tps" "*.vrs" "*.pyc" "*.pyo" "*.d"))
  '(merlin-completion-with-doc t)
  '(package-selected-packages
-   '(zotxt yaml-mode which-key wgrep vlf vertico use-package undo-tree tuareg rust-mode rmsbolt riscv-mode realgud rainbow-delimiters racket-mode package-lint org-noter orderless merlin magit ivy-xref ivy-bibtex general geiser exec-path-from-shell evil-surround esup eglot disaster cquery counsel-projectile counsel-etags consult clang-format bison-mode avy auto-virtualenv auctex-latexmk annalist anaconda-mode))
+   '(marginalia zotxt yaml-mode which-key wgrep vlf vertico use-package undo-tree tuareg rust-mode rmsbolt riscv-mode realgud rainbow-delimiters racket-mode package-lint org-noter orderless merlin magit ivy-xref ivy-bibtex general geiser exec-path-from-shell evil-surround esup eglot disaster cquery counsel-projectile counsel-etags consult clang-format bison-mode avy auto-virtualenv auctex-latexmk annalist anaconda-mode))
  '(safe-local-variable-values '((rmsbolt-asm-format) (rmsbolt-disassemble)))
  '(truncate-lines nil))
 (put 'dired-find-alternate-file 'disabled nil)
