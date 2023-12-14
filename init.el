@@ -784,8 +784,6 @@ When you add a new element to the alist, keep in mind that you
 (use-package cc-mode
   :ensure nil
   :mode ("\\.c\\'" . c-mode)            ;TODO: add c++ mode
-  :init
-  (add-hook 'c-mode-common-hook 'electric-pair-local-mode)
   :general
   (general-define-key
    :states 'normal
