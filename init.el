@@ -29,7 +29,6 @@
 				    user-emacs-directory
 				    "auto-save-list/")
 				   t))
- inhibit-startup-screen nil
  ;; silent bell when you make a mistake
  ring-bell-function 'ignore
  ;; sentence SHOULD end with only a point.
@@ -46,6 +45,14 @@
  split-height-threshold 160)
 
 (setq-default fill-column 80)
+
+;; only show startup screen when opening no files
+(defun bwww-inhibit-startup-screen-always ()
+  "Startup screen inhibitor for `command-line-functions`.
+Inhibits startup screen on the first unrecognised option."
+  (ignore (setq inhibit-startup-screen t)))
+
+(add-hook 'command-line-functions #'bwww-inhibit-startup-screen-always)
 
 ;; fix bad answer default
 (defalias 'yes-or-no-p 'y-or-n-p)
