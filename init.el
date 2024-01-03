@@ -727,11 +727,10 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'python-mode-hook 'flymake-mode)
   (add-hook 'python-mode-hook (lambda () (setq fill-column 79)))
   :config
-  ;; (setq python-shell-interpreter "/opt/miniconda3/bin/python3")
+  (setq python-interpreter "python3")
+  (setq python-shell-interpreter "python3")
   ;; (setq python-shell-interpreter-args "-m IPython --simple-prompt -i")
-  (setq python-flymake-command '("flake8" "-"))
-  ;; (setq python-indent-guess-indent-offset nil)
-  )
+  (setq python-flymake-command '("flake8" "-")))
 (use-package anaconda-mode
   :after python
   :init
