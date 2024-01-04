@@ -86,10 +86,16 @@ Inhibits startup screen on the first unrecognised option."
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 
-;; we want a portable python environment
-(setenv "PATH" (concat "$HOME/.pyenv/bin:" (getenv "PATH")))
-;; (getenv "PATH")
-;; (add-to-list 'exec-path "/opt/miniconda3/bin")
+;; set up PATH to also consider other commonly used directories
+(defun bwww-extend-path (path)
+  "Extend `PATH' and variable `exec-path' by PATH."
+  (setenv "PATH" (concat (expand-file-name path) ":" (getenv "PATH")))
+  (setq exec-path (append (list (expand-file-name path)) exec-path)))
+
+(when (memq window-system '(ns x))
+  (bwww-extend-path "~/.scripts")
+  (bwww-extend-path "~/.cargo/bin")
+  (bwww-extend-path "~/.local/bin"))
 
 ;; ctags we like
 (setq path-to-ctags "~/.local/bin/ctags")
@@ -575,11 +581,12 @@ When you add a new element to the alist, keep in mind that you
 (with-eval-after-load 'eshell
   (evil-collection-eshell-setup))
 
-;; exec path from shell
-(use-package exec-path-from-shell
-  :config
-  (when (memq window-system '(ns x))
-    (exec-path-from-shell-initialize)))
+;; we should do this manually
+;; ;; exec path from shell
+;; (use-package exec-path-from-shell
+;;   :config
+;;   (when (memq window-system '(ns x))
+;;     (exec-path-from-shell-initialize)))
 
 ;; Esup bug workaround
 (setq esup-depth 0)
