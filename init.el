@@ -145,11 +145,14 @@ When you add a new element to the alist, keep in mind that you
 
 (require 'package)
 ;; want to use use-package instead
-(setq package-enable-at-startup nil)
 (setq package-archives '(("org"       . "https://orgmode.org/elpa/")
 			 ("gnu"       . "https://elpa.gnu.org/packages/")
 			 ("melpa"     . "https://melpa.org/packages/")))
-(package-initialize)
+
+;; starting from emacs 27, package-initialize is automatically called before
+;; init.el is evaluated
+(if (version<  emacs-version "27")
+    (package-initialize))
 
 ;; (setq package-check-signature t)
 (unless (package-installed-p 'use-package)
