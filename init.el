@@ -293,12 +293,12 @@ When you add a new element to the alist, keep in mind that you
    "C-w" 'backward-kill-word
    "S-SPC" '+vertico-restrict-to-matches))
 
-;; ;; Configure grid extension
-;; (use-package vertico-grid
-;;   :after vertico
-;;   :ensure nil
-;;   :init
-;;   (vertico-grid-mode))
+;; Enable vertico mouse support
+(use-package vertico-mouse
+  :after vertico
+  :ensure nil
+  :init
+  (vertico-mouse-mode))
 
 ;; ivy like S-SPC restrict
 (defun +vertico-restrict-to-matches ()
