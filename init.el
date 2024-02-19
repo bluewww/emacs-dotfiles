@@ -358,8 +358,8 @@ When you add a new element to the alist, keep in mind that you
 
 (use-package embark
   :bind
-  (("C-c C-." . embark-act)         ;; pick some comfortable binding
-   ("C-c C-," . embark-dwim)        ;; good alternative: M-.
+  (("C-c ." . embark-act)         ;; pick some comfortable binding
+   ("C-c ," . embark-dwim)        ;; good alternative: M-.
    ;; ("C-h B" . embark-bindings)  ;; alternative for `describe-bindings'
    ))
 
