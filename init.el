@@ -341,7 +341,10 @@ When you add a new element to the alist, keep in mind that you
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    "ss" 'consult-line
-   "sg" 'consult-git-grep
+   "sg" 'consult-grep
+   "sv" 'consult-git-grep
+   "sg" 'consult-grep
+   "sr" 'consult-ripgrep
    "sb" 'consult-line-multi
    "fj" 'consult-find
    "fr" 'consult-recent-file))
