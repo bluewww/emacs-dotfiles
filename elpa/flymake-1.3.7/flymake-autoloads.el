@@ -109,12 +109,15 @@ evaluate `flymake-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{flymake-mode-map}
+
 (fn &optional ARG)" t)
 (autoload 'flymake-mode-on "flymake" "\
 Turn Flymake mode on.")
 (autoload 'flymake-mode-off "flymake" "\
 Turn Flymake mode off.")
 (register-definition-prefixes "flymake" '("flymake-"))
+
 
 ;;; End of scraped data
 

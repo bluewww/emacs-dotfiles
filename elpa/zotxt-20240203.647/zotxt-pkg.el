@@ -1,7 +1,7 @@
-(define-package "zotxt" "20210908.402" "Tools to integrate emacs with Zotero via the zotxt plugin."
+(define-package "zotxt" "20240203.647" "Tools to integrate emacs with Zotero via the zotxt plugin."
   '((request "0.3.2")
     (deferred "0.5.1"))
-  :commit "d344e7ac281a083f4e39e95b5664633a015e2b3b" :authors
+  :commit "7eae5196dbe6fa3045b31412538ce4a81204abc4" :authors
   '(("Erik Hetzner" . "egh@e6h.org"))
   :maintainer
   '("Erik Hetzner" . "egh@e6h.org")
