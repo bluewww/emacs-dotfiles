@@ -996,6 +996,10 @@ When you add a new element to the alist, keep in mind that you
   :load-path "mlir/")
 
 
+;;; save place mode so cursor is placed when we closed file
+(use-package saveplace
+  :init (save-place-mode))
+
 ;;; Custom functions
 ;; quickly open dotfile
 (defun find-dotfile ()
