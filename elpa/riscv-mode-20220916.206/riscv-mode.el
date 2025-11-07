@@ -5,7 +5,8 @@
 ;; Author: Adam Niederer <https://github.com/AdamNiederer>
 ;; Maintainer: Adam Niederer
 ;; Created: September 29, 2016
-;; Version: 0.1
+;; Package-Version: 20220916.206
+;; Package-Revision: 8e335b9c93de
 ;; Keywords: riscv assembly
 ;; Package-Requires: ((emacs "24.4"))
 ;; Homepage: https://github.com/AdamNiederer/riscv-mode
