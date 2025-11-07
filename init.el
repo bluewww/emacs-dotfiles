@@ -639,12 +639,12 @@ When you add a new element to the alist, keep in mind that you
 
 ;;; LaTeX
 (use-package auctex
-  :mode ("\\.tex\\'" . TeX-latex-mode)
+  :mode ("\\.tex\\'" . LaTeX-mode)
   :init
   ;; font-lock for custom keywords
   (setq font-latex-match-reference-keywords '(("cref" "{")))
   :config
-  (add-to-list 'TeX-command-list '("Make" "make" TeX-run-compile t t))
+  ;; (add-to-list 'TeX-command-list '("Make" "make" TeX-run-compile t t))
   ;; :general
   ;; (general-define-key
   ;;  :states 'normal
