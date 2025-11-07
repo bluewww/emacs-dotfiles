@@ -439,7 +439,7 @@ When you add a new element to the alist, keep in mind that you
  "u" 'universal-argument
 
  ;; buffer handling
- "bd" 'kill-this-buffer
+ "bd" 'kill-current-buffer
  "bm" 'kill-other-buffers
  "bs" 'switch-to-scratch-buffer
  "bn" 'next-buffer
