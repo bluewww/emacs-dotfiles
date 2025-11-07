@@ -763,11 +763,10 @@ When you add a new element to the alist, keep in mind that you
   (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
 
 (use-package auto-virtualenv
-  :after python
-  :init
-  (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-  (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
-  (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
+  :after python)
+
+(with-eval-after-load 'auto-virtualenv
+  (auto-virtualenv-setup))
 
 (use-package yaml-mode
   :mode ("\\.yml\\'" . yaml-mode))
