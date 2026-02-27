@@ -196,6 +196,7 @@ When you add a new element to the alist, keep in mind that you
   (setq evil-want-integration t)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-fine-undo nil)
+  (setq evil-auto-balance-windows nil)
   (when (not (display-graphic-p))
     (setq evil-want-C-i-jump nil))
   (setq evil-search-module 'evil-search)
