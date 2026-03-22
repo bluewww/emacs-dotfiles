@@ -46,6 +46,12 @@
 
 (setq-default fill-column 80)
 
+;; Set CJK fonts
+(let ((jp-font "Noto Sans CJK JP"))
+  (set-fontset-font t 'han (font-spec :family jp-font))
+  (set-fontset-font t 'kana (font-spec :family jp-font))
+  (set-fontset-font t 'cjk-misc (font-spec :family jp-font)))
+
 ;; only show startup screen when opening no files
 (defun bwww-inhibit-startup-screen-always ()
   "Startup screen inhibitor for `command-line-functions`.
