@@ -307,6 +307,16 @@ When you add a new element to the alist, keep in mind that you
   :init
   (vertico-mouse-mode))
 
+;; (use-package vertico-directory
+;;   :after vertico
+;;   :ensure nil
+;;   :bind (:map vertico-map
+;;               ("RET" . vertico-directory-enter)
+;;               ("DEL" . vertico-directory-delete-char)
+;;               ("M-DEL" . vertico-directory-delete-word))
+;;   ;; Cleans up path shadows (e.g., /foo/bar/~/ becomes ~/)
+;;   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
 ;; ivy like S-SPC restrict
 (defun +vertico-restrict-to-matches ()
   (interactive)
@@ -1139,25 +1149,42 @@ window."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(TeX-view-program-selection
-   '(((output-dvi has-no-display-manager)
-      "dvi2tty")
-     ((output-dvi style-pstricks)
-      "dvips and gv")
-     (output-dvi "Evince")
-     (output-pdf "Evince")
-     (output-html "xdg-open")))
+   '(((output-dvi has-no-display-manager) "dvi2tty")
+     ((output-dvi style-pstricks) "dvips and gv") (output-dvi "Evince")
+     (output-pdf "Evince") (output-html "xdg-open")))
  '(auth-source-save-behavior nil)
  '(custom-enabled-themes '(wombat))
  '(custom-safe-themes
-   '("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59" "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default))
+   '("8bb8a5b27776c39b3c7bf9da1e711ac794e4dc9d43e32a075d8aa72d6b5b3f59"
+     "53a9ec5700cf2bb2f7059a584c12a5fdc89f7811530294f9eaf92db526a9fb5f" default))
  '(delete-selection-mode nil)
  '(doc-view-continuous t)
  '(enable-remote-dir-locals t)
+ '(grep-find-ignored-directories
+   '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs"
+     "{arch}" ".cache" ".venv"))
  '(grep-find-ignored-files
-   '(".#*" "*.cmti" "*.cmt" "*.annot" "*.cmi" "*.cmxa" "*.cma" "*.cmx" "*.cmo" "*.o" "*~" "*.bin" "*.lbin" "*.so" "*.a" "*.ln" "*.blg" "*.bbl" "*.elc" "*.lof" "*.glo" "*.idx" "*.lot" "*.fmt" "*.tfm" "*.class" "*.fas" "*.lib" "*.mem" "*.x86f" "*.sparcf" "*.dfsl" "*.pfsl" "*.d64fsl" "*.p64fsl" "*.lx64fsl" "*.lx32fsl" "*.dx64fsl" "*.dx32fsl" "*.fx64fsl" "*.fx32fsl" "*.sx64fsl" "*.sx32fsl" "*.wx64fsl" "*.wx32fsl" "*.fasl" "*.ufsl" "*.fsl" "*.dxl" "*.lo" "*.la" "*.gmo" "*.mo" "*.toc" "*.aux" "*.cp" "*.fn" "*.ky" "*.pg" "*.tp" "*.vr" "*.cps" "*.fns" "*.kys" "*.pgs" "*.tps" "*.vrs" "*.pyc" "*.pyo" "*.d"))
+   '(".#*" "*.cmti" "*.cmt" "*.annot" "*.cmi" "*.cmxa" "*.cma" "*.cmx" "*.cmo"
+     "*.o" "*~" "*.bin" "*.lbin" "*.so" "*.a" "*.ln" "*.blg" "*.bbl" "*.elc"
+     "*.lof" "*.glo" "*.idx" "*.lot" "*.fmt" "*.tfm" "*.class" "*.fas" "*.lib"
+     "*.mem" "*.x86f" "*.sparcf" "*.dfsl" "*.pfsl" "*.d64fsl" "*.p64fsl"
+     "*.lx64fsl" "*.lx32fsl" "*.dx64fsl" "*.dx32fsl" "*.fx64fsl" "*.fx32fsl"
+     "*.sx64fsl" "*.sx32fsl" "*.wx64fsl" "*.wx32fsl" "*.fasl" "*.ufsl" "*.fsl"
+     "*.dxl" "*.lo" "*.la" "*.gmo" "*.mo" "*.toc" "*.aux" "*.cp" "*.fn" "*.ky"
+     "*.pg" "*.tp" "*.vr" "*.cps" "*.fns" "*.kys" "*.pgs" "*.tps" "*.vrs"
+     "*.pyc" "*.pyo" "*.d"))
  '(merlin-completion-with-doc t)
  '(package-selected-packages
-   '(gnu-elpa-keyring-update embark-consult embark bind-key eldoc flymake jsonrpc project marginalia zotxt yaml-mode which-key wgrep vlf vertico use-package undo-tree tuareg rust-mode rmsbolt realgud rainbow-delimiters racket-mode package-lint org-noter orderless merlin magit ivy-xref ivy-bibtex general geiser exec-path-from-shell evil-surround esup eglot disaster cquery counsel-projectile counsel-etags consult clang-format bison-mode avy auto-virtualenv auctex-latexmk annalist anaconda-mode))
+   '(gnu-elpa-keyring-update embark-consult embark bind-key eldoc flymake jsonrpc
+			     project marginalia zotxt yaml-mode which-key wgrep
+			     vlf vertico use-package undo-tree tuareg rust-mode
+			     rmsbolt realgud rainbow-delimiters racket-mode
+			     package-lint org-noter orderless merlin magit
+			     ivy-xref ivy-bibtex general geiser
+			     exec-path-from-shell evil-surround esup eglot
+			     disaster cquery counsel-projectile counsel-etags
+			     consult clang-format bison-mode avy auto-virtualenv
+			     auctex-latexmk annalist anaconda-mode))
  '(safe-local-variable-values '((rmsbolt-asm-format) (rmsbolt-disassemble)))
  '(truncate-lines nil))
 (put 'dired-find-alternate-file 'disabled nil)

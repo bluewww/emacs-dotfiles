@@ -1,0 +1,122 @@
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  AUCTEX NEWS – HISTORY OF NOTABLE AND
+                          USER-VISIBLE CHANGES
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+[14.2.0] - 2026-09-15
+═════════════════════
+
+Added
+─────
+
+  • Add more control over preview-latex snippets: The new option
+    `preview-visibility-style' controls how previews and their source
+    are displayed relative to point.  The option
+    `preview-at-point-placement' controls the placement of the at-point
+    preview relative to its source.  Finally, the boolean option
+    `preview-keep-stale-images' determines how the preview is updated
+    after the source is changed.
+  • Activate new TeX xref backend (`tex-etags') provided by Emacs 31.
+  • Add support for in-buffer completion of citation keys for various
+    `\cite' macros.  The length of the annotations attached to the keys
+    is controlled by the new option `LaTeX-bib-annotation-max-length'.
+    The annotations are offered only when RefTeX-mode in activated.
+    Multicite commands (Qualified Citation Lists) from the biblatex
+    package are not supported.
+  • Improve in-buffer completion of referencing macros.
+  • Add new support files `style/bigfoot.el', `style/handstroke.el',
+    `style/lineno.el', `style/lua-unicode-math.el', `style/manyfoot.el',
+    `style/perpage.el', `style/sourcesans.el' and
+    `style/sourceserif.el'.
+
+
+Changed
+───────
+
+  • Change behavior of `TeX-output-dir' for security considerations.
+    The value can be set to a subdirectory of the master file, otherwise
+    the user is asked for permission.
+  • Support new language names provided by babel-german v2.99.
+  • Remove `--jobname' argument from default LuaLaTeX invocation.  If
+    this causes trouble for you, we first recommend to update your (very
+    old) TeX distribution.  But if you can't do that for some reason,
+    add the following entry to the customize option `TeX-engine-alist':
+    ┌────
+    │ (luatex "LuaTeX" "luatex" "lualatex --jobname=%(s-filename-only)" "luatex")
+    └────
+  • Change default value of `ConTeXt-Mark-version' to `XL' which is the
+    current ConTeXt version.  Internally, there is no difference for
+    Mark XL and Mark IV behavior.
+
+
+Fixed
+─────
+
+  • Fix parsing of error messages for ConTeXt LMTX.
+  • Fix indentation for macros with arguments in ConTeXt mode.
+
+
+[14.1.2] - 2026-01-14
+═════════════════════
+
+Fixed
+─────
+
+  • Recognize and ignore non-error messages emitted by LuaTeX which are
+    different from what pdfTeX does.
+
+
+[14.1.1] - 2026-01-12
+═════════════════════
+
+Added
+─────
+
+  • Add new command `LaTeX-repeat-recent-math' which looks backward for
+    a recent top-level display math construct and inserts a copy to the
+    current line.
+  • Add new support files `style/floatflt.el', `style/fontawesome7.el'
+    and `style/ltx-talk.el'.
+  • Add new function `preview-dvisvgm-command' to generate SVG images in
+    preview.
+
+
+Changed
+───────
+
+  • Change the format of the value stored in `preview-dumped-alist'.
+    Add a new optional argument to the function
+    `preview-watch-preamble'.
+  • Respect the value of `font-latex-fontify-sectioning' when fontifying
+    macros as `slide-title'.  This affects macros provided by
+    `style/beamer.el' and `style/ltx-talk.el'.
+  • Change the name of `preview-dvipng-command' to
+    `preview-dvi*-command'.  Also make it accept a function symbol
+    returning the full command.
+  • Change the name of `preview-dvipng-image-type' to
+    `preview-dvi*-image-type'.
+  • Change the setting of `preview-image-creators' and
+    `preview-gs-image-type-alist' to use `dvi*' instead of `dvipng'.
+
+
+Fixed
+─────
+
+  • Ignore the (non-error) "ignored error" messages emitted by the
+    typesetting engine and don't abort the re-compilation when
+    necessary.  It fixes this [LaTeX report].
+
+
+[LaTeX report] <https://github.com/latex3/latex2e/issues/1907>
+
+
+[14.1.0] - 2025-07-11
+═════════════════════
+
+Added
+─────
+
+  • Add new commands `LaTeX-make-inline' which converts the display math
+    environment at point to inline math and the more general
+  …  …
