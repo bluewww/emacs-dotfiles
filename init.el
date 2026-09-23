@@ -46,6 +46,9 @@
 
 (setq-default fill-column 80)
 
+;; Suppress annoying lexical binding warnings
+(add-to-list 'warning-suppress-types '(files missing-lexbind-cookie))
+
 ;; Set CJK fonts
 (let ((jp-font "Noto Sans CJK JP"))
   (set-fontset-font t 'han (font-spec :family jp-font))
